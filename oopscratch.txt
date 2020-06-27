@@ -1,0 +1,361 @@
+    def __init__(self,first,last,social,contel,conemail,fulladdress,salary,dept,manager,position,insure,transit,f401k,vac,pers,sick)
+self.first=first
+self.last=lastlast
+self.social=social
+self.contel=contel
+self.conemail=conemail
+self.fulladdress=fulladdress
+self.salary=salary
+self.dept=dept
+self.manager=manager
+self.position=position
+self.insure=insure
+self.transit=transit
+self.f401k=f401k
+self.vac=vac
+self.pers=pers
+self.sick=sick
+
+
+
+
+
+
+firstname= input("first name: ")
+lastname= input("last name: ")
+ssn= input("ssn: ")
+telno= input("tel no: ")
+email= input("email: ")
+streetaddress= input("street address: ")
+city= input("city: ")
+state= input("state: ")
+zipcode= input("zipcode: ")
+salary= input("salary: ")
+dept= input("dept: ")
+manager= input("manager: ")
+position= input("position: ")
+insurance= input("insurance: ")
+transitpay= input("transitpay: ")
+401k= input("401k: ")
+vacationtime= input("vacation time: ")
+personaltime= input("personal time: ")
+sicktime= input("sick time: ")
+
+
+
+dataentered.append(firstname)
+dataentered.append(lastname)
+dataentered.append(ssn)
+dataentered.append(telno)
+dataentered.append(email)
+dataentered.append(streetaddress)
+dataentered.append(city)
+dataentered.append(state)
+dataentered.append(zipcode)
+dataentered.append(salary)
+dataentered.append(dept)
+dataentered.append(manager)
+dataentered.append(position)
+dataentered.append(insurance)
+dataentered.append(transitpay)
+dataentered.append(401k)
+dataentered.append(vacationtime)
+dataentered.append(personaltime)
+dataentered.append(sicktime)
+
+
+
+
+
+
+
+
+
+    empFname=dataentered[0]
+    empLname =dataentered[1]
+    socno =dataentered[2]
+    contactTel =dataentered[3]
+    contactEmail =dataentered[4]
+    contactAdd1 =dataentered[5]
+    contactAddCity =dataentered[6]
+    contactAddSt =dataentered[7]
+    contactAddZip =dataentered[8]
+    empSal =dataentered[9]
+    dept =dataentered[10]
+    mgr =dataentered[11]
+    posit =dataentered[12]
+    healthIns =dataentered[13]
+    transitpay =dataentered[14]
+    four1k =dataentered[15]
+    vacationtime =dataentered[16]
+    personaltime =dataentered[17]
+    sicktime =dataentered[18]
+
+
+fullname = empFname+empLname
+empAddress = contactAdd1 + contactAddCity + contactAddSt +contactAddZip
+
+
+
+
+                
+
+
+
+
+def subverify3():
+	choose3 = int(input('Which line should we edit: '))
+    more3 = input('any others y or n: ')
+    if more3 == 'y':
+    	print('seriously?! Damn! well fix those 3 first then fix the next 3 when i ask you to verify ')
+    if more3 == "n":
+        print("ok great let's edit!")
+    else:
+        print("C'mon dude! y or n")
+        subverify3()
+
+def subverify2():
+	choose2 = int(input('Which line should we edit: '))
+    more2 = input('any others y or n: ')
+    if more2 == 'y':
+    	subverify3()
+    if more2 == "n":
+        print("ok great let's edit!")
+    else:
+        print("C'mon dude! y or n")
+        subverify2()
+
+def subverify1():
+	choose = int(input('Which line should we edit: '))
+    more = input('any others y or n: ')
+    if more == 'y':
+    	subverify2()
+    if more == "n":
+        print("ok great let's edit!")
+    else:
+        print("C'mon dude! y or n")
+        subverify1()
+
+
+
+
+
+
+
+
+
+                choose2 = int(input('Which line should we edit: '))
+                more2 = input('any others y or n: ')
+                if more2 == 'y':
+                    choose3 = int(input('Which line should we edit: '))
+                    more3 = input('any others y or n: ')
+                    if more3 == 'y':
+                        print('seriously?! Damn! well fix those 3 first then fix the next 3 when i ask you to verify ')
+                    if more3 == "n":
+                        print("ok great let's edit!")
+                    else:
+                        print("C'mon dude! y or n")
+                        more3 = input('any others y or n: ')
+                if more2 == "n":
+                    print("ok great let's edit!")
+                    choose2 = int(input('Which line should we edit: '))
+                else:
+                    print("C'mon dude! y or n")
+                    more2 = input('any others y or n: ')
+            
+
++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+ def verifier():
+        verify = input('enter (1) to confirm data or (2) to edit data: ')
+        if verify == '1':
+            print('yayus!')
+        else if verify == '2':
+            choose = int(input('Which line should we edit: '))
+            print(f'{dataentered[choose]} will now be edited. Enter new Info below')
+            newentry = input('correction: ')
+            dataentered[choose] = newentry
+            print(f'Info on line {choose} has now been changed to {newentry}.')
+            print('Review Updated Employee entry')
+            for z in range (len(dataentered)):
+                print(f"{z} {dataenetered[z]}")
+            verifier()
+
+
+
+
+    def verifier():
+        verify = input('enter (y) to confirm data or (n) to edit data: ')
+        if verify == 'y':
+            print('yayus!')
+        elif verify =='n':
+        	def subverify1():
+                while True:
+                    try:
+                        choose = int(input('Which line should we edit: '))
+                        if choose <= (len(dataenetered)-1) and choose >= 0:
+                            more = input('any others y or n: ')
+                            while True:
+                                if more == 'y':
+                                    print('ok cool, but let us fix this line first')
+                                    print(f'{dataentered[choose]} will now be edited. Enter new Info below')
+                                    newentry = input('correction: ')
+                                    dataentered[choose] = newentry
+                                    print(f'Info on line {choose} has now been changed to {newentry}.')
+                                    choose = int(input('Which line should we edit: '))
+
+                                elif more == "n":
+                                    print("ok great let's edit!")
+                                    print(f'{dataentered[choose]} will now be edited. Enter new Info below')
+                                    newentry = input('correction: ')
+                                    dataentered[choose] = newentry
+                                    print(f'Info on line {choose} has now been changed to {newentry}.')
+                                    for x in range (len(dataenetered)):
+                                        print(f"{x} ... {dataentered[x]}")
+                                    verifier()
+                                    break
+                                else:
+                                    print("C'mon dude! y or n")
+                                    more = input('any others y or n: ')
+                        else:
+                            print('choose a line')
+                            subverify1()
+                            break
+                    except:
+                        print("input has to be a number")
+                        subverify1()
+                        break
+                    finally:
+                        break
+            subverify1()   
+        else:
+        	print('y or n dude...wtf :(') 
+        	verifier()
+    verifier()
+
+
+
+
+hsk=['*deptmgr','*adeptmgr','deptsup','hskper','hseman']
+FD=['*deptmgr','*adeptmgr','*ntmgr','deptsup','ntaud','fdagnt','bllmn','drmn']
+eng=['*deptmgr','*adeptmgr','deptsup','engnr']
+pbx=['*deptmgr','*adeptmgr','deptsup','oprt'r]
+sle=['*deptmgr','*adeptmgr','deptsup','res']
+acc=['*cntrller','*asscntrller','acctnt']
+
+
+
+
+
+
+
+
+
+
+
+ def subverify1():
+            while True:
+                try:
+                    choose = int(input('Which line should we edit: '))
+                    if choose <= (len(dataentered)-1) and choose >= 0:
+                        more = input('any others y or n: ')
+                            if more == 'y':
+                                print('ok cool, but let us fix this line first')
+                                print(f'{dataentered[choose]} will now be edited. Enter new Info below')
+                                newentry = input('correction: ')
+                                dataentered[choose] = newentry
+                                print(f'Info on line {choose} has now been changed to {newentry}.')
+                                choose = int(input('Which line should we edit: '))
+                                more = input('any others y or n: ')
+
+                            elif more == "n":
+                                print("ok great let's edit!")
+                                print(f'{dataentered[choose]} will now be edited. Enter new Info below')
+                                newentry = input('correction: ')
+                                dataentered[choose] = newentry
+                                print(f'Info on line {choose} has now been changed to {newentry}.')
+                                for x in range (len(dataentered)):
+                                    print(f"{x} ... {dataentered[x]}")
+                                verifier()
+                                break
+                            else:
+                                print("C'mon dude! y or n")
+                                more = input('any others y or n: ')
+                    else:
+                        print('choose a line')
+                        subverify1()
+                        break
+                except:
+                    print("input has to be a number")
+                    subverify1()
+                    break
+                finally:
+                    break
+        subverify1()   
+
+
+
+statedictionary = {'AL':"Alabama",'AK':"Alaska",'AZ':"Arizona",'AR':"Arkansas",'CA':"California",'CO':"Colorado",'CT':"Connecticut",'DE':"Delaware",'FL':"Florida",'GA':"Georgia",'HI':"Hawaii",'ID':"Idaho",'IL':"Illinois",'IN':"Indiana",'IA':"Iowa",'KS':"Kansas",'KY':"Kentucky",'LA':"Louisiana",'ME':"Maine",'MD':"Maryland",'MA':"Massachusetts",'MI':"Michigan",'MN':"Minnesota",'MS':"Mississippi",'MO':"Missouri",'MT':"Montana",'NE':"Nebraska",'NV':"Nevada",'NH':"New Hampshire",'NJ':"New Jersey",'NM':"New Mexico",'NY':"New York",'NC':"North Carolina",'ND':"North Dakota",'OH':"Ohio",'OK':"Oklahoma",'OR':"Oregon",'PA':"Pennsylvania",'RI':"Rhode Island",'SC':"South Carolina",'SD':"South Dakota",'TN':"Tennessee",'TX':"Texas",'UT':"Utah",'VT':"Vermont",'VA':"Virginia",'WA':"Washington",'WV':"West Virginia",'WI':"Wisconsin",'WY':"Wyoming"}
+
+stablist = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']
+
+
+
+
+
+
+
+
+    fouronek= input("401k: ")
+    transitpay= input("transitpay: ")
+    manager =input("manager: ")
+    salary= input("salary: ")
+    hired = input("hire date: ")
+    
+
+
+    zipcode= input("zipcode: ")
+    state= input("state: ")
+    city= input("city: ")
+    streetaddress= input("street address: ")
+    email= input("email: ")
+    telno= input("tel no: ")
+    ssn= input("ssn: ")
+    lastname= input("last name: ")
+
+    firstname= input("first name: ")
+
+
+
+
+
+empFname=dataentered[0]
+empLname =dataentered[1]
+fullname = empFname + empLname
+socno =dataentered[2]
+contactTel =dataentered[3]
+contactEmail =dataentered[4]
+contactAdd1 =dataentered[5]
+contactAddCity =dataentered[6]
+contactAddSt =dataentered[7]
+contactAddZip =dataentered[8]
+empAddress = contactAdd1 + contactAddCity + contactAddSt + contactAddZip
+empHireDate = dataentered[9]
+m = dataentered[10] 
+d = dataentered[11]
+y = dataentered[12]
+empSal =dataentered[13]
+dept =dataenteredSET2[0]
+mgr =dataentered[14]
+posit =dataenteredSET2[1]
+healthIns =dataenteredSET2[2]
+vacationtime =dataenteredSET2[3]
+personaltime =dataenteredSET2[4]
+sicktime =dataenteredSET2[5]
+
+
+
+
+
+empHdMonth+empHdday+empHdyear+
