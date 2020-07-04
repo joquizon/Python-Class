@@ -359,3 +359,25 @@ sicktime =dataenteredSET2[5]
 
 
 empHdMonth+empHdday+empHdyear+
+
+
+
+
+
+
+
+
+dataentered.append(firstname)
+dataentered.append(lastname)
+dataentered.append(ssn)
+dataentered.append(telno)
+dataentered.append(email)
+dataentered.append(streetaddress)
+dataentered.append(city)
+dataentered.append(state)
+dataentered.append(zipcode)
+dataentered.append(hiredM)
+dataentered.append(hiredD)
+dataentered.append(hiredY)
+dataentered.append(salary)
+dataentered.append(manager)  
