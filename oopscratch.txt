@@ -385,3 +385,100 @@ dataentered.append(hiredD)
 dataentered.append(hiredY)
 dataentered.append(salary)
 dataentered.append(manager)  
+
+
+
+
+
+
+
+
+
+
+
+    if reader==0:
+        print(f'{[reader]}>>>firstname:{load[reader]}')
+    elif reader==1:
+        print(f'{[reader]}>>>lastname:......{load[reader]}')
+    elif reader==2:
+        print(f'{[reader]}>>>socno:......{load[reader]}')
+    elif reader==3:
+        print(f'{[reader]}>>>telno:......{load[reader]}')
+    elif reader==4:
+        print(f'{[reader]}>>>email:......{load[reader]}')
+    elif reader==5:
+        print(f'{[reader]}>>>address:......{load[reader]}')
+    elif reader==6:
+        print(f'{[reader]}>>>city:......{load[reader]}')
+    elif reader==7:
+        print(f'{[reader]}>>>state:......{load[reader]}')
+    elif reader==8:
+        print(f'{[reader]}>>>zip:......{load[reader]}')
+    elif reader==9:
+        print(f'{[reader]}>>>hire month:......{load[reader]}')
+    elif reader==10:
+        print(f'{[reader]}>>>hire date:......{load[reader]}')
+    elif reader==11:
+        print(f'{[reader]}>>>hire year:......{load[reader]}')
+    elif reader==12:
+        print(f'{[reader]}>>>department:......{load[reader]}')
+    elif reader==13:
+        print(f'{[reader]}>>>position:......{load[reader]}')
+    elif reader==14:
+        print(f'{[reader]}>>>hourly pay:......{load[reader]}')
+    elif reader==15:
+        print(f'{[reader]}>>>weekly pay:......{load[reader]}')
+    elif reader==16:
+        print(f'{[reader]}>>>monthly pay:......{load[reader]}')
+    elif reader==17:
+        print(f'{[reader]}>>>yearly pay:......{load[reader]}')   
+
+
+
+
+if year==24 or year==28 or year==32 or year==36 or year==40 or year==44 or year==48 or year==52 or year==56 or year==60 or year==64 or year==68 or year==72 or year==76 or year==80 or year==84 or year==88 or year==92 or year==96 and month == 2 and date + amt> 30:
+    
+yearnowsick==24 or yearnowsick==28 or yearnowsick==32 or yearnowsick==36 or yearnowsick==40 or yearnowsick==44 or yearnowsick==48 or yearnowsick==52 or yearnowsick==56 or yearnowsick==60 or yearnowsick==64 or yearnowsick==68 or yearnowsick==72 or yearnowsick==76 or yearnowsick==80 or yearnowsick==84 or yearnowsick==88 or yearnowsick==92 or yearnowsick==96
+
+
+
+
+
+def sickfiler():
+        monthSick=sickentries[0]
+        date=sickentries[1]
+        year=sickentries[2]
+        amt=sickentries[3]
+        print(f'{monthSick}/{date}/{year}.amt{amt}')
+        if year==24 or year==28 or year==32 or year==36 or year==40 or year==44 or year==48 or year==52 or year==56 or year==60 or year==64 or year==68 or year==72 or year==76 or year==80 or year==84 or year==88 or year==92 or year==96 and monthSick == 2 and date + amt> 30:
+            amtnew = 30 - date
+            amtB = amt - amtnew
+            for x in range(amtnew):
+                sickdays.append(f'{monthSick}/{date+x}/{year}')
+            for z in range(amtB):
+                sickdays.append(f'{monthSick+1}/{1+z}/{year}')
+        elif monthSick == 2 and date + amt> 29:
+            amtnew = 29 - date
+            amtB = amt - amtnew
+            for x in range(amtnew):
+                sickdays.append(f'{monthSick}/{date+x}/{year}')
+            for z in range(amtB):
+                sickdays.append(f'{monthSick+1}/{1+z}/{year}')
+        elif monthSick == 4 or monthSick == 6 or monthSick ==  9 or monthSick ==  11 and date + amt> 31:
+            amtnew = 31 - date
+            amtB = amt - amtnew
+            for x in range(amtnew):
+                sickdays.append(f'{monthSick}/{date+x}/{year}')
+            for z in range(amtB):
+                sickdays.append(f'{monthSick+1}/{1+z}/{year}')
+        elif monthSick == 1 or monthSick == 3 or monthSick ==  5 or monthSick ==  7 or monthSick ==  8 or monthSick ==  10 or monthSick ==  12 and date + amt> 32:
+            amtnew = 32 - date
+            amtB = amt - amtnew
+            for x in range(amtnew):
+                sickdays.append(f'{monthSick}/{date+x}/{year}')
+            for z in range(amtB):
+                sickdays.append(f'{monthSick+1}/{1+z}/{year}')
+        else:
+            for x in range (amt):
+                sickdays.append(f'{monthSick}/{date+x}/{year}')
+        print(sickdays)    
