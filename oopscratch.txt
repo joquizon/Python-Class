@@ -482,3 +482,87 @@ def sickfiler():
             for x in range (amt):
                 sickdays.append(f'{monthSick}/{date+x}/{year}')
         print(sickdays)    
+
+
+
+
+
+sickYenom==20 or sickYenom==24 or sickYenom==28 or sickYenom==32 or sickYenom==36 or sickYenom==40 or sickYenom==44 or sickYenom==48 or sickYenom==52 or sickYenom==56 or sickYenom==60 or sickYenom==64 or sickYenom==68 or sickYenom==72 or sickYenom==76 or sickYenom==80 or sickYenom==84 or sickYenom==88 or sickYenom==92 or sickYenom==96:
+                            
+
+sickYenom = 0 or sickYenom = 4 or sickYenom = 8 or sickYenom = 12 or sickYenom = 16 or sickYenom=20 or sickYenom=24 or sickYenom=28 or sickYenom=32 or sickYenom=36 or sickYenom=40 or sickYenom=44 or sickYenom=48 or sickYenom=52 or sickYenom=56 or sickYenom=60 or sickYenom=64 or sickYenom=68 or sickYenom=72 or sickYenom=76 or sickYenom=80 or sickYenom=84 or sickYenom=88 or sickYenom=92 or sickYenom=96:
+                            
+
+
+
+
+
+
+ def sickfiler():
+        monthSick=sickentries[0]
+        date=sickentries[1]
+        year=sickentries[2]
+        amt=sickentries[3]
+        print(f'{monthSick}/{date}/{year}.amt{amt}')
+        if monthSick == 2 and year==20 or year==24 or year==28 or year==32 or year==36 or year==40 or year==44 or year==48 or year==52 or year==56 or year==60 or year==64 or year==68 or year==72 or year==76 or year==80 or year==84 or year==88 or year==92 or year==96:
+            if date + amt>31:
+                amtnew = 31 - date
+                amtB = amt - amtnew
+                for x in range(amtnew):
+                    load[19].append(f'{monthSick}/{date+x}/{year}')
+                for z in range(amtB):
+                    load[19].append(f'{monthSick+1}/{1+z}/{year}')
+            else:
+                for x in range (amt):
+                    load[19].append(f'{monthSick}/{date+x}/{year}')                 
+        elif monthSick == 2:
+            if date + amt>29:
+                amtnew = 29 - date
+                amtB = amt - amtnew
+                for x in range(amtnew):
+                    load[19].append(f'{monthSick}/{date+x}/{year}')
+                for z in range(amtB):
+                    load[19].append(f'{monthSick+1}/{1+z}/{year}')
+            else:
+                for x in range (amt):
+                    load[19].append(f'{monthSick}/{date+x}/{year}') 
+        elif monthSick == 4 or monthSick == 6 or monthSick ==  9 or monthSick ==  11:
+            if date + amt>31:
+                amtnew = 31 - date
+                amtB = amt - amtnew
+                for x in range(amtnew):
+                    load[19].append(f'{monthSick}/{date+x}/{year}')
+                for z in range(amtB):
+                    load[19].append(f'{monthSick+1}/{1+z}/{year}')
+            else:
+                for x in range (amt):
+                    load[19].append(f'{monthSick}/{date+x}/{year}') 
+        elif monthSick == 1 or monthSick == 3 or monthSick ==  5 or monthSick ==  7 or monthSick ==  8 or monthSick ==  10:
+            if date + amt>32:
+                amtnew = 32 - date
+                amtB = amt - amtnew
+                for x in range(amtnew):
+                    load[19].append(f'{monthSick}/{date+x}/{year}')
+                for z in range(amtB):
+                    load[19].append(f'{monthSick+1}/{1+z}/{year}')
+            else:
+                for x in range (amt):
+                    load[19].append(f'{monthSick}/{date+x}/{year}')
+        elif monthSick == 12:
+            if date + amt>32:
+                amtnew = 32 - date
+                amtB = amt - amtnew
+                for x in range(amtnew):
+                    load[19].append(f'{monthSick}/{date+x}/{year}')
+                for z in range(amtB):
+                    load[19].append(f'1/{1+z}/{year+1}')
+            else:
+                for x in range (amt):
+                    load[19].append(f'{monthSick}/{date+x}/{year}') 
+        print(load[19])
+        moresickentries()
+
+
+
+
+        z[x+1] == '1' or z[x+1] == '2' or z[x+1] == '3' or z[x+1] == '4' or z[x+1] == '5' or z[x+1] == '6' or z[x+1] == '7' or z[x+1] == '8' or z[x+1] == '9' or z[x+1] == '0'
