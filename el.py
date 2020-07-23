@@ -1,6 +1,6 @@
 from Newdatin import Ndataenter
 from Editdatin import Bigeditinput
-
+from editinFo import editinFo
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -39,6 +39,8 @@ def modeset():
         Bigeditinput()
         #run search function for editing employee info
     elif mission == '3':
+        editinFo()
+    elif mission == '4':
         quit()
     else:
         print('boopbeep Error!')

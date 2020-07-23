@@ -1,3 +1,4 @@
+
 def Ndataenter():
     ### # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> sets variable func for input funcs to return to mode select
     currfunc=['0']
@@ -499,7 +500,7 @@ def Ndataenter():
                 statecheckcorr()
             else:
                 statentry = statedictionary[stabcorr]
-                dataentered[7]=stabcorr
+                dataentered[7]=statentry
                 verifier() 
         else:
             print(stabcorr)
@@ -1120,18 +1121,8 @@ def Ndataenter():
             dataentered.append(firstname)
             lnameFunc()
     fnameFunc()
+        
 
-
-
-
-
-
-
-
-
-
-
-from Editdatin import Bigeditinput
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -1171,6 +1162,8 @@ def modeset():
         Bigeditinput()
         #run search function for editing employee info
     elif mission == '3':
+        editinFo()
+    elif mission == '4':
         quit()
     else:
         print('boopbeep Error!')

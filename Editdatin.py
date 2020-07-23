@@ -1,9 +1,53 @@
 
-curremp=[]
-searchlist=[]
-notsearch=[]
-searchedpos=[]
+
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 def Bigeditinput():
+    from cryptography.fernet import Fernet
+    fkey = open('testdocs/filekey.night','rb')
+    key = fkey.read()
+    print (key)
+    cipher = Fernet(key)          
+    with open('testdocs/noclist.night','rb') as df:
+        encryptedfile = df.read()
+    decrypted_file = cipher.decrypt(encryptedfile)
+
+
+
+    noclist = (decrypted_file.decode()).splitlines() 
+    emplist = noclist
+    print(emplist)
+
+
+    curremp=[]
+    searchlist=[]
+    notsearch=[]
+    searchedpos=[]
+
+
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     def Editsavechanges():
         load = curremp[0]
@@ -1306,191 +1350,149 @@ def Bigeditinput():
         sicpervac_mtn()
 
 
-def EditMenu():
-    wachuwant= input('if you would like to edit the employee information enter (i)\nif you would like to input\nsick days enter (s)\npersonal days enter (p)\nvacation days enter (v)\nIf you would like to edit the list of days taken enter (m)\nOr If you wish to go to the main menu enter (*)\nOR if you wish to save your current changes enter (sv): ').lower()
-    if wachuwant == 'i':
-        infolog()
-    if wachuwant == 's':
-        sickdayslog()
-    elif wachuwant == 'p':
-        persdayslog()
-    elif wachuwant == 'v':
-        vacdayslog()
-    elif wachuwant == 'm':
-        Mainsicpervac_Mtn()
-    elif wachuwant == '*':
-        modeset()
-    elif wachuwant == 'sv':
-        Editsavechanges()
-    else:
-        print('sorry that was not a choice!')
-        EditMenu()
-
-
-
-
-
-def editinput():
-    from cryptography.fernet import Fernet
-    fkey = open('testdocs/filekey.night','rb')
-    key = fkey.read()
-    print (key)
-    cipher = Fernet(key)          
-    with open('testdocs/noclist.night','rb') as df:
-        encryptedfile = df.read()
-    decrypted_file = cipher.decrypt(encryptedfile)
-
-
-
-    noclist = (decrypted_file.decode()).splitlines() 
-    emplist = noclist
-    print(emplist)
-
-    searcher= input('employee name:')
-    for k in range(len(emplist)):
-        if searcher == emplist[k]:
-            searchlist.append(emplist[k])
-            searchedpos.append(k)
+    def EditMenu():
+        wachuwant= input('if you would like to input\nsick days enter (s)\npersonal days enter (p)\nvacation days enter (v)\nIf you would like to edit the list of days taken enter (m)\nOr If you wish to go to the main menu enter (*)\nOR if you wish to save your current changes enter (sv): ').lower()
+        if wachuwant == 's':
+            sickdayslog()
+        elif wachuwant == 'p':
+            persdayslog()
+        elif wachuwant == 'v':
+            vacdayslog()
+        elif wachuwant == 'm':
+            Mainsicpervac_Mtn()
+        elif wachuwant == '*':
+            modeset()
+        elif wachuwant == 'sv':
+            Editsavechanges()
         else:
-            notsearch.append(emplist[k])
-    if len(searchlist) == 1:
-        print('employee found!')
-        from cryptography.fernet import Fernet
-        fkey = open('testdocs/filekey.night','rb')
-        key = fkey.read()
-        print (key)
-        cipher = Fernet(key)   
-        search = searchlist[0]
-        with open('testdocs/'+search+'.night','rb') as et:
-            encryptedfileA = et.read()
-        decrypted_fileA = cipher.decrypt(encryptedfileA)
+            print('sorry that was not a choice!')
+            EditMenu()
 
-        with open('testdocs/'+search+'sickdates.night','rb') as ms:
-            encryptedfileB = ms.read()
-        decrypted_fileB = cipher.decrypt(encryptedfileB)
 
-        with open('testdocs/'+search+'persdates.night','rb') as lm:
-            encryptedfileC = lm.read()
-        decrypted_fileC = cipher.decrypt(encryptedfileC)
 
-        with open('testdocs/'+search+'vacdates.night','rb') as nh:
-            encryptedfileD = nh.read()
-        decrypted_fileD = cipher.decrypt(encryptedfileD)
 
-        load = (decrypted_fileA.decode()).splitlines() 
-        load2 = (decrypted_fileB.decode()).splitlines() 
-        load3 = (decrypted_fileC.decode()).splitlines() 
-        load4 = (decrypted_fileD.decode()).splitlines() 
-        print(load)
-        curremp.append(load)
-        print(load2)
-        curremp.append(load2)
-        print(load3)
-        curremp.append(load3)
-        print(load4)
-        curremp.append(load4)
-        for reader in range(len(load)):
-            if reader==0:
-                print(f'{[reader]}>>>firstname:.....{load[reader]}')
-            elif reader==1:
-                print(f'{[reader]}>>>lastname:......{load[reader]}')
-            elif reader==2:
-                print(f'{[reader]}>>>socno:......{load[reader]}')
-            elif reader==3:
-                print(f'{[reader]}>>>telno:......{load[reader]}')
-            elif reader==4:
-                print(f'{[reader]}>>>email:......{load[reader]}')
-            elif reader==5:
-                print(f'{[reader]}>>>address:......{load[reader]}')
-            elif reader==6:
-                print(f'{[reader]}>>>city:......{load[reader]}')
-            elif reader==7:
-                print(f'{[reader]}>>>state:......{load[reader]}')
-            elif reader==8:
-                print(f'{[reader]}>>>zip:......{load[reader]}')
-            elif reader==9:
-                print(f'{[reader]}>>>hire month:......{load[reader]}')
-            elif reader==10:
-                print(f'{[reader]}>>>hire date:......{load[reader]}')
-            elif reader==11:
-                print(f'{[reader]}>>>hire year:......{load[reader]}')
-            elif reader==12:
-                print(f'{[reader]}>>>department:......{load[reader]}')
-            elif reader==13:
-                print(f'{[reader]}>>>position:......{load[reader]}')
-            elif reader==14:
-                print(f'{[reader]}>>>hourly pay:......{load[reader]}')
-            elif reader==15:
-                print(f'{[reader]}>>>weekly pay:......{load[reader]}')
-            elif reader==16:
-                print(f'{[reader]}>>>monthly pay:......{load[reader]}')
-            elif reader==17:
-                print(f'{[reader]}>>>yearly pay:......{load[reader]}')
-            elif reader==18:
-                print(f'{[reader]}>>>sick days taken:......{load[reader]}')
-            elif reader==19:
-                print(f'{[reader]}>>>sick days remaining:......{load[reader]}')
-            elif reader==20:
-                print(f'{[reader]}>>>personal days taken:......{load[reader]}')
-            elif reader==21:
-                print(f'{[reader]}>>>personal days remaining:......{load[reader]}')
-            elif reader==22:
-                print(f'{[reader]}>>>vacation days taken:......{load[reader]}')
-            elif reader==23:
-                print(f'{[reader]}>>>vacation days remaining:......{load[reader]}')
-        for reader in range(len(load2)):
-            if reader==0:
-                print(f'{[reader]}>>>sick dates:......{load2}')
-        for reader in range(len(load3)):
-            if reader==0:
-                print(f'{[reader]}>>>personal dates:......{load3}')
-        for reader in range(len(load4)):
-            if reader==0:
-                print(f'{[reader]}>>>vacation dates:......{load4}')
-        print(curremp)
-        EditMenu()
-    elif searcher == '*':
-        modeset()
-    else:
-        print('employee not found!')
-        editinput()
-editinput()        
+
+    def editinput():
+        searcher= input('employee name:')
+        for k in range(len(emplist)):
+            if searcher == emplist[k]:
+                searchlist.append(emplist[k])
+                searchedpos.append(k)
+            else:
+                notsearch.append(emplist[k])
+        if len(searchlist) == 1:
+            print('employee found!')
+            from cryptography.fernet import Fernet
+            fkey = open('testdocs/filekey.night','rb')
+            key = fkey.read()
+            print (key)
+            cipher = Fernet(key)   
+            search = searchlist[0]
+            with open('testdocs/'+search+'.night','rb') as et:
+                encryptedfileA = et.read()
+            decrypted_fileA = cipher.decrypt(encryptedfileA)
+
+            with open('testdocs/'+search+'sickdates.night','rb') as ms:
+                encryptedfileB = ms.read()
+            decrypted_fileB = cipher.decrypt(encryptedfileB)
+
+            with open('testdocs/'+search+'persdates.night','rb') as lm:
+                encryptedfileC = lm.read()
+            decrypted_fileC = cipher.decrypt(encryptedfileC)
+
+            with open('testdocs/'+search+'vacdates.night','rb') as nh:
+                encryptedfileD = nh.read()
+            decrypted_fileD = cipher.decrypt(encryptedfileD)
+
+            load = (decrypted_fileA.decode()).splitlines() 
+            load2 = (decrypted_fileB.decode()).splitlines() 
+            load3 = (decrypted_fileC.decode()).splitlines() 
+            load4 = (decrypted_fileD.decode()).splitlines() 
+            print(load)
+            curremp.append(load)
+            print(load2)
+            curremp.append(load2)
+            print(load3)
+            curremp.append(load3)
+            print(load4)
+            curremp.append(load4)
+            for reader in range(len(load)):
+                if reader==0:
+                    print(f'{[reader]}>>>firstname:.....{load[reader]}')
+                elif reader==1:
+                    print(f'{[reader]}>>>lastname:......{load[reader]}')
+                elif reader==2:
+                    print(f'{[reader]}>>>nickname:......{load[reader]}')
+                elif reader==3:
+                    print(f'{[reader]}>>>soc no.:......{load[reader]}')
+                elif reader==4:
+                    print(f'{[reader]}>>>tel no.:......{load[reader]}')
+                elif reader==5:
+                    print(f'{[reader]}>>>address:......{load[reader]}')
+                elif reader==6:
+                    print(f'{[reader]}>>>city:......{load[reader]}')
+                elif reader==7:
+                    print(f'{[reader]}>>>state:......{load[reader]}')
+                elif reader==8:
+                    print(f'{[reader]}>>>zip:......{load[reader]}')
+                elif reader==9:
+                    print(f'{[reader]}>>>hire month:......{load[reader]}')
+                elif reader==10:
+                    print(f'{[reader]}>>>hire date:......{load[reader]}')
+                elif reader==11:
+                    print(f'{[reader]}>>>hire year:......{load[reader]}')
+                elif reader==12:
+                    print(f'{[reader]}>>>department:......{load[reader]}')
+                elif reader==13:
+                    print(f'{[reader]}>>>position:......{load[reader]}')
+                elif reader==14:
+                    print(f'{[reader]}>>>hourly pay:......{load[reader]}')
+                elif reader==15:
+                    print(f'{[reader]}>>>weekly pay:......{load[reader]}')
+                elif reader==16:
+                    print(f'{[reader]}>>>monthly pay:......{load[reader]}')
+                elif reader==17:
+                    print(f'{[reader]}>>>yearly pay:......{load[reader]}')
+                elif reader==18:
+                    print(f'{[reader]}>>>sick days taken:......{load[reader]}')
+                elif reader==19:
+                    print(f'{[reader]}>>>sick days remaining:......{load[reader]}')
+                elif reader==20:
+                    print(f'{[reader]}>>>personal days taken:......{load[reader]}')
+                elif reader==21:
+                    print(f'{[reader]}>>>personal days remaining:......{load[reader]}')
+                elif reader==22:
+                    print(f'{[reader]}>>>vacation days taken:......{load[reader]}')
+                elif reader==23:
+                    print(f'{[reader]}>>>vacation days remaining:......{load[reader]}')
+            for reader in range(len(load2)):
+                if reader==0:
+                    print(f'{[reader]}>>>sick dates:......{load2}')
+            for reader in range(len(load3)):
+                if reader==0:
+                    print(f'{[reader]}>>>personal dates:......{load3}')
+            for reader in range(len(load4)):
+                if reader==0:
+                    print(f'{[reader]}>>>vacation dates:......{load4}')
+            print(curremp)
+            EditMenu()
+        elif searcher == '*':
+            modeset()
+        else:
+            print('employee not found!')
+            editinput()
+    editinput()        
         
 
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     
 
-from Newdatin import Ndataenter
-
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
 
 
 #_____________________________________________________________________________________________________________
 
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>mode select
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>mode select
 def modeset():
     mission = input("1 for entry or 2 for output: ")
@@ -1501,6 +1503,8 @@ def modeset():
         Bigeditinput()
         #run search function for editing employee info
     elif mission == '3':
+        editinFo()
+    elif mission == '4':
         quit()
     else:
         print('boopbeep Error!')
