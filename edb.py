@@ -1,53 +1,44 @@
-from m import fnameFunc
-from m import lnameFunc
-from m import nickname
+from newEmpdataFuncsModule import fnameFunc
+from newEmpdataFuncsModule import lnameFunc
+from newEmpdataFuncsModule import nickname
+from newEmpdataFuncsModule import ssno
+from newEmpdataFuncsModule import telno
+from newEmpdataFuncsModule import address1
+from newEmpdataFuncsModule import statedictionary
+from newEmpdataFuncsModule import stablist
+from newEmpdataFuncsModule import stateverify
+from newEmpdataFuncsModule import cityfunc
+from newEmpdataFuncsModule import statecheck
+from newEmpdataFuncsModule import zipno
+from newEmpdataFuncsModule import hiredate
+from newEmpdataFuncsModule import depsetter
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> state verfication dict and list and utility list for loops
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> list that collects input data
+dataentered=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+NdataFunclist = [fnameFunc,lnameFunc,nickname,ssno,telno,address1,cityfunc,statecheck,zipno]
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>time variables for time based funcs
+import datetime
+z=datetime.datetime.now()
+monthnow = int((z.strftime("%m")))
+daynow = int((z.strftime("%d")))
+yearnow = int((z.strftime("%Y")))-2000
+print(monthnow)
+print(daynow)
+print(yearnow)
+hireY=1
+hiredD=1
+hiredM=1
+x=datetime.datetime(hireY,hiredD,hiredM)
+
+
+depset=[0]
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> sickday persday vacday listcreator
+sickdatestart =[]
+persdatestart =[]
+vacdatestart =[]
 
 def Ndataenter():
-    ### # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> sets variable func for input funcs to return to mode select
-    currfunc=['0']
-
-    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> state verfication dict and list and utility list for loops
-    statedictionary = {"DISTRICT OF COLUMBIA":'DC',"ALABAMA":'AL',"ALASKA":'AK',"ARIZONA":'AZ',"ARKANSAS":'AR',"CALIFORNIA":'CA',"COLORADO":'CO',"CONNECTICUT":'CT',"DELAWARE":'DE',"FLORIDA":'FL',"GEORGIA":'GA',"HAWAII":'HI',"IDAHO":'ID',"ILLINOIS":'IL',"INDIANA":'IN',"IOWA":'IA',"KANSAS":'KS',"KENTUCKY":'KY',"LOUISIANA":'LA',"MAINE":'ME',"MARYLAND":'MD',"MASSACHUSETTS":'MA',"MICHIGAN":'MI',"MINNESOTA":'MN',"MISSISSIPPI":'MS',"MISSOURI":'MO',"MONTANA":'MT',"NEBRASKA":'NE',"NEVADA":'NV',"NEW HAMPSHIRE":'NH',"NEW JERSEY":'NJ',"NEW MEXICO":'NM',"NEW YORK":'NY',"NORTH CAROLINA":'NC',"NORTH DAKOTA":'ND',"OHIO":'OH',"OKLAHOMA":'OK',"OREGON":'OR',"PENNSYLVANIA":'PA',"RHODE ISLAND":'RI',"SOUTH CAROLINA":'SC',"SOUTH DAKOTA":'SD',"TENNESSEE":'TN',"TEXAS":'TX',"UTAH":'UT',"VERMONT":'VT',"VIRGINIA":'VA',"WASHINGTON":'WA',"WEST VIRGINIA":'WV',"WISCONSIN":'WI',"WYOMING":'WY'}
-    stablist = ['DC','AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']
-    stateverify = []
-
-    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> list that collects input data
-    dataentered=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    dta = dataentered
-    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>time variables for time based funcs
-    import datetime
-    z=datetime.datetime.now()
-    monthnow = (z.strftime("%m"))
-    daynow = (z.strftime("%d"))
-    yearnow = int((z.strftime("%Y")))-2000
-    print(monthnow)
-    print(daynow)
-    print(yearnow)
-    hireY=1
-    hiredD=1
-    hiredM=1
-    x=datetime.datetime(hireY,hiredD,hiredM)
-    # set up for conditional repair of hiredates
-    hiredateset=[0,0,0]
-
-    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> list for dept sets and position sets
-    hsk=['*deptmgr','*adeptmgr','*deptsup','hskper','hseman']
-    FD=['*deptmgr','*adeptmgr','*ntmgr','deptsup','ntaud','fdagnt','bllmn','drmn']
-    eng=['*deptmgr','*adeptmgr','*deptsup','engnr']
-    pbx=['*deptmgr','*adeptmgr','*deptsup','oprtr']
-    sle=['*deptmgr','*adeptmgr','*deptsup','res']
-    acct=['*cntrller','*asscntrller','acctnt']
-    department=[hsk,FD,eng,pbx,sle,acct]                
-    departmentString = ['hsk','FD','eng','pbx','sle','acct'] 
-    depset=[]
-
-    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> sickday persday vacday listcreator
-    sickdatestart =[]
-    persdatestart =[]
-    vacdatestart =[]
-
-
-
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> master employee listcreator
     from cryptography.fernet import Fernet
     fkey = open('testdocs/filekey.night','rb')
@@ -57,8 +48,6 @@ def Ndataenter():
     with open('testdocs/noclist.night','rb') as df:
         encryptedfile = df.read()
     decrypted_file = cipher.decrypt(encryptedfile)
-
-
 
     noclist = (decrypted_file.decode()).splitlines() 
     emplist = noclist
@@ -772,325 +761,25 @@ def Ndataenter():
 
         
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>sets department    
-    def depsetter():
-        depset.clear()
-        deptchoose= input("enter no. for dept 0-Hskeeping, 1-Front Office, 2-Engineering, 3-PBX, 4-Sales, 5-Accting: ")
-        if deptchoose == '*':
-            del dataentered[-1]
-            del dataentered[-1]
-            del dataentered[-1]
-            hiredate()
-        else:
-            while True:
-                try:
-                    deptchooser=int(deptchoose)
-                except:
-                    print('Please pick a Number from the choices')
-                    depsetter()
-                    break
-                else:
-                    if deptchooser == 0:
-                        for h in range (len(hsk)):
-                            print(f"{h}...{hsk[h]}")
-                            dept = department[deptchooser]
-                            depset.append(dept)
-                        break
-                    if deptchooser == 1:
-                        for f in range (len(FD)):
-                            print(f"{f}...{FD[f]}")
-                            dept = department[deptchooser]
-                            depset.append(dept)
-                        break
-                    if deptchooser == 2:        
-                        for e in range (len(eng)):
-                            print(f"{e}...{eng[e]}")
-                            dept = department[deptchooser]
-                            depset.append(dept)
-                        break
-                    if deptchooser == 3:
-                        for p in range (len(pbx)):
-                            print(f"{p}...{pbx[p]}")
-                            dept = department[deptchooser]
-                            depset.append(dept)
-                        break
-                    if deptchooser == 4:
-                        for s in range (len(sle)):
-                            print(f"{s}...{sle[s]}")
-                            dept = department[deptchooser]
-                            depset.append(dept)
-                        break
-                    if deptchooser == 5:
-                        for a in range (len(acct)):
-                            print(f"{a}...{acct[a]}")
-                            dept = department[deptchooser]
-                            depset.append(dept)
-                        break
-                    else:
-                        print('Please pick a Number from the choices***')
-                        depsetter()
-                        break
-            deptS = departmentString[int(deptchoose)]
-            depset.append(dept)
-            dataentered.append(deptS)
-            postsetter()
-            
-              
-            
-       
-         
-        
-        
-    #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hireday     
-    def hireDay():
-
-            hireDa = (input('enter numerical 2 digit date 01-31 pls: '))
-            if hireDa == '*':
-                hireMonth()
-            else:
-                while True:
-                    try:
-                        hireDanom = int(hireDa)
-                        if int(hiredateset[0]) < yearnow and len(hireDa)==2 and hireDanom  > 0 and hireDanom  < 32:
-                            hiredateset[2]= hireDa
-                            dataentered.append(hiredateset[1])
-                            dataentered.append(hiredateset[2])
-                            dataentered.append(hiredateset[0])
-                            depsetter()
-                        elif int(hiredateset[0]) == yearnow and int(hiredateset[1]) < int(monthnow) and len(hireDa)==2 and hireDanom  > 0 and hireDanom  < 32:
-                            hiredateset[2]= hireDa
-                            dataentered.append(hiredateset[1])
-                            dataentered.append(hiredateset[2])
-                            dataentered.append(hiredateset[0])
-                            depsetter()
-                        elif int(hiredateset[0]) == yearnow and int(hiredateset[1]) == int(monthnow) and len(hireDa)==2 and hireDanom  > 0 and hireDanom  <= int(daynow):
-                            hiredateset[2]= hireDa
-                            dataentered.append(hiredateset[1])
-                            dataentered.append(hiredateset[2])
-                            dataentered.append(hiredateset[0])
-                            depsetter()
-                        else:
-                            print('nooooo')
-                            hireDay()
-                    except ValueError :
-                        print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                        hireDay()
-                        break
-                    else:
-                        break     
-        
-        
-        
-        
-        
-    #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hiremonth     
-    def hireMonth():
-
-            hireMo = (input('enter 2 digit numerical month 01-12 pls: '))
-            if hireMo == '*':
-                hireYear()
-            else:
-                while True:
-                    try:
-                        hireMonom = int(hireMo)
-                        if int(hiredateset[0]) < yearnow and len(hireMo)==2 and hireMonom> 0 and hireMonom < 13:
-                            hiredateset[1]=hireMo
-                            hireDay()
-                        elif int(hiredateset[0]) == yearnow and hireMonom<= int(monthnow) and len(hireMo)==2 and hireMonom> 0:
-                            hiredateset[1]=hireMo
-                            hireDay()
-                        else:
-                            print('nooooo')
-                            hireMonth()
-                    except ValueError :
-                        print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                        hireMonth()
-                        break
-                    else:
-                        break       
-            
-            
-
-
-    #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hireyear    
-    def hireYear():
-            hireYe = (input('enter 2 digit format of year 00-99 pls: '))
-            if hireYe == '*':
-                hiredate() 
-            else:
-                while True:
-                    try:
-                        hireYenom = int(hireYe)
-                        hireYelist = len(str(hireYe))
-                        print(hireYelist)
-                        if hireYelist == 2 and  hireYenom  <= yearnow:
-                            hiredateset[0]=hireYe
-                            hireMonth() 
-                        else:
-                            print('nooooo')
-                            hireYear()
-                    except ValueError :
-                        print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                        hireYear()
-                        break
-                    else:
-                        break  
-
-
-
-
-
-
-
-      
-            
-    #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hiredate
-    def hiredate():
-        hirenow = input('is today the hiring day of the employee. 1 for yes Or any key for no: ')
-        if hirenow == '*':
-            del dataentered[-1]
-            zipno()
-        elif hirenow == '1':
-            hiredM=str(monthnow)
-            hiredD=str(daynow)
-            hiredY=str(yearnow)
-            currdate = hiredM +' '+ hiredD +' '+ hiredY
-            dataentered.append(hiredM)
-            dataentered.append(hiredD)
-            dataentered.append(hiredY)
-            print(currdate)
-            depsetter() 
-        else:
-            hireYear()
-            
-
-
-    #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>zip      
-    def zipno():
-
-            zipnomi = (input('enter zip code in 12345 format pls: '))
-            if zipnomi == '*':
-                del dataentered[-1]
-                statecheck()
-            else:
-                while True:
-                    try:
-                        zipnom = int(zipnomi)
-                        ziplist = len(str(zipnomi))
-                        print(ziplist)
-                        if ziplist == 5:
-                            dataentered.append(zipnom)
-                            hiredate()
-                        else:
-                            print('nooooo')
-                            zipno()
-                    except ValueError :
-                        print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                        zipno()
-                        break
-                    else:
-                        break        
-            
-            
-            
-            
-
-    #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>state
-    def statecheck():
-        stab = input('enter State name or other if not a state: ').upper()
-        stateverify.clear()
-        if stab == '*':
-            del dataentered[-1]
-            cityfunc()
-        elif len(stab)>2:
-            for key in statedictionary:
-                if key == stab:
-                    print(statedictionary[stab])
-                else:
-                    stateverify.append(1)
-            if sum(stateverify)==51:
-                print('this aint no state')
-                statecheck()
-            else:
-                statentry = statedictionary[stab]
-                dataentered.append(statentry)
-                zipno()
-        else:
-            print(stab)
-            for z in range(len(stablist)):
-                if stablist[z] == stab:
-                    print(stablist[z])
-                else:
-                    stateverify.append(1)
-            if sum(stateverify)==51:
-                print('this aint no state')
-                statecheck()
-            else:
-                dataentered.append(stab)
-                zipno()
-                      
-            
-            
-
-
-    #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>city    
-    def cityfunc():
-        city= input("city: ") 
-        if city == '*':
-            del dataentered[-1]
-            address
-        elif len(city) == 0:
-            print('cannot leave this blank')
-            cityfunc()    
-        else:
-            dataentered.append(city)
-            statecheck()       
-        
-        
-    #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>street address      
-    def address1():
-        streetaddress= input("street address: ")    
-        if streetaddress == '*':
-            del dataentered[-1]
-            telno()
-     
-        elif len(streetaddress) == 0:
-            print('cannot leave this blank')
-            address1()
-        else:
-            dataentered.append(streetaddress)
-            cityfunc()  
-                
-            
-            
-            
-    #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>telno
-      
-                    
-            
-            
-            
-   
-
-            
-            
-            
-            
-
-         
-            
-   
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>first name     
-    fnameFunc(dataentered,'0')        
+    fnameFunc(dataentered,0,NdataFunclist,modeset)        
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>last name        
-    lnameFunc(dataentered,'1')
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>nickname           
-    nickname(dataentered,'2')          
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ssno      
-    ssno(dataentered,'3')
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>telno
-    telno(dataentered,'4')
-    
-        
+    #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>street address      
+    #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>city    
+    #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>state
+    #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>zip
+    hiredate(monthnow,daynow,yearnow,dataentered,9,10,11,NdataFunclist)           
+    #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hireday     
+    #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hiremonth     
+    #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hireyear 
+    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>sets department   
+
+
+
+
 
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -1122,4 +811,19 @@ def Ndataenter():
 #_____________________________________________________________________________________________________________
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>mode select
-Ndataenter()
+def modeset():
+    mission = input("1 for entry or 2 for output: ")
+    if mission== '1':
+        print("A new employee! coo'coo :)")
+        Ndataenter()
+    elif mission== '2':
+        depsetter(dataentered,depset)
+    elif mission == '3':
+        pass
+    elif mission == '4':
+        quit()
+    else:
+        print('boopbeep Error!')
+        modeset()
+
+modeset()

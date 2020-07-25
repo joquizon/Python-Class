@@ -1,27 +1,4 @@
 
-
-
-
-
-
-
-
-def modeset():
-    mission = input("1 for entry or 2 for output: ")
-    if mission== '1':
-        print("A new employee! coo'coo :)")
-        Ndataenter()
-    elif mission== '2':
-        Bigeditinput()
-        #run search function for editing employee info
-    elif mission == '3':
-        editinFo()
-    elif mission == '4':
-        quit()
-    else:
-        print('boopbeep Error!')
-        modeset()
-
 def editinputFo():
     import datetime
     z=datetime.datetime.now()
@@ -57,137 +34,122 @@ def editinputFo():
 
 
     def EditFOsavechanges():
-            load = curremp[0]
-            empnamer = curremp[0][0]+curremp[0][1]
-            emplist[int(searchedpos[0])]= empnamer
+        load = curremp[0]
+        empnamer = curremp[0][0]+curremp[0][1]
+        emplist[int(searchedpos[0])]= empnamer
 
-            with open(f'testdocs\\noclist.night',mode='w')as n:
-                for m in range(len(emplist)):
-                    n.write(f'{emplist[m]}\n')        
-            
-            with open(f'testdocs\\{empnamer}.night',mode='w')as t:
-                for k in range(len(load)):
-                    t.write(f'{load[k]}\n')
-            print('saved')
-            
-            fkey = open('testdocs/filekey.night','rb')
-            key = fkey.read()
-            print (key)
-            cipher = Fernet(key)
-            
+        with open(f'testdocs\\noclist.night',mode='w')as n:
+            for m in range(len(emplist)):
+                n.write(f'{emplist[m]}\n')        
+        
+        with open(f'testdocs\\{empnamer}.night',mode='w')as t:
+            for k in range(len(load)):
+                t.write(f'{load[k]}\n')
+        print('saved')
+        
+        fkey = open('testdocs/filekey.night','rb')
+        key = fkey.read()
+        print (key)
+        cipher = Fernet(key)
+        
 
-        # >>>>>>>>>>>>>>>>>>>>>>>>>    
-            Nocfile= 'testdocs/noclist.night'
-            with open(Nocfile,'rb')as e:
-                Nocfiletoencrypt = e.read()
+    # >>>>>>>>>>>>>>>>>>>>>>>>>    
+        Nocfile= 'testdocs/noclist.night'
+        with open(Nocfile,'rb')as e:
+            Nocfiletoencrypt = e.read()
 
-            Nocencryptedfile = cipher.encrypt(Nocfiletoencrypt) 
-            with open(Nocfile,'wb') as ee:
-                ee.write(Nocencryptedfile)  
-            
-            
+        Nocencryptedfile = cipher.encrypt(Nocfiletoencrypt) 
+        with open(Nocfile,'wb') as ee:
+            ee.write(Nocencryptedfile)  
+        
+        
 
-        # >>>>>>>>>>>>>>>>>>>>>
-            infofileN= 'testdocs/'+ empnamer +'.night'
-            with open(infofileN,'rb')as f:
-                fileNtoencrypt = f.read()
-
-
-            encryptedfileN = cipher.encrypt(fileNtoencrypt) 
-            with open(infofileN,'wb') as ef:
-                ef.write(encryptedfileN)
-
-        #/////////////////////////////////////////////////////////////
-            with open('testdocs/'+ empnamer +'.night','rb') as df:
-                encryptedfileN = df.read()
-                print(encryptedfileN)
-                print('>>>>>>>>>>>>>>>>>>>>>>>')
-            decrypted_fileN = cipher.decrypt(encryptedfileN)
-            print(decrypted_fileN.decode())   
-            modeset()
+    # >>>>>>>>>>>>>>>>>>>>>
+        infofileN= 'testdocs/'+ empnamer +'.night'
+        with open(infofileN,'rb')as f:
+            fileNtoencrypt = f.read()
 
 
+        encryptedfileN = cipher.encrypt(fileNtoencrypt) 
+        with open(infofileN,'wb') as ef:
+            ef.write(encryptedfileN)
 
-
-
-
-
-
-
-
-
-
-
-
-
+    #/////////////////////////////////////////////////////////////
+        with open('testdocs/'+ empnamer +'.night','rb') as df:
+            encryptedfileN = df.read()
+            print(encryptedfileN)
+            print('>>>>>>>>>>>>>>>>>>>>>>>')
+        decrypted_fileN = cipher.decrypt(encryptedfileN)
+        print(decrypted_fileN.decode())   
+        modeset()
 
 
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> pay setter edit
     def paysetteredit():    
-            payedit = (input('enter rate per hour or enter salary in 00.00 format: '))
-            if payedit == '*':
-                infoeditMenu()
-            else:
-                while True:
-                    try:
-                        paynoedit = float(payedit)
-                        paylistedit = len(payedit)
-                        print(paynoedit)
-                        print(paylistedit)
-                        if paylistedit>=5 and payedit[2]=='.':
-                            hourlyedit = paynoedit
-                            weeklyedit = paynoedit*40
-                            monthlyedit = weeklyedit *4
-                            yearlyedit = monthlyedit *12
-                            print(f'gross pay weekly{hourlyedit}')
-                            print(f'gross pay weekly{weeklyedit}')
-                            print(f'gross pay monthly{monthlyedit}')
-                            print(f'gross pay yearly{yearlyedit}')
-                            curremp[0][14] = (hourlyedit)
-                            curremp[0][15] = (weeklyedit)
-                            curremp[0][16] = (monthlyedit)
-                            curremp[0][17] = (yearlyedit)
-                            print(curremp)
-                            infoeditMenu()
-                        elif paylistedit >= 8 and payedit[5]=='.':
-                            weeklyedit = paynoedit/52
-                            hourlyedit = weeklyedit/40
-                            monthlyedit = weeklyedit *4 
-                            yearlyedit = paynoedit
-                            print(f'gross pay weekly{hourlyedit}')
-                            print(f'gross pay weekly{weeklyedit}')
-                            print(f'gross pay monthly{monthlyedit}')
-                            print(f'gross pay yearly{yearlyedit}')
-                            curremp[0][14] = (hourlyedit)
-                            curremp[0][15] = (weeklyedit)
-                            curremp[0][16] = (monthlyedit)
-                            curremp[0][17] = (yearlyedit)                        
-                            print(curremp)
-                            infoeditMenu()
-                        elif paylistedit >= 9 and payedit[6]=='.':
-                            weeklyedit = paynoedit/52
-                            hourlyedit = weeklyedit/40
-                            monthlyedit = weeklyedit *4 
-                            yearlyedit = paynoedit
-                            print(f'gross pay weekly{hourlyedit}')
-                            print(f'gross pay weekly{weeklyedit}')
-                            print(f'gross pay monthly{monthlyedit}')
-                            print(f'gross pay yearly{yearlyedit}')
-                            curremp[0][14] = (hourlyedit)
-                            curremp[0][15] = (weeklyedit)
-                            curremp[0][16] = (monthlyedit)
-                            curremp[0][17] = (yearlyedit)
-                            print(curremp)
-                            infoeditMenu()
-                        else:
-                            print('noooooope')
-                            paysetter()
-                    except ValueError :
-                        print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                        paysetter()
-                        break
+        payedit = (input('enter rate per hour or enter salary in 00.00 format: '))
+        if payedit == '*':
+            infoeditMenu()
+        else:
+            while True:
+                try:
+                    paynoedit = float(payedit)
+                    paylistedit = len(payedit)
+                    print(paynoedit)
+                    print(paylistedit)
+                    if paylistedit>=5 and payedit[2]=='.':
+                        hourlyedit = paynoedit
+                        weeklyedit = paynoedit*40
+                        monthlyedit = weeklyedit *4
+                        yearlyedit = monthlyedit *12
+                        print(f'gross pay weekly{hourlyedit}')
+                        print(f'gross pay weekly{weeklyedit}')
+                        print(f'gross pay monthly{monthlyedit}')
+                        print(f'gross pay yearly{yearlyedit}')
+                        curremp[0][14] = (hourlyedit)
+                        curremp[0][15] = (weeklyedit)
+                        curremp[0][16] = (monthlyedit)
+                        curremp[0][17] = (yearlyedit)
+                        print(curremp)
+                        infoeditMenu()
+                    elif paylistedit >= 8 and payedit[5]=='.':
+                        weeklyedit = paynoedit/52
+                        hourlyedit = weeklyedit/40
+                        monthlyedit = weeklyedit *4 
+                        yearlyedit = paynoedit
+                        print(f'gross pay weekly{hourlyedit}')
+                        print(f'gross pay weekly{weeklyedit}')
+                        print(f'gross pay monthly{monthlyedit}')
+                        print(f'gross pay yearly{yearlyedit}')
+                        curremp[0][14] = (hourlyedit)
+                        curremp[0][15] = (weeklyedit)
+                        curremp[0][16] = (monthlyedit)
+                        curremp[0][17] = (yearlyedit)                        
+                        print(curremp)
+                        infoeditMenu()
+                    elif paylistedit >= 9 and payedit[6]=='.':
+                        weeklyedit = paynoedit/52
+                        hourlyedit = weeklyedit/40
+                        monthlyedit = weeklyedit *4 
+                        yearlyedit = paynoedit
+                        print(f'gross pay weekly{hourlyedit}')
+                        print(f'gross pay weekly{weeklyedit}')
+                        print(f'gross pay monthly{monthlyedit}')
+                        print(f'gross pay yearly{yearlyedit}')
+                        curremp[0][14] = (hourlyedit)
+                        curremp[0][15] = (weeklyedit)
+                        curremp[0][16] = (monthlyedit)
+                        curremp[0][17] = (yearlyedit)
+                        print(curremp)
+                        infoeditMenu()
                     else:
-                        break         
+                        print('noooooope')
+                        paysetter()
+                except ValueError :
+                    print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
+                    paysetter()
+                    break
+                else:
+                    break         
             
             
             
@@ -281,28 +243,28 @@ def editinputFo():
             
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hireyear editr verif fucn  
     def hireYearedit():
-            hireYeedit = (input('enter 2 digit format of numerical year 00-99 pls: '))
-            if hireYeedit == '*':
-                infoeditMenu()
-            else:
-                while True:
-                    try:
-                        hireYenomedit = int(hireYeedit)
-                        hireYelistedit = len(str(hireYeedit))
-                        print(hireYelistedit)
-                        if hireYelistedit == 2 and  hireYenomedit <= int(yearnow):
-                            curremp[0][11]=hireYeedit
-                            print(curremp)
-                            infoeditMenu()  
-                        else:
-                            print('nooooo')
-                            hireYearedit()
-                    except ValueError :
-                        print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                        hireYearedit()
-                        break
+        hireYeedit = (input('enter 2 digit format of numerical year 00-99 pls: '))
+        if hireYeedit == '*':
+            infoeditMenu()
+        else:
+            while True:
+                try:
+                    hireYenomedit = int(hireYeedit)
+                    hireYelistedit = len(str(hireYeedit))
+                    print(hireYelistedit)
+                    if hireYelistedit == 2 and  hireYenomedit <= int(yearnow):
+                        curremp[0][11]=hireYeedit
+                        print(curremp)
+                        infoeditMenu()  
                     else:
-                        break         
+                        print('nooooo')
+                        hireYearedit()
+                except ValueError :
+                    print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
+                    hireYearedit()
+                    break
+                else:
+                    break         
             
             
             
@@ -314,34 +276,34 @@ def editinputFo():
             
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hireday   editrector for verifierfucn       
     def hireDayedit():
-            hireDaedit = (input('enter numerical date 1-31 pls: '))
-            if hireDaedit == '*':
-                infoeditMenu()
-            else:
-                while True:
-                    try:
-                        hireDanomedit = int(hireDaedit)
-                        if int(curremp[0][11])<int(yearnow) and len(hireDaedit)==2 and hireDanomedit  > 0 and hireDanomedit  < 32:
-                            curremp[0][10] = hireDaedit
-                            print(curremp)
-                            infoeditMenu()
-                        elif int(curremp[0][11]) == int(yearnow) and int(curremp[0][9]) < int(monthnow) and len(hireDaedit)==2 and hireDanomedit  > 0 and hireDanomedit  < 32:
-                            curremp[0][10] = hireDaedit
-                            print(curremp)
-                            infoeditMenu()
-                        elif int(curremp[0][11]) == int(yearnow) and int(curremp[0][9]) == int(monthnow) and len(hireDaedit)==2 and hireDanomedit  > 0 and hireDanomedit <= int(daynow):
-                            curremp[0][10] = hireDaedit
-                            print(curremp)
-                            infoeditMenu()
-                        else:
-                            print('nooooo')
-                            hireDayedit()
-                    except ValueError :
-                        print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                        hireDayedit()
-                        break
+        hireDaedit = (input('enter numerical date 1-31 pls: '))
+        if hireDaedit == '*':
+            infoeditMenu()
+        else:
+            while True:
+                try:
+                    hireDanomedit = int(hireDaedit)
+                    if int(curremp[0][11])<int(yearnow) and len(hireDaedit)==2 and hireDanomedit  > 0 and hireDanomedit  < 32:
+                        curremp[0][10] = hireDaedit
+                        print(curremp)
+                        infoeditMenu()
+                    elif int(curremp[0][11]) == int(yearnow) and int(curremp[0][9]) < int(monthnow) and len(hireDaedit)==2 and hireDanomedit  > 0 and hireDanomedit  < 32:
+                        curremp[0][10] = hireDaedit
+                        print(curremp)
+                        infoeditMenu()
+                    elif int(curremp[0][11]) == int(yearnow) and int(curremp[0][9]) == int(monthnow) and len(hireDaedit)==2 and hireDanomedit  > 0 and hireDanomedit <= int(daynow):
+                        curremp[0][10] = hireDaedit
+                        print(curremp)
+                        infoeditMenu()
                     else:
-                        break          
+                        print('nooooo')
+                        hireDayedit()
+                except ValueError :
+                    print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
+                    hireDayedit()
+                    break
+                else:
+                    break          
             
             
             
@@ -349,33 +311,33 @@ def editinputFo():
 
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hiremonth editrector for verifierfucn   
     def hireMonthedit():
-            print('if youve entered the wrong no. enter * to choose again')
-            hireMoedit = (input('enter 2 digit numerical month 01-12 pls: '))
-            if hireMoedit == '*':
-                infoeditMenu()
-            else:
-                while True:
-                    try:
-                        hireMonomedit = int(hireMoedit)
-                        hireMolistedit = len(str(hireMoedit))
-                        print(hireMolistedit)
-                        if int(curremp[0][11]) < int(yearnow) and hireMolistedit == 2 and hireMonomedit < 13:
-                            curremp[0][9] = hireMoedit
-                            print(curremp)
-                            infoeditMenu()  
-                        elif int(curremp[0][11])==int(yearnow) and hireMolistedit == 2 and hireMonomedit <= int(monthnow):
-                            curremp[0][9] = hireMoedit
-                            print(curremp)
-                            infoeditMenu()                        
-                        else:
-                            print('check your year entry, it may be incorrect i.e. i cannot enter a future month this year')
-                            hireMonthedit()
-                    except ValueError :
-                        print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                        hireMonthedit()
-                        break
+        print('if youve entered the wrong no. enter * to choose again')
+        hireMoedit = (input('enter 2 digit numerical month 01-12 pls: '))
+        if hireMoedit == '*':
+            infoeditMenu()
+        else:
+            while True:
+                try:
+                    hireMonomedit = int(hireMoedit)
+                    hireMolistedit = len(str(hireMoedit))
+                    print(hireMolistedit)
+                    if int(curremp[0][11]) < int(yearnow) and hireMolistedit == 2 and hireMonomedit < 13:
+                        curremp[0][9] = hireMoedit
+                        print(curremp)
+                        infoeditMenu()  
+                    elif int(curremp[0][11])==int(yearnow) and hireMolistedit == 2 and hireMonomedit <= int(monthnow):
+                        curremp[0][9] = hireMoedit
+                        print(curremp)
+                        infoeditMenu()                        
                     else:
-                        break       
+                        print('check your year entry, it may be incorrect i.e. i cannot enter a future month this year')
+                        hireMonthedit()
+                except ValueError :
+                    print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
+                    hireMonthedit()
+                    break
+                else:
+                    break       
             
                             
             
@@ -387,29 +349,29 @@ def editinputFo():
             
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>zip  editrector for verifierfucn    
     def zipnoedit():
-            print('if youve entered the wrong no. enter * to choose again')
-            zipnomiedit = (input('enter zip code in 12345 format pls: '))
-            if zipnomiedit == '*':
-                infoeditMenu()
-            else:
-                while True:
-                    try:
-                        zipnomedit = int(zipnomiedit)
-                        ziplistedit = len(str(zipnomiedit))
-                        print(ziplistedit)
-                        if ziplistedit == 5:
-                            curremp[0][8] = zipnomedit
-                            print(curremp)
-                            infoeditMenu()
-                        else:
-                            print('nooooo')
-                            zipnoedit()
-                    except ValueError :
-                        print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                        zipnoedit()
-                        break
+        print('if youve entered the wrong no. enter * to choose again')
+        zipnomiedit = (input('enter zip code in 12345 format pls: '))
+        if zipnomiedit == '*':
+            infoeditMenu()
+        else:
+            while True:
+                try:
+                    zipnomedit = int(zipnomiedit)
+                    ziplistedit = len(str(zipnomiedit))
+                    print(ziplistedit)
+                    if ziplistedit == 5:
+                        curremp[0][8] = zipnomedit
+                        print(curremp)
+                        infoeditMenu()
                     else:
-                        break             
+                        print('nooooo')
+                        zipnoedit()
+                except ValueError :
+                    print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
+                    zipnoedit()
+                    break
+                else:
+                    break             
             
 
 
@@ -452,57 +414,57 @@ def editinputFo():
             
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>telno editrector for verifierfucn        
     def telnoedit():
-            print('if youve entered the wrong no. enter * to choose again')
-            telnomiedit = (input('enter tel no in 1234567890 format pls: '))
-            if telnomiedit == '*':
-                infoeditMenu()
-            else:
-                while True:
-                    try:
-                        telnomedit = int(telnomiedit)
-                        telistedit = len(str(telnomiedit))
-                        print(telistedit)
-                        if telistedit == 10:
-                            curremp[0][4]=telnomedit
-                            print(curremp)
-                            infoeditMenu()
-                        else:
-                            print('nooooo')
-                            telnoedit()
-                    except ValueError :
-                        print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                        telnoedit()
-                        break
+        print('if youve entered the wrong no. enter * to choose again')
+        telnomiedit = (input('enter tel no in 1234567890 format pls: '))
+        if telnomiedit == '*':
+            infoeditMenu()
+        else:
+            while True:
+                try:
+                    telnomedit = int(telnomiedit)
+                    telistedit = len(str(telnomiedit))
+                    print(telistedit)
+                    if telistedit == 10:
+                        curremp[0][4]=telnomedit
+                        print(curremp)
+                        infoeditMenu()
                     else:
-                        break        
+                        print('nooooo')
+                        telnoedit()
+                except ValueError :
+                    print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
+                    telnoedit()
+                    break
+                else:
+                    break        
             
             
             
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ssno for edit section
     def ssnoedit():
-            print('if youve entered the wrong no. enter * to choose again')
-            ssnomiedit = (input('enter ss no in 123456789 format pls: '))
-            if ssnomiedit == '*':
-                infoeditMenu()
-            else:
-                while True:
-                    try:
-                        ssnomedit = int(ssnomiedit)
-                        sslistedit = len(str(ssnomedit))
-                        print(sslistedit)
-                        if sslistedit == 9:
-                            curremp[0][3]=ssnomedit
-                            print(curremp)
-                            infoeditMenu()
-                        else:
-                            print('nooooo')
-                            ssnoedit()
-                    except ValueError :
-                        print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                        ssnoedit()
-                        break
+        print('if youve entered the wrong no. enter * to choose again')
+        ssnomiedit = (input('enter ss no in 123456789 format pls: '))
+        if ssnomiedit == '*':
+            infoeditMenu()
+        else:
+            while True:
+                try:
+                    ssnomedit = int(ssnomiedit)
+                    sslistedit = len(str(ssnomedit))
+                    print(sslistedit)
+                    if sslistedit == 9:
+                        curremp[0][3]=ssnomedit
+                        print(curremp)
+                        infoeditMenu()
                     else:
-                        break 
+                        print('nooooo')
+                        ssnoedit()
+                except ValueError :
+                    print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
+                    ssnoedit()
+                    break
+                else:
+                    break 
 
 
 
@@ -714,5 +676,4 @@ def editinputFo():
     else:
         print('employee not found!')
         editinputFo()
-editinputFo()    
 
