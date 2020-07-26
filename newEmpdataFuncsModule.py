@@ -2,135 +2,139 @@ statedictionary = {"DISTRICT OF COLUMBIA":'DC',"ALABAMA":'AL',"ALASKA":'AK',"ARI
 stablist = ['DC','AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']
 stateverify = []
 
-def fnameFunc(list,position,list2,retfunc):
-        print('if you have entered the wrong mode, enter < to go back to mode select')
-        firstname= input("first name: ")
-        if len(firstname) == 0:
-            print('cannot leave this blank')
-            fnameFunc()
-        elif firstname == '<':
-            print('Are you sure ? Going Back to mode choice will erase all the data you have entered so far.')
-            moderet= input('y for yes OR Any key for no: ')
-            if moderet == 'y':
-                retfunc()
-            else:
-                fnameFunc(list,position,list2)
+
+
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>first name
+def fnameFunc(list,retfunc):
+    print('if you have entered the wrong mode, enter < to go back to mode select')
+    firstname= input("first name: ")
+    if len(firstname) == 0:
+        print('cannot leave this blank')
+        fnameFunc(list,retfunc)
+    elif firstname == '<':
+        print('Are you sure ? Going Back to mode choice will erase all the data you have entered so far.')
+        moderet= input('(y) for yes OR (enter) key for no: ')
+        if moderet == 'y':
+            retfunc()
         else:
-           list[position]=(firstname)
-           (list2[1])(list,position+1,list2)     
+            fnameFunc(list,retfunc)
+    else:
+       list[0]=(firstname)
+                   
 
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>last name
-def lnameFunc(list,position,list2):
+def lnameFunc(list,retfunc):
     print('if you have entered the wrong previous info, enter * to go back')
     lastname= input("last name: ")
     if lastname == '*':
-        list2[position-1](list,position-1,list2,retfunc)
+        fnameFunc(list,retfunc)
+        lnameFunc(list,retfunc)
     elif len(lastname) == 0:
         print('cannot leave this blank')
+        lnameFunc(list,retfunc)
     else:
-        list[position]=(lastname)
-        (list2[position+1])(list,position+1,list2)
+        list[1]=(lastname)
+        
 
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>nickname       
-def nickname(list,position,list2):
+def nicknameFunc(list,retfunc):
     nickname= input("nickname: ")
     if nickname == '*':
-        list2[position-1](list,position-1,list2)
+        lnameFunc(list,retfunc)
+        nicknameFunc(list,retfunc)
     elif len(nickname) == 0:
         print('cannot leave this blank')
-        nicknamefunc(list,position,list2)
+        nicknameFunc(list,retfunc)
     else:
-        list[position]=(nickname)
-        (list2[position+1])(list,position+1,list2)
+        list[2]=(nickname)
+        
 
  #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ssno
-def ssno(list,position,list2):
-
+def ssno(list,retfunc):
         ssnomi = (input('enter ss no in 123456789 format pls: '))
         if ssnomi == '*':
-            list2[position-1](list,position-1,list2)
+            nicknameFunc(list,retfunc)
+            ssno(list,retfunc)
         else:
             while True:
                 try:
                     ssnom = int(ssnomi)
                     sslist = len((ssnomi))
-                    print(sslist)
                     if sslist == 9:
-                        list[position]=(ssnomi)
-                        (list2[position+1])(list,position+1,list2)
+                        list[3]=(ssnomi)
                     else:
                         print('nooooo')
-                        ssno(list,position,list2)
+                        ssno(list,retfunc)
                 except ValueError :
                     print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                    ssno(list,position,list2)
+                    ssno(list,retfunc)
                     break
                 else:
                     break        
 
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>telno
-def telno(list,position,list2):
+def telno(list,retfunc):
     telnomi = (input('enter tel no in 1234567890 format pls: '))
     if telnomi == '*':
-        list2[position-1](list,position-1,list2)
+        ssno(list,retfunc)
+        telno(list,retfunc)
     else:
         while True:
             try:
                 telnom = int(telnomi)
                 telist = len(str(telnomi))
-                print(telist)
                 if telist == 10:
-                    list[position]=(telnomi)
-                    (list2[position+1])(list,position+1,list2)
+                    list[4]=(telnomi)
                 else:
                     print('nooooo')
-                    telno(list,position,list2)
+                    telno(list,retfunc)
             except ValueError :
                 print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                telno(list,position,list2)
+                telno(list,retfunc)
                 break
             else:
                 break        
                 
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>street address      
-def address1(list,position,list2):
+def address1(list,retfunc):
     streetaddress= input("street address: ")    
     if streetaddress == '*':
-        list2[position-1](list,position-1,list2)
+        telno(list,retfunc)
+        address1(list,retfunc)
     elif len(streetaddress) == 0:
         print('cannot leave this blank')
-        address1(list,position,list2)
+        address1(list,retfunc)
     else:
-        list[position]=(streetaddress)
-        (list2[position+1])(list,position+1,list2) 
+        list[5]=(streetaddress)
 
 
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>city    
-def cityfunc(list,position,list2):
+def cityfunc(list,retfunc):
     city= input("city: ") 
     if city == '*':
-        list2[position-1](list,position-1,list2)
+        address1(list,retfunc)
+        cityfunc(list,retfunc)
     elif len(city) == 0:
         print('cannot leave this blank')
-        cityfunc(list,position,list2)    
+        cityfunc(list,retfunc)    
     else:
-        list[position]=(city)
-        (list2[position+1])(list,position+1,list2)
+        list[6]=(city)
 
 
 
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>state
-def statecheck(list,position,list2):
+def statecheck(list,retfunc):
     stab = input('enter State name or other if not a state: ').upper()
     stateverify.clear()
     if stab == '*':
-        list2[position-1](list,position-1,list2)
+        cityfunc(list,retfunc)
+        statecheck(list,retfunc)
     elif len(stab)>2:
         for key in statedictionary:
             if key == stab:
@@ -139,11 +143,10 @@ def statecheck(list,position,list2):
                 stateverify.append(1)
         if sum(stateverify)==51:
             print('this aint no state')
-            statecheck(list,position,list2)
+            statecheck(list,retfunc)
         else:
             statentry = statedictionary[stab]
-            list[position]=statentry
-            (list2[position+1])(list,position+1,list2)
+            list[7]=statentry
     else:
         print(stab)
         for z in range(len(stablist)):
@@ -153,36 +156,95 @@ def statecheck(list,position,list2):
                 stateverify.append(1)
         if sum(stateverify)==51:
             print('this aint no state')
-            statecheck(list,position,list2)
+            statecheck(list,retfunc)
         else:
-            list[position]=stab
-            (list2[position+1])(list,position+1,list2)
+            list[7]=stab
 
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>zip
-def zipno(list,position,list2):
-
-        zipnomi = (input('enter zip code in 12345 format pls: '))
-        if zipnomi == '*':
-            list2[position-1](list,position-1,list2)
-        else:
-            while True:
-                try:
-                    zipnom = int(zipnomi)
-                    ziplist = len(str(zipnomi))
-                    print(ziplist)
-                    if ziplist == 5:
-                        list[position]=zipnom
-                        print('lets do dates!')
-                    else:
-                        print('nooooo')
-                        zipno(list,position,list2)
-                except ValueError :
-                    print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                    zipno(list,position,list2)
-                    break
+def zipno(list,retfunc):
+    zipnomi = (input('enter zip code in 12345 format pls: '))
+    if zipnomi == '*':
+        statecheck(list,retfunc)
+        zipno(list,retfunc)
+    else:
+        while True:
+            try:
+                zipnom = int(zipnomi)
+                ziplist = len(str(zipnomi))
+                if ziplist == 5:
+                    list[8]=zipnom
+                    print('lets do dates!')
                 else:
-                    break   
+                    print('nooooo')
+                    zipno(list,retfunc)
+            except ValueError :
+                print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
+                zipno(list,retfunc)
+                break
+            else:
+                break
+
+
+
+
+
+def firstset(list,retfuncM):
+    #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>confirmation
+    retfunc = retfuncM
+    def infoconfirmation(list):
+        for num in range(len(list)):
+            if list[num]==0:
+                pass
+            else:
+                print(f'{num}....{list[num]}')
+
+        infoconfirm=input('is this info correct?type(y) for yes. If not type the no. of the entry you wish to correct: ')
+
+        if infoconfirm == 'y':
+            print('test done')
+        elif infoconfirm == '0':
+            fnameFunc(list,retfunc)
+            infoconfirmation(list)
+        elif infoconfirm == '1':
+            lnameFunc(list,retfunc) 
+            infoconfirmation(list)
+        elif infoconfirm == '2':
+            nicknameFunc(list,retfunc)
+            infoconfirmation(list)
+        elif infoconfirm == '3':
+            ssno(list,retfunc)
+            infoconfirmation(list)
+        elif infoconfirm == '4':
+            telno(list,retfunc)
+            infoconfirmation(list)
+        elif infoconfirm == '5':
+            address1(list,retfunc)
+            infoconfirmation(list)
+        elif infoconfirm == '6':
+            cityfunc(list,retfunc)
+            infoconfirmation(list)
+        elif infoconfirm == '7':
+            statecheck(list,retfunc)
+            infoconfirmation(list)
+        elif infoconfirm == '8':
+            zipno(list,retfunc)
+            infoconfirmation(list)
+        else:
+            print('does not compute')
+            infoconfirmation()
+
+    fnameFunc(list,retfunc)
+    lnameFunc(list,retfunc) 
+    nicknameFunc(list,retfunc)
+    ssno(list,retfunc)
+    telno(list,retfunc)
+    address1(list,retfunc)
+    cityfunc(list,retfunc)
+    statecheck(list,retfunc)
+    zipno(list,retfunc)
+    infoconfirmation(list)
+
 
 
 
@@ -213,14 +275,14 @@ def zipno(list,position,list2):
 
 
 
-def hiredate(mn,dn,yn,list,positionM,positionD,positionY,list2):
+def hiredate(mn,dn,yn,list):
     
     hiredateset=[0,0,0]
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hireyear
-    def hireYear(yn,list,positionY):
+    def hireYear(yn,list):
         hireYe = (input('enter 2 digit format of year 00-99 pls: '))
         if hireYe == '*':
-            hiredate(mn,dn,yn,list,positionM,positionD,positionY,list2)
+            hiredate(mn,dn,yn,list)
         else:
             while True:
                 try:
@@ -229,105 +291,103 @@ def hiredate(mn,dn,yn,list,positionM,positionD,positionY,list2):
                     print(hireYelist)
                     if hireYelist == 2 and  hireYenom  <= yn:
                         hiredateset[2] =hireYe
-                        list[positionY]=hireYe
+                        list[11]=hireYe
                     else:
                         print('nooooo')
-                        hireYear()
+                        hireYear(yn,list)
                 except ValueError :
                     print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                    hireYear()
+                    hireYear(yn,list)
                     break
                 else:
                     break
 
 
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hiremonth     
-    def hireMonth(yn,mn,list,positionM):
+    def hireMonth(yn,mn,list):
             hireMo = (input('enter 2 digit numerical month 01-12 pls: '))
             if hireMo == '*':
-                hireYear(yn,list,positionY)
-                hireMonth(yn,mn,list,positionM)
+                hireYear(yn,list)
+                hireMonth(yn,mn,list)
             else:
                 while True:
                     try:
                         hireMonom = int(hireMo)
                         if int(hiredateset[2]) < yn and len(hireMo)==2 and hireMonom> 0 and hireMonom < 13:
                             hiredateset[0]=hireMo
-                            list[positionM]= hireMo
+                            list[9]= hireMo
                         elif int(hiredateset[2]) == yn and hireMonom<= mn and len(hireMo)==2 and hireMonom> 0:
                             hiredateset[0]=hireMo
-                            list[positionM]=hireMo
+                            list[9]=hireMo
                         else:
                             print('nooooo')
-                            hireMonth(yn,mn,list,positionM)
+                            hireMonth(yn,mn,list)
                     except ValueError :
                         print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                        hireMonth(yn,mn,list,positionM)
+                        hireMonth(yn,mn,list)
                         break
                     else:
                         break
 
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hiremonth
-    def hireDay(yn,mn,dn,list,positionD):
+    def hireDay(yn,mn,dn,list):
             hireDa = (input('enter numerical 2 digit date 01-31 pls: '))
             if hireDa == '*':
-                hireMonth(yn,mn,list,positionM)
-                hireDay(yn,mn,dn,list,positionD)
+                hireMonth(yn,mn,list)
+                hireDay(yn,mn,dn,list)
             else:
                 while True:
                     try:
                         hireDanom = int(hireDa)
                         if int(hiredateset[2]) < yn and len(hireDa)==2 and hireDanom  > 0 and hireDanom  < 32:
-                            list[positionD]= hireDa
+                            list[10]= hireDa
                         elif int(hiredateset[2]) == yn and int(hiredateset[0]) < mn and len(hireDa)==2 and hireDanom  > 0 and hireDanom  < 32:
-                            list[positionD]= hireDa
+                            list[10]= hireDa
                         elif int(hiredateset[2]) == yn and int(hiredateset[0]) == mn and len(hireDa)==2 and hireDanom  > 0 and hireDanom  <= dn:
-                            list[positionD]= hireDa
+                            list[10]= hireDa
                         else:
                             print('nooooo')
-                            hireDay(yn,mn,dn,list,positionD)
+                            hireDay(yn,mn,dn,list)
                     except ValueError :
                         print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                        hireDay(yn,mn,dn,list,positionD)
+                        hireDay(yn,mn,dn,list)
                         break
                     else:
                         break  
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>confirmation
     def dateconfirmation():
-        print(f'month {str(list[positionM])} day {str(list[positionD])} year{str(list[positionY])}')
+        print(f'month {str(list[9])} day {str(list[10])} year{str(list[11])}')
         dateconfirm=input('is this date correct?type(y) for yes. If not type\n(m) to fix the month\n(d) to fix the day\n(yr) to fix the year: ')
         if dateconfirm == 'y':
             print('test done')
         elif dateconfirm == 'm':
-            hireMonth(yn,mn,list,positionM)
+            hireMonth(yn,mn,list)
             dateconfirmation()
         elif dateconfirm == 'd':
-            hireDay(yn,mn,dn,list,positionD)
+            hireDay(yn,mn,dn,list)
             dateconfirmation()
         elif dateconfirm == 'yr':
-            hireYear(yn,list,positionY)
+            hireYear(yn,list)
             dateconfirmation()
         else:
             print('does not compute')
-            print(f'month {str(list[positionM])} day {str(list[positionD])} year{str(list[positionY])}')
+            print(f'month {str(list[9])} day {str(list[10])} year{str(list[11])}')
             dateconfirmation()
 
     hirenow = input('is today the hiring day of the employee. y for yes Or any key for no: ')
-    if hirenow == '*':
-        list2[-1](list,positionM-1,list2)
-    elif hirenow == 'y':
+    if hirenow == 'y':
         hiredM=str(mn)
         hiredD=str(dn)
         hiredY=str(yn)
         currdate = hiredM +' '+ hiredD +' '+ hiredY
-        list[positionM]=(hiredM)
-        list[positionD]=(hiredD)
-        list[positionY]=(hiredY)
+        list[9]=(hiredM)
+        list[10]=(hiredD)
+        list[11]=(hiredY)
         dateconfirmation()
     else:
-        hireYear(yn,list,positionY)
-        hireMonth(yn,mn,list,positionM)
-        hireDay(yn,mn,dn,list,positionD)
+        hireYear(yn,list)
+        hireMonth(yn,mn,list)
+        hireDay(yn,mn,dn,list)
         dateconfirmation()
 
  
@@ -348,25 +408,21 @@ def hiredate(mn,dn,yn,list,positionM,positionD,positionY,list2):
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
-
-def depsetter(list,ds):
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> list for dept sets and position sets
-    hsk=['*deptmgr','*adeptmgr','*deptsup','hskper','hseman']
-    FD=['*deptmgr','*adeptmgr','*ntmgr','deptsup','ntaud','fdagnt','bllmn','drmn']
-    eng=['*deptmgr','*adeptmgr','*deptsup','engnr']
-    pbx=['*deptmgr','*adeptmgr','*deptsup','oprtr']
-    sle=['*deptmgr','*adeptmgr','*deptsup','res']
-    acct=['*cntrller','*asscntrller','acctnt']
-    department=[hsk,FD,eng,pbx,sle,acct]                
-    departmentString = ['hsk','FD','eng','pbx','sle','acct'] 
+hsk=['*deptmgr','*adeptmgr','*deptsup','hskper','hseman']
+FD=['*deptmgr','*adeptmgr','*ntmgr','deptsup','ntaud','fdagnt','bllmn','drmn']
+eng=['*deptmgr','*adeptmgr','*deptsup','engnr']
+pbx=['*deptmgr','*adeptmgr','*deptsup','oprtr']
+sle=['*deptmgr','*adeptmgr','*deptsup','res']
+acct=['*cntrller','*asscntrller','acctnt']
+department=[hsk,FD,eng,pbx,sle,acct]                
+departmentString = ['hsk','FD','eng','pbx','sle','acct'] 
 
-
-    def postsetter(list,ds):            
+def postsetter(list,ds):            
         deptA = ds[0]
-        print(len(deptA))
         choicer = (len(deptA))
+        for h in range (len(deptA)):
+            print(f"{h}...{deptA[h]}")
         positionchoose= input("enter no. for position: ")
         if positionchoose == '*':
             depsetter(list,ds)
@@ -389,6 +445,19 @@ def depsetter(list,ds):
                 else:
                     break
 
+
+
+def depsetter(list,ds):
+    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> list for dept sets and position sets
+    hsk=['*deptmgr','*adeptmgr','*deptsup','hskper','hseman']
+    FD=['*deptmgr','*adeptmgr','*ntmgr','deptsup','ntaud','fdagnt','bllmn','drmn']
+    eng=['*deptmgr','*adeptmgr','*deptsup','engnr']
+    pbx=['*deptmgr','*adeptmgr','*deptsup','oprtr']
+    sle=['*deptmgr','*adeptmgr','*deptsup','res']
+    acct=['*cntrller','*asscntrller','acctnt']
+    department=[hsk,FD,eng,pbx,sle,acct]                
+    departmentString = ['hsk','FD','eng','pbx','sle','acct'] 
+
     deptchoose= input("enter no. for dept 0-Hskeeping, 1-Front Office, 2-Engineering, 3-PBX, 4-Sales, 5-Accting: ")
     while True:
         try:
@@ -399,46 +468,115 @@ def depsetter(list,ds):
             break
         else:
             if deptchooser == 0:
-                for h in range (len(hsk)):
-                    print(f"{h}...{hsk[h]}")
-                    dept = department[deptchooser]
-                    ds[0]=dept
+                dept = department[deptchooser]
+                ds[0]=dept
                 break
             if deptchooser == 1:
-                for f in range (len(FD)):
-                    print(f"{f}...{FD[f]}")
-                    dept = department[deptchooser]
-                    ds[0]=dept
+                dept = department[deptchooser]
+                ds[0]=dept
                 break
             if deptchooser == 2:        
-                for e in range (len(eng)):
-                    print(f"{e}...{eng[e]}")
-                    dept = department[deptchooser]
-                    ds[0]=dept
+                dept = department[deptchooser]
+                ds[0]=dept
                 break
             if deptchooser == 3:
-                for p in range (len(pbx)):
-                    print(f"{p}...{pbx[p]}")
-                    dept = department[deptchooser]
-                    ds[0]=dept
+                dept = department[deptchooser]
+                ds[0]=dept
                 break
             if deptchooser == 4:
-                for s in range (len(sle)):
-                    print(f"{s}...{sle[s]}")
-                    dept = department[deptchooser]
-                    ds[0]=dept
+                dept = department[deptchooser]
+                ds[0]=dept
                 break
             if deptchooser == 5:
-                for a in range (len(acct)):
-                    print(f"{a}...{acct[a]}")
-                    dept = department[deptchooser]
-                    ds[0]=dept
+                dept = department[deptchooser]
+                ds[0]=dept
                 break
             else:
                 print('Please pick a Number from the choices***')
                 depsetter(list,ds)
                 break
+
+    def depconfirmation(list):
+        print(f'1 dept....{list[12]}')
+        print(f'2 position....{list[13]}')
+        depconfirm=input('is this info correct?type(y) for yes. If not type the no. of the entry you wish to correct: ')
+        if depconfirm  =='y':
+            print('test done')
+        elif depconfirm == '1':
+            depsetter(list,ds)
+        elif depconfirm == '2':
+            postsetter(list,ds)
+            depconfirmation(list)
+        else:
+            print('does not compute')
+            depconfirmation(list)
+
     deptS = departmentString[int(deptchoose)]
     ds[0]=dept
     list[12]=deptS
     postsetter(list,ds)
+    depconfirmation(list)
+
+
+
+
+
+
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> list for dept sets and position sets
+def paysetter(list):    
+    pay = (input('enter rate per hour or enter salary in 00.00 format: '))
+    while True:
+        try:
+            payno = float(pay)
+            paylist = len(pay)
+            print(payno)
+            print(paylist)
+            if paylist>=5 and pay[2]=='.':
+                hourly = payno
+                weekly = payno*40
+                monthly = weekly *4
+                yearly = monthly *12
+                print(f'gross pay hourly{hourly}')
+                print(f'gross pay weekly{weekly}')
+                print(f'gross pay monthly{monthly}')
+                print(f'gross pay yearly{yearly}')
+                list[14]==hourly
+                list[15]==weekly
+                list[16]==monthly
+                list[17]==yearly
+            elif paylist>=8 and pay[5]=='.':
+                weekly = payno/52
+                hourly = weekly/40
+                monthly = weekly *4 
+                yearly = payno
+                print(f'gross pay hourly{hourly}')
+                print(f'gross pay weekly{weekly}')
+                print(f'gross pay monthly{monthly}')
+                print(f'gross pay yearly{yearly}')
+                list[14]==hourly
+                list[15]==weekly
+                list[16]==monthly
+                list[17]==yearly                    
+            elif paylist>=9 and pay[6]=='.':
+                weekly = payno/52
+                hourly = weekly/40
+                monthly = weekly *4 
+                yearly = payno
+                print(f'gross pay hourly{hourly}')
+                print(f'gross pay weekly{weekly}')
+                print(f'gross pay monthly{monthly}')
+                print(f'gross pay yearly{yearly}')
+                list[14]==hourly                     
+                list[15]==weekly
+                list[16]==monthly
+                list[17]==yearly
+            else:
+                print('noooooope')
+                paysetter(list)
+        except ValueError :
+            print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
+            paysetter(list)
+            break
+        else:
+            break 
