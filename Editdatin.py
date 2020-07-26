@@ -1,6 +1,5 @@
 
 
-
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -403,7 +402,8 @@ def Bigeditinput():
                 if sickMo == '*':
                     EditMenu()
                 elif sickMo == '<':
-                    modeset()
+                    with open('el.py') as infile:
+                        exec(infile.read())
                 else:
                     while True:
                         try:
@@ -675,7 +675,8 @@ def Bigeditinput():
                 if persMo == '*':
                     EditMenu()
                 elif persMo == '<':
-                    modeset()
+                    with open('el.py') as infile:
+                        exec(infile.read())
                 else:
                     while True:
                         try:
@@ -955,7 +956,8 @@ def Bigeditinput():
                 if vacMo == '*':
                     EditMenu()
                 elif vacMo == '<':
-                    modeset()
+                    with open('el.py') as infile:
+                        exec(infile.read())
                 else:
                     while True:
                         try:
@@ -1361,7 +1363,8 @@ def Bigeditinput():
         elif wachuwant == 'm':
             Mainsicpervac_Mtn()
         elif wachuwant == '*':
-            modeset()
+            with open('el.py') as infile:
+                exec(infile.read())
         elif wachuwant == 'sv':
             Editsavechanges()
         else:
@@ -1477,35 +1480,12 @@ def Bigeditinput():
             print(curremp)
             EditMenu()
         elif searcher == '*':
-            modeset()
+            with open('el.py') as infile:
+                exec(infile.read())
         else:
             print('employee not found!')
             editinput()
     editinput()        
         
-
+Bigeditinput()
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-    
-
-
-
-#_____________________________________________________________________________________________________________
-
-#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>mode select
-#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>mode select
-def modeset():
-    mission = input("1 for entry or 2 for output: ")
-    if mission== '1':
-        print("A new employee! coo'coo :)")
-        Ndataenter()
-    elif mission== '2':
-        Bigeditinput()
-        #run search function for editing employee info
-    elif mission == '3':
-        editinFo()
-    elif mission == '4':
-        quit()
-    else:
-        print('boopbeep Error!')
-        modeset()
