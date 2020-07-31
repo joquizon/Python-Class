@@ -1,23 +1,22 @@
-def readytosave(list,list2,list3,list4,confirmfunc,retfunc,savefunc,nlist):
+def readytosave(list,list2,list3,list4,confirmfunc,retfunc,savefunc,nlist,mn,dn,yn,ds):
     saver = input('save your entries enter (y) to save enter (n) to go back(<): ')
     if saver == 'y':
-        empname = list[0]+list[1]
-        nlist.append(empname)
         savefunc(list,list2,list3,list4,retfunc,nlist)
     elif saver == 'n':
-        confirmfunc()
+        confirmfunc(list,list2,list3,list4,retfunc,mn,dn,yn,ds)
+        readytosave(list,list2,list3,list4,confirmfunc,retfunc,savefunc,nlist,mn,dn,yn,ds)
     elif saver =='<':
         print('going back to the main menu will erase all the data you have entered!!! Are you sure?')
         returner = input('type (y) for yes or (n) for no: ')
         if returner == "y":
             retfunc()
         elif returner == 'n':
-            readytosave()
+            readytosave(list,list2,list3,list4,confirmfunc,retfunc,savefunc,nlist,mn,dn,yn,ds)
         else:
             print('let us try that again')
-            readytosave()
+            readytosave(list,list2,list3,list4,confirmfunc,retfunc,savefunc,nlist,mn,dn,yn,ds)
     else:
-        readytosave()   
+        readytosave(list,list2,list3,list4,confirmfunc,retfunc,savefunc,nlist,mn,dn,yn,ds)   
 
 
 
