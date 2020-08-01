@@ -160,10 +160,7 @@ def Bigeditinput():
 
 
     # >>>>>>>>>>>>>>>>>>>>>>>> logs and sickdays
-    sickdays=[]
-    sickentries=[0,0,0,0]
-    curryr = []
-    pastyr = []
+
     import datetime
     z=datetime.datetime.now()
     yearnow = (z.strftime("%Y"))
