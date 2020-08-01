@@ -19,7 +19,8 @@ from savers import filencrypter
 from savers import listcreate
 from savers import newempfilesaver
 from editEmp import empsearchprinter
-
+from editEmp import sickdayslog
+from editEmp import EditMenu
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Openloader vars
 nocmemlist =[]
@@ -53,6 +54,66 @@ vacdatestart =[]
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> position of input match on employeesearch
 searchpos=[0]
 
+
+
+
+
+def sicpervaclog():
+    wachuwant= input('if you would like to input\nsick days enter (s)\npersonal days enter (p)\nvacation days enter (v)\nIf you would like to edit the list of days taken enter (m)\nOr If you wish to go to the main menu enter (*)\nOR if you wish to save your current changes enter (sv): ').lower()
+    if wachuwant == 's':
+        sickdayslog(retfunc,nmlist,sposit,mn,dn,yn)
+    elif wachuwant == 'p':
+        # persdayslog()
+        pass
+    elif wachuwant == 'v':
+        # vacdayslog()
+        pass
+    elif wachuwant == 'm':
+        # Mainsicpervac_Mtn()
+        pass
+    elif wachuwant == '*':
+        retfunc()
+    elif wachuwant == 'sv':
+        editlist = nocmemlist[searchpos[0]]
+        editlistA = nocmemlist[searchpos[0]+1]
+        editlistB = nocmemlist[searchpos[0]+2]
+        editlistC = nocmemlist[searchpos[0]+3]
+        rts(list,list2,list3,list4,confirmfunc,retfunc,savefunc,nlist,mn,dn,yn,ds)
+    else:
+        print('sorry that was not a choice!')
+        EditMenu(retfunc,nmlist,sposit,mn,dn,yn)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+
 # this fnction is for editing existing employee info entries
 def EditempInfo():
     print(searchpos)
@@ -67,6 +128,8 @@ def EditempInfo():
         readytosave(editlist,editlistA,editlistB,editlistC,EditempInfo,modeset,newempfilesaver,noclist,monthnow,daynow,yearnow,depset)
     elif int(toedit)<18:
         linechooser(toedit,noclist,nocmemlist,searchpos,modeset,monthnow,daynow,yearnow,depset,EditempInfo)
+    elif int(toedit)>17:
+        sicpervaclog()
     else:
         print('boopbeep doesnot compute')
         EditempInfo()
@@ -81,14 +144,6 @@ def EditempInfo():
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
-
-
-
-
-
-
 
 
 
@@ -121,19 +176,9 @@ def Ndataenter():
 
 
 
-
-
-
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -142,7 +187,6 @@ def Ndataenter():
 
 
 
-#_____________________________________________________________________________________________________________
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>mode select
 def modeset():
@@ -158,9 +202,7 @@ def modeset():
         empsearchprinter(noclist,nocmemlist,searchpos,modeset)
         EditempInfo()
     elif mission == '3':
-        print(nocmemlist)
-        print(noclist)
-        hiredate(monthnow,daynow,yearnow,dataentered)
+        sicpervaclog()
 
     elif mission == '4':
         quit()
