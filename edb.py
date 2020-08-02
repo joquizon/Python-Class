@@ -20,7 +20,13 @@ from savers import listcreate
 from savers import newempfilesaver
 from editEmp import empsearchprinter
 from editEmp import sickdayslog
-from editEmp import EditMenu
+from editEmp import persdayslog
+from editEmp import vacdayslog
+from logmtn import Mainsicpervac_Mtn
+
+
+
+
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Openloader vars
 nocmemlist =[]
@@ -47,9 +53,9 @@ x=datetime.datetime(hireY,hiredD,hiredM)
 depset=[0]
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> sickday persday vacday listcreator
-sickdatestart =[]
-persdatestart =[]
-vacdatestart =[]
+sickdatestart =[0]
+persdatestart =[0]
+vacdatestart =[0]
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> position of input match on employeesearch
 searchpos=[0]
@@ -58,30 +64,7 @@ searchpos=[0]
 
 
 
-def sicpervaclog():
-    wachuwant= input('if you would like to input\nsick days enter (s)\npersonal days enter (p)\nvacation days enter (v)\nIf you would like to edit the list of days taken enter (m)\nOr If you wish to go to the main menu enter (*)\nOR if you wish to save your current changes enter (sv): ').lower()
-    if wachuwant == 's':
-        sickdayslog(retfunc,nmlist,sposit,mn,dn,yn)
-    elif wachuwant == 'p':
-        # persdayslog()
-        pass
-    elif wachuwant == 'v':
-        # vacdayslog()
-        pass
-    elif wachuwant == 'm':
-        # Mainsicpervac_Mtn()
-        pass
-    elif wachuwant == '*':
-        retfunc()
-    elif wachuwant == 'sv':
-        editlist = nocmemlist[searchpos[0]]
-        editlistA = nocmemlist[searchpos[0]+1]
-        editlistB = nocmemlist[searchpos[0]+2]
-        editlistC = nocmemlist[searchpos[0]+3]
-        rts(list,list2,list3,list4,confirmfunc,retfunc,savefunc,nlist,mn,dn,yn,ds)
-    else:
-        print('sorry that was not a choice!')
-        EditMenu(retfunc,nmlist,sposit,mn,dn,yn)
+
 
 
 
@@ -117,7 +100,11 @@ def sicpervaclog():
 # this fnction is for editing existing employee info entries
 def EditempInfo():
     print(searchpos)
-    toedit = input('enter the no. of the line you wish to edit or (s) if you want to save youre done and ready to save: ')
+    toedit = input('enter the no. of the line you wish to edit or (s) if you want to save youre done and ready to save\nor (m) to go to the log maintenance: ')
+    for x in range(0,18):
+        if toedit == str(x):
+            linechooser(toedit,noclist,nocmemlist,searchpos,modeset,monthnow,daynow,yearnow,depset,EditempInfo)
+        else: pass
     if toedit == '<':
         modeset()
     elif toedit == 's':
@@ -126,10 +113,16 @@ def EditempInfo():
         editlistB = nocmemlist[searchpos[0]+2]
         editlistC = nocmemlist[searchpos[0]+3]
         readytosave(editlist,editlistA,editlistB,editlistC,EditempInfo,modeset,newempfilesaver,noclist,monthnow,daynow,yearnow,depset)
-    elif int(toedit)<18:
+    elif (toedit) == '19' or (toedit) == '21' or (toedit) == '23':
         linechooser(toedit,noclist,nocmemlist,searchpos,modeset,monthnow,daynow,yearnow,depset,EditempInfo)
-    elif int(toedit)>17:
-        sicpervaclog()
+    elif (toedit) == '18' or (toedit) == '24':
+        sickdayslog(EditempInfo,nocmemlist,searchpos,monthnow,daynow,yearnow)
+    elif (toedit) == '20' or (toedit) == '25':
+        persdayslog(EditempInfo,nocmemlist,searchpos,monthnow,daynow,yearnow)
+    elif (toedit) == '22' or (toedit) == '26':
+        vacdayslog(EditempInfo,nocmemlist,searchpos,monthnow,daynow,yearnow)
+    elif toedit ==  'm':
+        Mainsicpervac_Mtn(EditempInfo,nocmemlist,searchpos)
     else:
         print('boopbeep doesnot compute')
         EditempInfo()
