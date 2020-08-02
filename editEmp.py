@@ -95,15 +95,14 @@ def empsearchprinter(nlist,nmlist,sposit,retfunc):
 
 
 
-
-
-
-
-
-
-
-
-
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -160,7 +159,7 @@ def sickdayslog(retfunc,nmlist,sposit,mn,dn,yn):
             for e in range(len(pastyr)):
                 currsicklist.append(pastyr[e])
             print('done!')
-            EditMenu(retfunc)
+            retfunc()
         else:
             print('<y for yes OR n for no> is all im taking')
             moresickentries()
@@ -350,10 +349,10 @@ def sickdayslog(retfunc,nmlist,sposit,mn,dn,yn):
                             sickDay()
                         else:
                             print('nooooo')
-                            sickMonth()
+                            sickMonth(retfunc)
                     except ValueError :
                         print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                        sickMonth()
+                        sickMonth(retfunc)
                         break
                     else:
                         break
@@ -370,6 +369,549 @@ def sickdayslog(retfunc,nmlist,sposit,mn,dn,yn):
 
 
 
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+
+
+
+
+
+
+
+# >>>>>>>>>>>>>>>>>>>>>>>> logs and personal days
+
+def persdayslog(retfunc,nmlist,sposit,mn,dn,yn):
+    persdays=[]
+    persentries=[0,0,0,0]
+    Pcurryr = []
+    Ppastyr = []
+    yearnowpers = yn
+    yearnowperstr = str(yearnowpers-2)
+    persdays.clear()    
+    Pcurryr.clear()
+    Ppastyr.clear()
+    currlistp = nmlist[sposit[0]]
+    currperslist = nmlist[sposit[0]+2]
+# >>>>>>>>>>>>>>>> add more persday entries
+    def morepersentries():
+        morent= input('would you like to enter more pers days <y for yes OR n for no>: ').lower()
+        if morent == 'y':
+            for x in range(len(persdays)):
+                if persdays[x][-2]+persdays[x][-1] == yearnowperstr or persdays[x][-2]+persdays[x][-1] == str(yearnowpers):
+                    Pcurryr.append(persdays[x])
+                else:
+                    Ppastyr.append(persdays[x])
+            print(len(Pcurryr))
+            print(Pcurryr)
+            print(Ppastyr)
+            currlistp[20] = len(Pcurryr) + int(currlistp[20])
+            currlistp[21] = int(currlistp[21])-len(Pcurryr)
+            for d in range(len(Pcurryr)):
+                currperslist.append(Pcurryr[d])
+            for e in range(len(Ppastyr)):
+                currperslist.append(Ppastyr[e])
+            persdayslog(retfunc,nmlist,sposit,mn,dn,yn)
+        elif morent == 'n':
+            for x in range(len(persdays)):
+                if persdays[x][-2]+persdays[x][-1] == yearnowperstr or persdays[x][-2]+persdays[x][-1] == str(yearnowpers):
+                    Pcurryr.append(persdays[x])
+                else:
+                    Ppastyr.append(persdays[x])
+            print(len(Pcurryr))
+            print(Pcurryr)
+            print(Ppastyr)
+            currlistp[20] = len(Pcurryr) + int(currlistp[20])
+            currlistp[21] = int(currlistp[21])-len(Pcurryr)
+            for d in range(len(Pcurryr)):
+                currperslist.append(Pcurryr[d])
+            for e in range(len(Ppastyr)):
+                currperslist.append(Ppastyr[e])
+            print('done!')
+            retfunc()
+        else:
+            print('<y for yes OR n for no> is all im taking')
+            morepersentries()
+
+#>>>>>>>>>>>>>>>>>pers day setter func  
+    def persfiler():
+        monthpers=persentries[0]
+        date=persentries[1]
+        year=persentries[2]
+        amt=persentries[3]
+        print(f'{monthpers}/{date}/{year}.amt{amt}')
+        if monthpers == 2 and year==20 or year==24 or year==28 or year==32 or year==36 or year==40 or year==44 or year==48 or year==52 or year==56 or year==60 or year==64 or year==68 or year==72 or year==76 or year==80 or year==84 or year==88 or year==92 or year==96:
+            if date + amt>31:
+                amtnew = 31 - date
+                amtB = amt - amtnew
+                for x in range(amtnew):
+                    persdays.append(f'{monthpers}/{date+x}/{year}')
+                for z in range(amtB):
+                    persdays.append(f'{monthpers+1}/{1+z}/{year}')
+            else:
+                for x in range (amt):
+                    persdays.append(f'{monthpers}/{date+x}/{year}')                 
+        elif monthpers == 2:
+            if date + amt>29:
+                amtnew = 29 - date
+                amtB = amt - amtnew
+                for x in range(amtnew):
+                    persdays.append(f'{monthpers}/{date+x}/{year}')
+                for z in range(amtB):
+                    persdays.append(f'{monthpers+1}/{1+z}/{year}')
+            else:
+                for x in range (amt):
+                    persdays.append(f'{monthpers}/{date+x}/{year}') 
+        elif monthpers == 4 or monthpers == 6 or monthpers ==  9 or monthpers ==  11:
+            if date + amt>31:
+                amtnew = 31 - date
+                amtB = amt - amtnew
+                for x in range(amtnew):
+                    persdays.append(f'{monthpers}/{date+x}/{year}')
+                for z in range(amtB):
+                    persdays.append(f'{monthpers+1}/{1+z}/{year}')
+            else:
+                for x in range (amt):
+                    persdays.append(f'{monthpers}/{date+x}/{year}') 
+        elif monthpers == 1 or monthpers == 3 or monthpers ==  5 or monthpers ==  7 or monthpers ==  8 or monthpers ==  10:
+            if date + amt>32:
+                amtnew = 32 - date
+                amtB = amt - amtnew
+                for x in range(amtnew):
+                    persdays.append(f'{monthpers}/{date+x}/{year}')
+                for z in range(amtB):
+                    persdays.append(f'{monthpers+1}/{1+z}/{year}')
+            else:
+                for x in range (amt):
+                    persdays.append(f'{monthpers}/{date+x}/{year}')
+        elif monthpers == 12:
+            if date + amt>32:
+                amtnew = 32 - date
+                amtB = amt - amtnew
+                for x in range(amtnew):
+                    persdays.append(f'{monthpers}/{date+x}/{year}')
+                for z in range(amtB):
+                    persdays.append(f'1/{1+z}/{year+1}')
+            else:
+                for x in range (amt):
+                    persdays.append(f'{monthpers}/{date+x}/{year}') 
+        print(persdays)
+        morepersentries()
+        
+#>>>>>>>>>>>>>>>>>year entry    
+    def persamount():
+            persamt = (input('enter no. of days taken: '))
+            if persamt == '*':
+                persYear()
+            else:
+                while True:
+                    try:
+                        persamtnom = int(persamt)
+                        if persamtnom > 0:
+                            persentries[3]=persamtnom
+                            persfiler()
+                        else:
+                            print('nooooo')
+                            persamount()
+                    except ValueError :
+                        print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
+                        persamount()
+                        break
+                    else:
+                        break       
+        
+    
+#>>>>>>>>>>>>>>>>>year entry    
+    def persYear():
+            persYe = (input('enter 2 digit format of numerical year 00-99 pls: '))
+            if persYe == '*':
+                persDay()
+            else:
+                while True:
+                    try:
+                        month = persentries[0]
+                        date = persentries[1]
+                        persYenom = int(persYe)
+                        persYelist = len(str(persYe))
+                        print(persYelist)
+                        if persYelist == 2 and  persYenom  <= int(yearnowpers) and month == 2 and date>28:
+                            if persYenom==20 or persYenom==24 or persYenom==28 or persYenom==32 or persYenom==36 or persYenom==40 or persYenom==44 or persYenom==48 or persYenom==52 or persYenom==56 or persYenom==60 or persYenom==64 or persYenom==68 or persYenom==72 or persYenom==76 or persYenom==80 or persYenom==84 or persYenom==88 or persYenom==92 or persYenom==96:
+                                persentries[2] = persYenom
+                                persamount()
+                            else:
+                                print('not a leap year! enter new date')
+                                persDay()
+                        elif persYelist == 2 and  persYenom  <= int(yearnowpers):
+                            persentries[2] = persYenom
+                            persamount()
+                        else:
+                            print('nooooo')
+                            persYear()
+                    except ValueError :
+                        print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
+                        persYear()
+                        break
+                    else:
+                        break    
+    
+#>>>>>>>>>>>>>>>>>date entry
+    def persDay():
+            persDa = (input('enter numerical date 1-31 pls: '))
+            if persDa == '*':
+                persMonth(retfunc)
+            else:
+                while True:
+                    try:
+                        month = persentries[0]
+                        print(month)
+                        persDanom = int(persDa)
+                        if month == 2 and yearnowpers==20 or yearnowpers==24 or yearnowpers==28 or yearnowpers==32 or yearnowpers==36 or yearnowpers==40 or yearnowpers==44 or yearnowpers==48 or yearnowpers==52 or yearnowpers==56 or yearnowpers==60 or yearnowpers==64 or yearnowpers==68 or yearnowpers==72 or yearnowpers==76 or yearnowpers==80 or yearnowpers==84 or yearnowpers==88 or yearnowpers==92 or yearnowpers==96:
+                            if persDanom  > 0 and persDanom  < 30:
+                                persentries[1]=persDanom
+                                persYear()
+                            else:
+                                print('nooooo')
+                                persDay()
+                        elif month == 2:
+                            if persDanom  > 0 and persDanom  < 29:
+                                persentries[1]=persDanom
+                                persYear()
+                            else:
+                                print('nooooo')
+                                persDay()
+                        elif month == 1 or month == 3 or month ==  5 or month ==  7 or month ==  8 or month ==  10 or month ==  12:
+                            if persDanom  > 0 and persDanom  < 32:
+                                persentries[1]=persDanom
+                                persYear()
+                            else:
+                                print('nooooo')
+                                persDay()
+                        elif month == 4 or month == 6 or month ==  9 or month ==  11:
+                            if persDanom  > 0 and persDanom  < 31:
+                                persentries[1]=persDanom
+                                persYear()
+                            else:
+                                print('nooooo')
+                                persDay()
+                        else:
+                            print('nooooo')
+                            persDay()
+                    except ValueError :
+                        print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
+                        persDay()
+                        break
+                    else:
+                        break
+                    
+#>>>>>>>>>>>>>>>>>month entry
+    def persMonth(retfunc):
+            persMo = (input('enter numerical month 1-12 pls: '))
+            if persMo == '*':
+                retfunc()
+            else:
+                while True:
+                    try:
+                        persMonom = int(persMo)
+                        if persMonom> 0 and persMonom < 13:
+                            persentries[0]=persMonom
+                            print(persentries[0])
+                            persDay()
+                        else:
+                            print('nooooo')
+                            persMonth(retfunc)
+                    except ValueError :
+                        print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
+                        persMonth(retfunc)
+                        break
+                    else:
+                        break
+    persMonth(retfunc)    
+
+
+
+    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+
+
+
+
+# >>>>>>>>>>>>>>>>>>>>>>>> logs and vacdays
+
+def vacdayslog(retfunc,nmlist,sposit,mn,dn,yn):
+    vacdays=[]
+    vacentries=[0,0,0,0]
+    toremove=[]
+    yearnow = yn
+    yearnowvac = int(yearnow)
+    vacdays.clear()
+    currVlist = nmlist[sposit[0]]
+    currvaclist = nmlist[sposit[0]+3]
+# >>>>>>>>>>>>>>>> remove more vacday entries
+    def removemore():
+        vacendchoice = input('would you like to enter another date for removal?<y for yes OR n for no>: ')
+        if vacendchoice == 'y':
+            dateremover()
+        elif vacendchoice == 'n':
+            morevacentries()
+        else:
+            print('sorry does not compute dude.')
+            removemore()
+
+    def dateremover():
+        remover = input('enter the line no. of the date you wish to remove: ')
+        for remo in range(len(vacdays)):
+            if str(remo) == remover:
+                toremove.append(vacdays[remo])
+                print('got it')
+            else:
+                pass
+        if len(toremove)>0:
+            vacdays.pop(int(remover))
+            removemore()
+        elif remover == '*':
+            morevacentries()
+        else:
+            print('sorry that is not on the list:)')
+            dateremover()
+
+
+
+# >>>>>>>>>>>>>>>> add more vacday entries
+    def morevacentries():
+        for r in range(len(vacdays)):
+            print(f'{r} ......{vacdays[r]}')
+        morent= input('would you like to ENTER more vac days <y for yes OR n for no> OR are there dates on this list that need to be removed<type 'r' to REMOVE>: ').lower()
+        if morent == 'y':
+            currVlist[22] = len(vacdays) + int(currVlist[22])
+            currVlist[23] = int(currVlist[23])-len(vacdays)
+            for d in range(len(vacdays)):
+                currvaclist.append(vacdays[d])
+            vacdayslog(retfunc,nmlist,sposit,mn,dn,yn)
+        elif morent == 'n':
+            currVlist[22] = len(vacdays) + int(currVlist[22])
+            currVlist[23] = int(currVlist[23])-len(vacdays)
+            for d in range(len(vacdays)):
+                currvaclist.append(vacdays[d])
+            print('done!')
+            retfunc()
+        elif morent == 'r':
+            dateremover()
+        else:
+            print('<y for yes OR n for no> is all im taking')
+            morevacentries()
+
+#>>>>>>>>>>>>>>>>>vac day setter func  
+    def vacfiler():
+        monthvac=vacentries[0]
+        date=vacentries[1]
+        year=vacentries[2]
+        amt=vacentries[3]
+        print(f'{monthvac}/{date}/{year}.amt{amt}')
+        if monthvac == 2 and year==20 or year==24 or year==28 or year==32 or year==36 or year==40 or year==44 or year==48 or year==52 or year==56 or year==60 or year==64 or year==68 or year==72 or year==76 or year==80 or year==84 or year==88 or year==92 or year==96:
+            if date + amt>31:
+                amtnew = 31 - date
+                amtB = amt - amtnew
+                for x in range(amtnew):
+                    vacdays.append(f'{monthvac}/{date+x}/{year}')
+                for z in range(amtB):
+                    vacdays.append(f'{monthvac+1}/{1+z}/{year}')
+            else:
+                for x in range (amt):
+                    vacdays.append(f'{monthvac}/{date+x}/{year}')                 
+        elif monthvac == 2:
+            if date + amt>29:
+                amtnew = 29 - date
+                amtB = amt - amtnew
+                for x in range(amtnew):
+                    vacdays.append(f'{monthvac}/{date+x}/{year}')
+                for z in range(amtB):
+                    vacdays.append(f'{monthvac+1}/{1+z}/{year}')
+            else:
+                for x in range (amt):
+                    vacdays.append(f'{monthvac}/{date+x}/{year}') 
+        elif monthvac == 4 or monthvac == 6 or monthvac ==  9 or monthvac ==  11:
+            if date + amt>31:
+                amtnew = 31 - date
+                amtB = amt - amtnew
+                for x in range(amtnew):
+                    vacdays.append(f'{monthvac}/{date+x}/{year}')
+                for z in range(amtB):
+                    vacdays.append(f'{monthvac+1}/{1+z}/{year}')
+            else:
+                for x in range (amt):
+                    vacdays.append(f'{monthvac}/{date+x}/{year}') 
+        elif monthvac == 1 or monthvac == 3 or monthvac ==  5 or monthvac ==  7 or monthvac ==  8 or monthvac ==  10:
+            if date + amt>32:
+                amtnew = 32 - date
+                amtB = amt - amtnew
+                for x in range(amtnew):
+                    vacdays.append(f'{monthvac}/{date+x}/{year}')
+                for z in range(amtB):
+                    vacdays.append(f'{monthvac+1}/{1+z}/{year}')
+            else:
+                for x in range (amt):
+                    vacdays.append(f'{monthvac}/{date+x}/{year}')
+        elif monthvac == 12:
+            if date + amt>32:
+                amtnew = 32 - date
+                amtB = amt - amtnew
+                for x in range(amtnew):
+                    vacdays.append(f'{monthvac}/{date+x}/{year}')
+                for z in range(amtB):
+                    vacdays.append(f'1/{1+z}/{year+1}')
+            else:
+                for x in range (amt):
+                    vacdays.append(f'{monthvac}/{date+x}/{year}') 
+        print(vacdays)
+        morevacentries()
+        
+#>>>>>>>>>>>>>>>>>year entry    
+    def vacamount():
+            vacamt = (input('enter no. of days taken: '))
+            if vacamt == '*':
+                vacYear()
+            elif vacamt == '<':
+                pass
+            else:
+                while True:
+                    try:
+                        vacamtnom = int(vacamt)
+                        if vacamtnom > 0:
+                            vacentries[3]=vacamtnom
+                            vacfiler()
+                        else:
+                            print('nooooo')
+                            vacamount()
+                    except ValueError :
+                        print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
+                        vacamount()
+                        break
+                    else:
+                        break       
+        
+    
+#>>>>>>>>>>>>>>>>>year entry    
+    def vacYear():
+            vacYe = (input('enter 2 digit format of numerical year 00-99 pls: '))
+            if vacYe == '*':
+                retfunc()
+            else:
+                while True:
+                    try:
+                        month = vacentries[0]
+                        date = vacentries[1]
+                        vacYenom = int(vacYe)
+                        vacYelist = len(str(vacYe))
+                        print(vacYelist)
+                        if vacYelist == 2 and  vacYenom  <= int(yearnowvac) and month == 2 and date>28:
+                            if vacYenom==20 or vacYenom==24 or vacYenom==28 or vacYenom==32 or vacYenom==36 or vacYenom==40 or vacYenom==44 or vacYenom==48 or vacYenom==52 or vacYenom==56 or vacYenom==60 or vacYenom==64 or vacYenom==68 or vacYenom==72 or vacYenom==76 or vacYenom==80 or vacYenom==84 or vacYenom==88 or vacYenom==92 or vacYenom==96:
+                                vacentries[2] = vacYenom
+                                vacamount()
+                            else:
+                                print('not a leap year! enter new date')
+                                vacDay()
+                        elif vacYelist == 2 and  vacYenom  <= int(yearnowvac):
+                            vacentries[2] = vacYenom
+                            vacamount()
+                        else:
+                            print('nooooo')
+                            vacYear()
+                    except ValueError :
+                        print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
+                        vacYear()
+                        break
+                    else:
+                        break    
+    
+#>>>>>>>>>>>>>>>>>date entry
+    def vacDay():
+            vacDa = (input('enter numerical date 1-31 pls: '))
+            if vacDa == '*':
+                vacMonth()
+            else:
+                while True:
+                    try:
+                        month = vacentries[0]
+                        print(month)
+                        vacDanom = int(vacDa)
+                        if month == 2 and yearnowvac==20 or yearnowvac==24 or yearnowvac==28 or yearnowvac==32 or yearnowvac==36 or yearnowvac==40 or yearnowvac==44 or yearnowvac==48 or yearnowvac==52 or yearnowvac==56 or yearnowvac==60 or yearnowvac==64 or yearnowvac==68 or yearnowvac==72 or yearnowvac==76 or yearnowvac==80 or yearnowvac==84 or yearnowvac==88 or yearnowvac==92 or yearnowvac==96:
+                            if vacDanom  > 0 and vacDanom  < 30:
+                                vacentries[1]=vacDanom
+                                vacYear()
+                            else:
+                                print('nooooo')
+                                vacDay()
+                        elif month == 2:
+                            if vacDanom  > 0 and vacDanom  < 29:
+                                vacentries[1]=vacDanom
+                                vacYear()
+                            else:
+                                print('nooooo')
+                                vacDay()
+                        elif month == 1 or month == 3 or month ==  5 or month ==  7 or month ==  8 or month ==  10 or month ==  12:
+                            if vacDanom  > 0 and vacDanom  < 32:
+                                vacentries[1]=vacDanom
+                                vacYear()
+                            else:
+                                print('nooooo')
+                                vacDay()
+                        elif month == 4 or month == 6 or month ==  9 or month ==  11:
+                            if vacDanom  > 0 and vacDanom  < 31:
+                                vacentries[1]=vacDanom
+                                vacYear()
+                            else:
+                                print('nooooo')
+                                vacDay()
+                        else:
+                            print('nooooo')
+                            vacDay()
+                    except ValueError :
+                        print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
+                        vacDay()
+                        break
+                    else:
+                        break
+                    
+#>>>>>>>>>>>>>>>>>month entry
+    def vacMonth():
+            vacMo = (input('enter numerical month 1-12 pls: '))
+            if vacMo == '*':
+                retfunc()
+            else:
+                while True:
+                    try:
+                        vacMonom = int(vacMo)
+                        if vacMonom> 0 and vacMonom < 13:
+                            vacentries[0]=vacMonom
+                            print(vacentries[0])
+                            vacDay()
+                        else:
+                            print('nooooo')
+                            vacMonth()
+                    except ValueError :
+                        print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
+                        vacMonth()
+                        break
+                    else:
+                        break
+    vacMonth()
 
 
 
@@ -387,30 +929,7 @@ def sickdayslog(retfunc,nmlist,sposit,mn,dn,yn):
 
 
 
-def EditMenu(retfunc,nmlist,sposit,mn,dn,yn):
-    wachuwant= input('if you would like to input\nsick days enter (s)\npersonal days enter (p)\nvacation days enter (v)\nIf you would like to edit the list of days taken enter (m)\nOr If you wish to go to the main menu enter (*)\nOR if you wish to save your current changes enter (sv): ').lower()
-    if wachuwant == 's':
-        sickdayslog(retfunc,nmlist,sposit,mn,dn,yn)
-    elif wachuwant == 'p':
-        # persdayslog()
-        pass
-    elif wachuwant == 'v':
-        # vacdayslog()
-        pass
-    elif wachuwant == 'm':
-        # Mainsicpervac_Mtn()
-        pass
-    elif wachuwant == '*':
-        retfunc()
-    elif wachuwant == 'sv':
-        editlist = nmlist[sposit[0]]
-        editlistA = nmlist[sposit[0]+1]
-        editlistB = nmlist[sposit[0]+2]
-        editlistC = nmlist[sposit[0]+3]
-        rts(list,list2,list3,list4,confirmfunc,retfunc,savefunc,nlist,mn,dn,yn,ds)
-    else:
-        print('sorry that was not a choice!')
-        EditMenu(retfunc,nmlist,sposit,mn,dn,yn)
+
 
 
 
