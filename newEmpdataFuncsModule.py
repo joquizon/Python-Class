@@ -594,6 +594,26 @@ def paysetter(list):
             break 
 
 
+def offdaygive(elist,daytype,resetfunc):
+    print(daytype)
+    giver = input('type the new number of days remaining: ')
+    if giver == '*':
+        resetfunc()
+    else:
+        while True:
+            try:
+                givernom = int(giver)
+                if givernom >= 0:
+                    elist[int(daytype)]=givernom
+                else:
+                    print('nooooo')
+                    offdaygive(elist,daytype,resetfunc)
+            except ValueError :
+                print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
+                offdaygive(elist,daytype,resetfunc)
+                break
+            else:
+                break        
 
 
 
@@ -808,6 +828,17 @@ def linechooser(lchosen,nlist,nmlist,sposit,retfunc,mn,dn,yn,ds,resetfunc):
             print(f'current entry: hourly {currlist[14]} weekly {currlist[15]} monthly {currlist[16]} yearly {currlist[17]}')
             paysetter(currlist) 
             print(f'new entry: hourly {currlist[14]} weekly {currlist[15]} monthly {currlist[16]} yearly {currlist[17]}')
+            resetfunc()
+        elif lchosen =='19' or lchosen =='21' or lchosen =='23':
+            if lchosen =='19':
+                label ='sick days remaining'
+            elif lchosen =='21':
+                label ='personal days remaining'
+            elif lchosen =='23':
+                label ='vacation days remaining'
+            print(f'current entry:{label}....{currlist[int(lchosen)]}')
+            offdaygive(currlist,lchosen,resetfunc)
+            print(f'new entry:{currlist[int(lchosen)]}')
             resetfunc()
         else:
             print('incorrect data :(')
