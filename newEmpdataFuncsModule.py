@@ -161,25 +161,32 @@ def statecheck(list,retfunc):
 
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>zip
-def zipno(list,retfunc):
+def zipno(list):
     zipnomi = (input('enter zip code in 12345 format pls: '))
     if zipnomi == 'state':
-        statecheck(list,retfunc)
-        zipno(list,retfunc)
+        pass
     else:
         while True:
             try:
-                zipnom = int(zipnomi)
                 ziplist = len(str(zipnomi))
                 if ziplist == 5:
-                    list[8]=zipnomi
-                    print('lets do dates!')
+                    zipper =[0]
+                    from pprint import pprint
+                    import zipcodes
+                    zipper[0] = (zipcodes.matching(zipnomi))
+                    if len(zipper[0]) == 0:
+                        print('not there try again')
+                        zipno(list)
+                    else:
+                        list[8] = zipper[0][0]['zip_code']
+                        list[7] = zipper[0][0]['state']
+                        list[6] = zipper[0][0]['city']
                 else:
                     print('nooooo')
-                    zipno(list,retfunc)
+                    zipno(list)
             except ValueError :
                 print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                zipno(list,retfunc)
+                zipno(list)
                 break
             else:
                 break
@@ -202,6 +209,13 @@ def firstset(list,retfuncM):
 
         if infoconfirm == 'y':
             print('test done')
+        elif infoconfirm == '*':
+            print('Are you sure ? Going Back to mode choice will erase all the data you have entered so far.')
+            moderet= input('(y) for yes OR (enter) key for no: ')
+            if moderet == 'y':
+                retfunc()
+            else:
+                infoconfirmation(list)
         elif infoconfirm == '0':
             fnameFunc(list,retfunc)
             infoconfirmation(list)
@@ -239,9 +253,7 @@ def firstset(list,retfuncM):
     ssno(list,retfunc)
     telno(list,retfunc)
     address1(list,retfunc)
-    cityfunc(list,retfunc)
-    statecheck(list,retfunc)
-    zipno(list,retfunc)
+    zipno(list)
     infoconfirmation(list)
 
 
@@ -435,6 +447,7 @@ def postsetter(list,ds):
         positionchoose= input("enter no. for position: ")
         if positionchoose == '*':
             depsetter(list,ds)
+            postsetter(list,ds)
         else:
             while True:
                 try:
@@ -511,23 +524,22 @@ def depsetter(list,ds):
                 depsetter(list,ds)
                 break
 
-    def depconfirmation(list):
-        print(f'1 dept....{list[12]}')
-        print(f'2 position....{list[13]}')
-        depconfirm=input('is this info correct?type(y) for yes. If not type the no. of the entry you wish to correct: ')
-        if depconfirm  =='y':
-            print('test done')
-        elif depconfirm == '1':
-            depsetter(list,ds)
-        elif depconfirm == '2':
-            postsetter(list,ds)
-            depconfirmation(list)
-        else:
-            print('does not compute')
-            depconfirmation(list)
+def depconfirmation(list,ds):
+    print(f'1 dept....{list[12]}')
+    print(f'2 position....{list[13]}')
+    depconfirm=input('is this info correct?type(y) for yes. If not type the no. of the entry you wish to correct: ')
+    if depconfirm  =='y':
+        print('test done')
+    elif depconfirm == '1':
+        depsetter(list,ds)
+    elif depconfirm == '2':
+        postsetter(list,ds)
+        depconfirmation(list,ds)
+    else:
+        print('does not compute')
+        depconfirmation(list)
 
-    postsetter(list,ds)
-    depconfirmation(list)
+
 
 
 
