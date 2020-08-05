@@ -11,6 +11,8 @@ from newEmpdataFuncsModule import zipno
 from newEmpdataFuncsModule import firstset
 from newEmpdataFuncsModule import hiredate
 from newEmpdataFuncsModule import depsetter
+from newEmpdataFuncsModule import postsetter
+from newEmpdataFuncsModule import depconfirmation
 from newEmpdataFuncsModule import paysetter
 from newEmpdataFuncsModule import verifier
 from newEmpdataFuncsModule import linechooser
@@ -157,6 +159,8 @@ def Ndataenter():
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hiremonth     
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hireyear 
     depsetter(dataentered,depset)
+    postsetter(dataentered,depset)
+    depconfirmation(dataentered,depset)
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>sets department   
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>sets position  
     paysetter(dataentered)   
@@ -187,6 +191,7 @@ def modeset():
     nocmemlist.clear()
 
     employeeloader(noclist,nocmemlist)
+    print(nocmemlist)
     mission = input("1 for entry or 2 for output: ")
     if mission== '1':
         print("A new employee! coo'coo :)")
