@@ -532,6 +532,7 @@ def depconfirmation(list,ds):
         print('test done')
     elif depconfirm == '1':
         depsetter(list,ds)
+        postsetter(list,ds)
     elif depconfirm == '2':
         postsetter(list,ds)
         depconfirmation(list,ds)
@@ -647,6 +648,9 @@ def verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist):
             list.append(0)
             list.append(0)
             list.append(0)
+            list.append(list2)
+            list.append(list3)
+            list.append(list4)
             print('input test done')
             print(list)
             empname = list[0]+list[1]

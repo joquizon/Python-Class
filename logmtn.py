@@ -6,9 +6,9 @@ def Mainsicpervac_Mtn(retfunc,nmlist,sposit):
 
     curremp = nmlist[sposit[0]]
 
-    sicdates=nmlist[sposit[0]+1]
-    perdates=nmlist[sposit[0]+2]
-    vacdates= nmlist[sposit[0]+3] 
+    sicdates=nmlist[sposit[0][24]]
+    perdates=nmlist[sposit[0][25]]
+    vacdates= nmlist[sposit[0][26]] 
 
     Sictoremove=[]
     Perstoremove=[]

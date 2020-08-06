@@ -130,7 +130,6 @@ def listcreate(list,list2,list3,list4,nlist):
 def newempfilesaver(list,list2,list3,list4,retfunc,nlist):
     listcreate(list,list2,list3,list4,nlist)
     filencrypter(list)
-    retfunc()
 
 #  plae 'nlist.append(empname)' when user says yes to save
 

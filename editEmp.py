@@ -1,10 +1,9 @@
 
 def empsearchprinter(nlist,nmlist,sposit,retfunc):
-    print('This is where you edit employee information, if you re here by mistake type (<) to return to main menu')
-    holdinglist = nmlist[::4]
-    print(str(holdinglist[1][0]+holdinglist[1][1]))
-    itsthere = 'false'
     print(nlist)
+    print('This is where you edit employee information, if you re here by mistake type (<) to return to main menu')
+    itsthere = 'false'
+    
     searcher= input('employee name:')
     for k in range(len(nlist)):
         # if in input is in the noclist
@@ -17,71 +16,66 @@ def empsearchprinter(nlist,nmlist,sposit,retfunc):
         retfunc()
     if itsthere == 'true':
         # check the nocmemlist and match input to a name
-        for emp in range (len(holdinglist)):
-            if searcher == (str(holdinglist[emp][0]))+(str(holdinglist[emp][1])):
+        for emp in range (len(nmlist)):
+            if searcher == (str(nmlist[emp][0]))+(str(nmlist[emp][1])):
+                sposit[0]=emp
+                print(f'employee is here {emp}')
                 #this is input's position in the nocmemlist
-                if emp == 0:
-                    sposit[0]=0
-                elif emp > 0:
-                    sposit[0] = emp*4
-                for reader in range(len(holdinglist[emp])):
+                for reader in range(len(nmlist[emp])):
                     if reader==0:
-                        print(f'{[reader]}>>>firstname:.....{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>firstname:.....{nmlist[emp][reader]}')
                     elif reader==1:
-                        print(f'{[reader]}>>>lastname:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>lastname:......{nmlist[emp][reader]}')
                     elif reader==2:
-                        print(f'{[reader]}>>>nickname:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>nickname:......{nmlist[emp][reader]}')
                     elif reader==3:
-                        print(f'{[reader]}>>>soc no.:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>soc no.:......{nmlist[emp][reader]}')
                     elif reader==4:
-                        print(f'{[reader]}>>>tel no.:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>tel no.:......{nmlist[emp][reader]}')
                     elif reader==5:
-                        print(f'{[reader]}>>>address:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>address:......{nmlist[emp][reader]}')
                     elif reader==6:
-                        print(f'{[reader]}>>>city:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>city:......{nmlist[emp][reader]}')
                     elif reader==7:
-                        print(f'{[reader]}>>>state:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>state:......{nmlist[emp][reader]}')
                     elif reader==8:
-                        print(f'{[reader]}>>>zip:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>zip:......{nmlist[emp][reader]}')
                     elif reader==9:
-                        print(f'{[reader]}>>>hire month:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>hire month:......{nmlist[emp][reader]}')
                     elif reader==10:
-                        print(f'{[reader]}>>>hire date:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>hire date:......{nmlist[emp][reader]}')
                     elif reader==11:
-                        print(f'{[reader]}>>>hire year:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>hire year:......{nmlist[emp][reader]}')
                     elif reader==12:
-                        print(f'{[reader]}>>>department:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>department:......{nmlist[emp][reader]}')
                     elif reader==13:
-                        print(f'{[reader]}>>>position:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>position:......{nmlist[emp][reader]}')
                     elif reader==14:
-                        print(f'{[reader]}>>>hourly pay:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>hourly pay:......{nmlist[emp][reader]}')
                     elif reader==15:
-                        print(f'{[reader]}>>>weekly pay:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>weekly pay:......{nmlist[emp][reader]}')
                     elif reader==16:
-                        print(f'{[reader]}>>>monthly pay:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>monthly pay:......{nmlist[emp][reader]}')
                     elif reader==17:
-                        print(f'{[reader]}>>>yearly pay:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>yearly pay:......{nmlist[emp][reader]}')
                     elif reader==18:
-                        print(f'{[reader]}>>>sick days taken:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>sick days taken:......{nmlist[emp][reader]}')
                     elif reader==19:
-                        print(f'{[reader]}>>>sick days remaining:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>sick days remaining:......{nmlist[emp][reader]}')
                     elif reader==20:
-                        print(f'{[reader]}>>>personal days taken:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>personal days taken:......{nmlist[emp][reader]}')
                     elif reader==21:
-                        print(f'{[reader]}>>>personal days remaining:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>personal days remaining:......{nmlist[emp][reader]}')
                     elif reader==22:
-                        print(f'{[reader]}>>>vacation days taken:......{holdinglist[emp][reader]}')
+                        print(f'{[reader]}>>>vacation days taken:......{nmlist[emp][reader]}')
                     elif reader==23:
-                        print(f'{[reader]}>>>vacation days remaining:......{holdinglist[emp][reader]}')
-                for reader2 in range(len(nmlist[sposit[0]+1])):
-                    if reader2==0:
-                        print(f'[24]>>>sick dates:......{nmlist[sposit[0]+1]}')
-                for reader3 in range(len(nmlist[sposit[0]+2])):
-                    if reader3==0:
-                        print(f'[25]>>>personal dates:......{nmlist[sposit[0]+2]}')
-                for reader4 in range(len(nmlist[sposit[0]+3])):
-                    if reader4==0:
-                        print(f'[26]>>>vacation dates:......{nmlist[sposit[0]+3]}')
+                        print(f'{[reader]}>>>vacation days remaining:......{nmlist[emp][reader]}')
+                    elif reader==24:
+                        print(f'{[reader]}>>>sick dates:......{nmlist[emp][reader]}')
+                    elif reader==25:
+                        print(f'{[reader]}>>>personal dates:......{nmlist[emp][reader]}')
+                    elif reader==26:
+                        print(f'{[reader]}>>>vacation dates:......{nmlist[emp][reader]}')
             else:
                 pass
     else:
@@ -123,7 +117,7 @@ def sickdayslog(retfunc,nmlist,sposit,mn,dn,yn):
     curryr.clear()
     pastyr.clear()
     currlist = nmlist[sposit[0]]
-    currsicklist = nmlist[sposit[0]+1]
+    currsicklist = nmlist[sposit[0][24]]
     # >>>>>>>>>>>>>>>> add more sickday entries
     def moresickentries():
         morent= input('would you like to enter more sick days <y for yes OR n for no>: ').lower()
@@ -397,7 +391,7 @@ def persdayslog(retfunc,nmlist,sposit,mn,dn,yn):
     Pcurryr.clear()
     Ppastyr.clear()
     currlistp = nmlist[sposit[0]]
-    currperslist = nmlist[sposit[0]+2]
+    currperslist = nmlist[sposit[0][25]]
 # >>>>>>>>>>>>>>>> add more persday entries
     def morepersentries():
         morent= input('would you like to enter more pers days <y for yes OR n for no>: ').lower()
@@ -662,7 +656,7 @@ def vacdayslog(retfunc,nmlist,sposit,mn,dn,yn):
     yearnowvac = int(yearnow)
     vacdays.clear()
     currVlist = nmlist[sposit[0]]
-    currvaclist = nmlist[sposit[0]+3]
+    currvaclist = nmlist[sposit[0][26]]
 # >>>>>>>>>>>>>>>> remove more vacday entries
     def removemore():
         vacendchoice = input('would you like to enter another date for removal?<y for yes OR n for no>: ')
