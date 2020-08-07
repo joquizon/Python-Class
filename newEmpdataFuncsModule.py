@@ -286,7 +286,7 @@ def firstset(list,retfuncM):
 
 
 
-def hiredate(mn,dn,yn,list):
+def hiredate(mn,dn,yn,list,dns):
     
     hiredateset=[0,0,0]
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hireyear
@@ -341,11 +341,11 @@ def hiredate(mn,dn,yn,list):
                     break
 
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hiremonth
-    def hireDay(yn,mn,dn,list):
+    def hireDay(yn,mn,dn,list,dns):
         hireDa = (input('enter numerical 2 digit date 01-31 pls: '))
         if hireDa == 'month':
             hireMonth(yn,mn,list)
-            hireDay(yn,mn,dn,list)
+            hireDay(yn,mn,dn,list,dns)
         else:
             while True:
                 try:
@@ -361,10 +361,10 @@ def hiredate(mn,dn,yn,list):
                         break
                     else:
                         print('nooooo')
-                        hireDay(yn,mn,dn,list)
+                        hireDay(yn,mn,dn,list,dns)
                 except ValueError :
                     print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-                    hireDay(yn,mn,dn,list)
+                    hireDay(yn,mn,dn,list,dns)
                     break
                 else:
                     break  
@@ -378,7 +378,7 @@ def hiredate(mn,dn,yn,list):
             hireMonth(yn,mn,list)
             dateconfirmation()
         elif dateconfirm == 'd':
-            hireDay(yn,mn,dn,list)
+            hireDay(yn,mn,dn,list,dns)
             dateconfirmation()
         elif dateconfirm == 'yr':
             hireYear(yn,list)
@@ -391,7 +391,7 @@ def hiredate(mn,dn,yn,list):
     hirenow = input('is today the hiring day of the employee. (y) for yes Or (n) for no: ')
     if hirenow == 'y':
         hiredM=str(mn)
-        hiredD=str(dn)
+        hiredD=str(dns)
         hiredY=str(yn)
         currdate = hiredM +' '+ hiredD +' '+ hiredY
         list[9]=(hiredM)
@@ -401,10 +401,10 @@ def hiredate(mn,dn,yn,list):
     elif hirenow == 'n':
         hireYear(yn,list)
         hireMonth(yn,mn,list)
-        hireDay(yn,mn,dn,list)
+        hireDay(yn,mn,dn,list,dns)
         dateconfirmation()
     else:
-        hiredate(mn,dn,yn,list)
+        hiredate(mn,dn,yn,list,dns)
 
  
 
@@ -538,7 +538,7 @@ def depconfirmation(list,ds):
         depconfirmation(list,ds)
     else:
         print('does not compute')
-        depconfirmation(list)
+        depconfirmation(list,ds)
 
 
 
@@ -632,14 +632,14 @@ def offdaygive(elist,daytype,resetfunc):
 
 
 
-def verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist):
+def verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns):
         for x in range (len(list)):
             print(f"{x} ... {list[x]}")
         choose = input('enter (y) to confirm data or enter the no. of the line you wish to edit: ')
 
         if len(choose) == 0:
             print('cannot leave this blank')
-            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist)
+            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns)
 
         elif choose.lower() == 'y':
             list.append(0)
@@ -648,9 +648,6 @@ def verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist):
             list.append(0)
             list.append(0)
             list.append(0)
-            list.append(list2)
-            list.append(list3)
-            list.append(list4)
             print('input test done')
             print(list)
             empname = list[0]+list[1]
@@ -661,83 +658,83 @@ def verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist):
         elif choose == '0':
             print(f'current entry: {list[0]}')
             fnameFunc(list,retfunc)
-            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist)  
+            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns)  
 
         # >>>>>>>>>last name edit
         elif choose == '1':
             print(f'current entry: {list[1]}')
             lnameFunc(list,retfunc)
-            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist)
+            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns)
 
         # >>>>>>>>>nick name edit
         elif choose == '2':
             print(f'current entry: {list[2]}')
             nicknameFunc(list,retfunc)
-            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist)
+            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns)
 
         # >>>>>>>>>ssno edit       
         elif choose == '3':            
             print(f'current entry: {list[3]}')
             ssno(list,retfunc)
-            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist)
+            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns)
 
         # >>>>>>>>>telno edit       
         elif choose == '4':            
             print(f'current entry: {list[4]}')
             telno(list,retfunc)
-            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist)
+            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns)
 
         # >>>>>>>>>telno edit       
         elif choose == '5':            
             print(f'current entry: {list[5]}')
             address1(list,retfunc)
-            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist)
+            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns)
 
         # >>>>>>>>>city edit
         elif choose == '6':            
             print(f'current entry: {list[6]}')
             cityfunc(list,retfunc)
-            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist)
+            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns)
 
         # >>>>>>>>>stte edit
         elif choose == '7':            
             print(f'current entry: {list[7]}')
             statecheck(list,retfunc)
-            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist)
+            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns)
 
         # >>>>>>>>>zip edit
         elif choose == '8':            
             print(f'current entry: {list[8]}')
             zipno(list,retfunc)
-            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist)
+            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns)
 
         # >>>>>>>>> hire date edit
         elif choose == '9' or choose == '10' or choose == '11':
             print(f'current entry: mont {list[9]} day {list[10]} year {list[11]} ')
-            hiredate(mn,dn,yn,list)
-            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist)
+            hiredate(mn,dn,yn,list,dns)
+            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns)
 
         # >>>>>>>>> deprt edit
         elif choose == '12':
             print(f'current entry: {list[12]}')
             depsetter(list,ds)
-            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist)
+            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns)
 
         # >>>>>>>>> position edit
         elif choose == '13':
             print(f'current entry: {list[13]}')
             postsetter(list,ds)
-            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist)       
+            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns)       
 
         # >>>>>>>>> pay edit
         elif choose == '14' or choose == '15' or choose == '16' or choose == '17':
             print(f'current entry: hourly {list[14]} weekly {list[15]} monthly {list[16]} yearly {list[17]}')
             paysetter(list)
-            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist) 
+            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns) 
 
         else:
             print('incorrect data :(')
-            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist)
+            verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns)
 
 
 
@@ -760,9 +757,9 @@ def verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist):
 
 
 
-def linechooser(lchosen,nlist,nmlist,sposit,retfunc,mn,dn,yn,ds,resetfunc):
+def linechooser(lchosen,nlist,nmlist,sposit,retfunc,mn,dn,yn,ds,resetfunc,dns):
         currlist = nmlist[sposit[0]]
-        nlistpos = sposit[0]//4
+        nlistpos = sposit[0]
         # >>>>>>>>>first name edit
         if lchosen == '0':
             print(f'current entry: {currlist[0]}')
@@ -824,7 +821,7 @@ def linechooser(lchosen,nlist,nmlist,sposit,retfunc,mn,dn,yn,ds,resetfunc):
         # >>>>>>>>> hire date edit
         elif lchosen == '9' or lchosen == '10' or lchosen == '11':
             print(f'current entry: mont {currlist[9]} day {currlist[10]} year {currlist[11]} ')
-            hiredate(mn,dn,yn,currlist)
+            hiredate(mn,dn,yn,currlist,dns)
             print(f'new entry: mont {currlist[9]} day {currlist[10]} year {currlist[11]} ')
             resetfunc()
         # >>>>>>>>> deprt edit
@@ -836,6 +833,7 @@ def linechooser(lchosen,nlist,nmlist,sposit,retfunc,mn,dn,yn,ds,resetfunc):
         # >>>>>>>>> position edit
         elif lchosen == '13':
             print(f'current entry: {currlist[13]}')
+            depsetter(currlist,ds)
             postsetter(currlist,ds)
             print(f'new entry: {currlist[13]}')       
             resetfunc()

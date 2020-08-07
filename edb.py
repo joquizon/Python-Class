@@ -1,9 +1,5 @@
 from openerLoader import employeeloader
 from openerLoader import terminator
-from openerLoader import Terminsave
-from openerLoader import terminencrypter
-from openerLoader import nocupdate
-from openerLoader import goneempfilesaver
 from newEmpdataFuncsModule import fnameFunc
 from newEmpdataFuncsModule import lnameFunc
 from newEmpdataFuncsModule import nicknameFunc
@@ -30,9 +26,7 @@ from editEmp import sickdayslog
 from editEmp import persdayslog
 from editEmp import vacdayslog
 from logmtn import Mainsicpervac_Mtn
-from instantiator import EmployeeCreate
-from instantiator import editlistloader
-from instantiator import Employee
+
 
 
 
@@ -41,7 +35,6 @@ from instantiator import Employee
 nocmemlist =[]
 noclist=[]
 
-dictionaryhold=[]
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> list that collects input data
 dataentered=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -61,7 +54,7 @@ hiredD=1
 hiredM=1
 x=datetime.datetime(hireY,hiredD,hiredM)
 depset=[0]
-
+daynowstr = (z.strftime("%d"))
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> sickday persday vacday listcreator
 sickdatestart =[0]
 persdatestart =[0]
@@ -89,7 +82,7 @@ searchpos=[0]
 
 def noclistedit():
     terminator(noclist)
-    Terminsave(modeset,goneempfilesaver,noclist)
+    readytosave(modeset,goneempfilesaver,noclist)
     
 
 
@@ -123,35 +116,26 @@ def EditempInfo():
     toedit = input('enter the no. of the line you wish to edit or (s) if you want to save youre done and ready to save\nor (m) to go to the log maintenance: ')
     for x in range(0,18):
         if toedit == str(x):
-            linechooser(toedit,noclist,nocmemlist,searchpos,modeset,monthnow,daynow,yearnow,depset,EditempInfo)
-            # runclass method that edits them
+            linechooser(toedit,noclist,nocmemlist,searchpos,modeset,monthnow,daynow,yearnow,depset,EditempInfo,daynowstr)
         else: pass
     if toedit == '<':
         modeset()
     elif toedit == 's':
         editlist = nocmemlist[searchpos[0]]
-        editlistA = editlist[24] 
-        editlistB = editlist[25]
-        editlistC = editlist[26]
-
-
+        editlistA = nocmemlist[searchpos[0]+1]
+        editlistB= nocmemlist[searchpos[0]+2]
+        editlistC= nocmemlist[searchpos[0]+3]
         readytosave(editlist,editlistA,editlistB,editlistC,EditempInfo,modeset,newempfilesaver,noclist,monthnow,daynow,yearnow,depset)
-        # runclass method that edits them
     elif (toedit) == '19' or (toedit) == '21' or (toedit) == '23':
-        linechooser(toedit,noclist,nocmemlist,searchpos,modeset,monthnow,daynow,yearnow,depset,EditempInfo)
-        # runclass method that edits them
+        linechooser(toedit,noclist,nocmemlist,searchpos,modeset,monthnow,daynow,yearnow,depset,EditempInfo,daynowstr)
     elif (toedit) == '18' or (toedit) == '24':
         sickdayslog(EditempInfo,nocmemlist,searchpos,monthnow,daynow,yearnow)
-        # runclass method that edits them
     elif (toedit) == '20' or (toedit) == '25':
         persdayslog(EditempInfo,nocmemlist,searchpos,monthnow,daynow,yearnow)
-        # runclass method that edits them
     elif (toedit) == '22' or (toedit) == '26':
         vacdayslog(EditempInfo,nocmemlist,searchpos,monthnow,daynow,yearnow)
-        # runclass method that edits them
     elif toedit ==  'm':
         Mainsicpervac_Mtn(EditempInfo,nocmemlist,searchpos)
-        # runclass method that edits them
     else:
         print('boopbeep doesnot compute')
         EditempInfo()
@@ -181,7 +165,7 @@ def Ndataenter():
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>city    
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>state
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>zip
-    hiredate(monthnow,daynow,yearnow,dataentered)           
+    hiredate(monthnow,daynow,yearnow,dataentered,daynowstr)           
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hireday     
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hiremonth     
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>hireyear 
@@ -192,12 +176,11 @@ def Ndataenter():
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>sets position  
     paysetter(dataentered)   
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>sets pay
-    verifier(dataentered,sickdatestart,persdatestart,vacdatestart,modeset,monthnow,daynow,yearnow,depset,noclist)
+    verifier(dataentered,sickdatestart,persdatestart,vacdatestart,modeset,monthnow,daynow,yearnow,depset,noclist,daynowstr)
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>confirm or edit info
     readytosave(dataentered,sickdatestart,persdatestart,vacdatestart,verifier,modeset,newempfilesaver,noclist,monthnow,daynow,yearnow,depset)
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> say yes and runs func to creates files --> encrypted --> saved
-    EmployeeCreate(noclist,dataentered,dictionaryhold)
-    modeset()
+
 
 
 
@@ -217,9 +200,9 @@ def Ndataenter():
 def modeset():
     noclist.clear()
     nocmemlist.clear()
+
     employeeloader(noclist,nocmemlist)
     print(nocmemlist)
-    editlistloader(noclist,nocmemlist,dictionaryhold)
     mission = input("1 for entry or 2 for output: ")
     if mission== '1':
         print("A new employee! coo'coo :)")
