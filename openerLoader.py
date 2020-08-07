@@ -27,8 +27,27 @@ def employeeloader(nlist,elist):
             encryptedfileA = et.read()
         decrypted_fileA = cipher.decrypt(encryptedfileA)
 
+        with open('testdocs/'+search+'sickdates.night','rb') as ms:
+            encryptedfileB = ms.read()
+        decrypted_fileB = cipher.decrypt(encryptedfileB)
+
+        with open('testdocs/'+search+'persdates.night','rb') as lm:
+            encryptedfileC = lm.read()
+        decrypted_fileC = cipher.decrypt(encryptedfileC)
+
+        with open('testdocs/'+search+'vacdates.night','rb') as nh:
+            encryptedfileD = nh.read()
+        decrypted_fileD = cipher.decrypt(encryptedfileD)
+
         load = (decrypted_fileA.decode()).splitlines() 
+        load2 = (decrypted_fileB.decode()).splitlines() 
+        load3 = (decrypted_fileC.decode()).splitlines() 
+        load4 = (decrypted_fileD.decode()).splitlines() 
+
         elist.append(load)
+        elist.append(load2)
+        elist.append(load3)
+        elist.append(load4)
     print(stringnlist)
 
 
@@ -46,8 +65,8 @@ def terminator(list):
         try:
             connorno = int(connor)
             if connorno <= len(list):
-                print(f'hasta la vista {list[connorno]}')
                 list.pop(connorno)
+                print(f'hasta la vista {list[connorno]}')
                 for x in range(len(list)):
                     print(f"{x}....{list[x]}")
             else:
@@ -59,68 +78,6 @@ def terminator(list):
             break
         else:
             break        
-
-
-
-
-# >>>>>>>>>>>>>>>>>>>>>>>saves noclist after fires employees
-
-def Terminsave(retfunc,savefunc,nlist):
-    saver = input('save your entries or edits? enter (y) to save enter (<) to go back: ')
-    if saver == 'y':
-        savefunc(retfunc,nlist)
-    elif saver =='<':
-        print('going back to the main menu will erase all the data you have entered!!! Are you sure?')
-        returner = input('type (y) for yes or (n) for no: ')
-        if returner == "y":
-            retfunc()
-        elif returner == 'n':
-            Terminsave(retfunc,savefunc,nlist)
-        else:
-            print('let us try that again')
-            Terminsave(retfunc,savefunc,nlist)
-    else:
-        Terminsave(retfunc,savefunc,nlist)
-
-
-
-
-
-
-
-def terminencrypter():  
-#  this is the encryption key opening
-    from cryptography.fernet import Fernet
-    fkey = open('testdocs/filekey.night','rb')
-    key = fkey.read()
-    print (key)
-    cipher = Fernet(key)
-
-#     opens created files to be encrypted and encrypts
-    Nocfile= 'testdocs/noclist.night'
-    with open(Nocfile,'rb')as e:
-        Nocfiletoencrypt = e.read()
-
-        
-    Nocencryptedfile = cipher.encrypt(Nocfiletoencrypt) 
-    with open(Nocfile,'wb') as ee:
-        ee.write(Nocencryptedfile)
-
-
-
-
-def nocupdate(nlist):
-#     this creates txt files from list
-    with open(f'testdocs\\noclist.night',mode='w')as n:
-        for m in range(len(nlist)):
-            n.write(f'{nlist[m]}\n')  
-    print('files created!')
-
-
-def goneempfilesaver(retfunc,nlist):
-    nocupdate(nlist)
-    terminencrypter()
-    retfunc()
             
 
 
