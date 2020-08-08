@@ -30,7 +30,6 @@ from logmtn import Mainsicpervac_Mtn
 
 
 
-
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Openloader vars
 nocmemlist =[]
 noclist=[]
