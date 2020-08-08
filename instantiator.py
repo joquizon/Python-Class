@@ -28,6 +28,154 @@ class Employee:
         self.persdates = persdates
         self.vacdates = vacdates
         self.hdatecombo = int(hireyear+hiremonth+hiredate)
+
+
+
+
+    # special method to give employees login or email usernames
+    def emailgen(self,dom):
+        companydomain = '@' + dom
+        email = self.first+self.last+companydomain
+        email2 = self.nickname+self.last[0]+companydomain
+        email3 = self.first[0]+self.last+companydomain
+        email4 = self.first+self.contel[-4:]+companydomain
+        email5 = self.first+self.last[0]+companydomain
+        
+        print(f"possible email addresses generated:\n{email}\n{email2}\n{email3}\n{email4}\n{email5}")   
+    
+
+
+    def termlogingen(self):
+        terminal = self.first+self.last
+        terminal2 = self.nickname+self.last[0]
+        terminal3 = self.first[0]+self.last
+        terminal4 = self.first+self.contel[-4:]
+        terminal5 = self.first+self.last[0]
+        
+        print(f"possible terminal logins generated:\n{terminal}\n{terminal2}\n{terminal3}\n{terminal4}\n{terminal5}")
+
+
+
+
+
+
+    # special method to give employees categ based on hiredate
+    def empstatus(self):
+        import datetime
+        z=datetime.datetime.now()
+        monthnow = (z.strftime("%m"))
+        daynow = (z.strftime("%d"))
+        yearnow = (z.strftime("%Y"))
+        yeardbl = str((int(yearnow))-2000)
+        x = int(yeardbl+monthnow+daynow)
+        probie = x - self.hdatecombo
+        if probie < 300:
+            print('Probation Period')
+        elif probie>300 and probie<10000:
+            print('Rookie')
+        elif probie>10000 and probie<30000:
+            print('Vet')
+        elif probie>30000 and probie<50000:
+            print('Bronze')
+        elif probie>50000 and probie<100000:
+            print('Silver')
+        else:
+            print('Gold')
+
+
+
+
+
+
+
+
+
+    # special method to give notice if employee is up for review
+    def raiseyet(self):
+        import datetime
+        z=datetime.datetime.now()
+        monthnow = (z.strftime("%m"))
+        daynow = (z.strftime("%d"))
+        yearnow = (z.strftime("%Y"))
+        yearint = (int(yearnow))-2000
+        monthint= int(monthnow)
+        dayint = int(daynow)
+        
+        if int(self.hireyear) < yearint:
+            if int(self.hiremonth) < monthint:
+                print("Review / Raise")
+            elif int(self.hiremonth) == monthint:
+                if int(self.hiredate) <= dayint:
+                    print("Review / Raise")
+                else:
+                    print(f'{int(self.hiredate) - dayint} day(s) from Review and / or Raise')        
+            else:
+                print(f'{int(self.hiremonth) - monthint} month(s) away Review and / or Raise')
+        else:
+            print('next year')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # special method to give employees vacation days on hiredate anniversy
+    def addvacdays(self,vacalot):
+        import datetime
+        z=datetime.datetime.now()
+        monthnow = (z.strftime("%m"))
+        daynow = (z.strftime("%d"))
+        yearnow = (z.strftime("%Y"))
+        yearint = (int(yearnow))-2000
+        monthint= int(monthnow)
+        dayint = int(daynow)
+        print (self.hdatecombo)
+        
+        if int(self.hireyear) < yearint:
+            if int(self.hiremonth) < monthint:
+                self.vacremaining = int(self.vacremaining) + vacalot 
+                print(self.vacremaining)
+            elif int(self.hiremonth) == monthint:
+                if int(self.hiredate) <= dayint:
+                    self.vacremaining = int(self.vacremaining) + vacalot 
+                    print(self.vacremaining)
+                else:
+                    print(f'{int(self.hiredate) - dayint} day(s) away from additional vacation time')        
+            else:
+                print(f'{int(self.hiremonth) - monthint} month(s) away from additional vacation time')
+        else:
+            print('next year')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
 
 
@@ -47,42 +195,50 @@ class Employee:
 
 
 
-#employeecreate() takes the inputs so the emplyee is instantiated in the class
-def EmployeeCreate(nlist,dtlist,dhold):
-        first = dtlist[0]
-        last = dtlist[1] 
-        nickname = dtlist[2] 
-        social = dtlist[3] 
-        contel = dtlist[4] 
-        address = dtlist[5]
-        city = dtlist[6]
-        state = dtlist[7] 
-        zipcode  = dtlist[8]
-        hiremonth = dtlist[9]
-        hiredate = dtlist[10]
-        hireyear = dtlist[11]
-        dept = dtlist[12]
-        position = dtlist[13]
-        hourlypay = dtlist[14]
-        weeklypay = dtlist[15]
-        monthlypay = dtlist[16]
-        yearlypay = dtlist[17]
-        sicktaken = dtlist[18]
-        sickremaining = dtlist[19]
-        perstaken = dtlist[20]
-        persremaining = dtlist[21]
-        vactaken = dtlist[22]
-        vacremaining = dtlist[23]
-        sickdates = dtlist[24]
-        persdates = dtlist[25]
-        vacdates = dtlist[26]
-        hdatecombo =dtlist[z][11]+hiremonth+dtlist[z][9]+dtlist[z][10]
+#employeecreate() takes the all employees and instantiate as class objects
+def EmployeeCreate(nlist,nmlist,dhold):
+    for x in range(len(nlist)):
+        z = x * 4
+        first = nmlist[z][0]
+        last = nmlist[z][1] 
+        nickname = nmlist[z][2] 
+        social = nmlist[z][3] 
+        contel = nmlist[z][4] 
+        address = nmlist[z][5]
+        city =nmlist[z][6]
+        state =nmlist[z][7] 
+        zipcode  = nmlist[z][8]
+        hiremonth = nmlist[z][9]
+        hiredate = nmlist[z][10]
+        hireyear = nmlist[z][11]
+        dept = nmlist[z][12]
+        position = nmlist[z][13]
+        hourlypay = nmlist[z][14]
+        weeklypay = nmlist[z][15]
+        monthlypay = nmlist[z][16]
+        yearlypay = nmlist[z][17]
+        sicktaken = nmlist[z][18]
+        sickremaining = nmlist[z][19]
+        perstaken = nmlist[z][20]
+        persremaining = nmlist[z][21]
+        vactaken = nmlist[z][22]
+        vacremaining = nmlist[z][23]
+        sickdates = nmlist[z+1]
+        persdates = nmlist[z+2]
+        vacdates = nmlist[z+3]
+        hdatecombo =nmlist[z][11]+hiremonth+nmlist[z][9]+nmlist[z][10]
+        
+        noclist[x] = Employee(first,last,nickname,social,contel,address,zipcode,hiremonth,hiredate,hireyear,dept,position,hourlypay,weeklypay,monthlypay,yearlypay,sicktaken,sickremaining,perstaken,persremaining,vactaken,vacremaining,sickdates,persdates,vacdates)
+        print(f'employee {nlist[x]} has been instantiated')
+    for dt in range(len(noclist)):
+        dictionaryhold.append(noclist[dt].__dict__)
 
-        nlist[-1] = Employee(first,last,nickname,social,contel,address,city,state,zipcode,hiremonth,hiredate,hireyear,dept,position,hourlypay,weeklypay,monthlypay,yearlypay,sicktaken,sickremaining,perstaken,persremaining,vactaken,vacremaining,sickdates,persdates,vacdates)
-        
-        print(f'employee {nlist[-1].first+nlist[-1].last} has been instantiated')
-        
-        dhold.append(nlist[-1].__dict__)
+    print(dictionaryhold)
+
+
+
+
+
 
 
 
@@ -114,12 +270,13 @@ def EmployeeCreate(nlist,dtlist,dhold):
 #     print(f'here it is the freeekking dicter {dhold}')
 
 obdict = 0
-def classcomprede(dhold):
+
+def classcomprede(dhold,odc):
     noclistkey=[]
     for x in range(len(dhold)):
         noclistkey.append(dhold[x]['first']+dhold[x]['last'])
     print(noclistkey)
-    obdict=dict(zip(noclistkey,noclist))
+    odc=dict(zip(noclistkey,noclist))
 
 
 
@@ -158,9 +315,6 @@ def sortbypay():
 def sortbyhiredate():
     numsorthdatecombo = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(float(item[1].hdatecombo)))}
     pass
-
-
-
 
 def sortbysicktake():
     numsortsicktaken = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(item[1].sicktaken))}
@@ -204,6 +358,59 @@ def sortbyvacRemain():
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+
+
+# grabs particular departments pay total and avg pay /// ret only total of dep so it can be reused by totalpay
+def payavg(depvar):
+    payadder=[]
+    for key in obdict:
+        if obdict[key].dept == depvar: 
+            payadder.append(int(float(obdict[key].yearlypay)))
+    avgpay = sum(payadder)//len(payadder)
+    print(f'Yearly {avgpay}')
+    print(f'Monthly {avgpay/12}')
+    print(f'Weekly {avgpay/52}')
+    print(f'Total{sum(payadder)}')
+    return (sum(payadder))
+
+# grabs particular departments pay total and avg pay THEN gives total annd avg pay
+def totalpay(depvar,depvar2,depvar3,depvar4,depvar5,depvar6):
+    a = payavg(depvar)
+    b = payavg(depvar2)
+    c = payavg(depvar3)
+    d = payavg(depvar4)
+    e = payavg(depvar5)
+    f = payavg(depvar6)
+
+    print(f'total payroll{sum[a,b,c,d,e,f]}')
+    print(f'avg payroll/ yr {(sum[a,b,c,d,e,f])//6}')
+    print(f'avg payroll/ mo {((sum[a,b,c,d,e,f])//6)12}')
+    print(f'avg payroll/ wk {((sum[a,b,c,d,e,f])//6)52}')
+
+
+
+
+
+
+
+
+
+
+
+
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 
 
 
