@@ -1,3 +1,41 @@
+
+def yearcheck():
+    import datetime
+    z=datetime.datetime.now()
+    yearnow = (z.strftime("%Y"))
+    yearint = (int(yearnow))-2000
+    
+    from cryptography.fernet import Fernet
+    fkey = open('testdocs/filekey.night','rb')
+    key = fkey.read()
+    cipher = Fernet(key)   
+    
+    with open('testdocs/yearstore.night','rb') as ys:
+        encryptedfileA = ys.read()
+    decrypted_fileA = cipher.decrypt(encryptedfileA)
+    yearstore = (decrypted_fileA.decode())
+    
+    if int(yearstore) == yearint:
+        print(f"Year check done")
+    else:
+        print(f"it is now the year 20{yearint}")
+        
+        with open(f'testdocs\\yearstore.night',mode='w')as n:
+            n.write(f'{yearint}')  
+            # print('files created!')
+            
+        yearstorefile= 'testdocs/yearstore.night'
+        with open(yearstorefile,'rb')as e:
+            yearstorefiletoencrypt = e.read()
+    
+        yearstoreencryptedfile = cipher.encrypt(yearstorefiletoencrypt) 
+        with open(yearstorefile,'wb') as ee:
+            ee.write(yearstoreencryptedfile)
+            # print('file encryted')   
+        return True
+
+yearcheck()
+
 class Employee:
     def __init__(self,first,last,nickname,social,contel,address,city,state,zipcode,hiremonth,hiredate,hireyear,dept,position,hourlypay,weeklypay,monthlypay,yearlypay,sicktaken,sickremaining,perstaken,persremaining,vactaken,vacremaining,sickdates,persdates,vacdates):
         self.first = first
@@ -32,7 +70,7 @@ class Employee:
 
 
 
-    # special method to give employees login or email usernames
+    # class method to give employees login or email usernames
     def emailgen(self,dom):
         companydomain = '@' + dom
         email = self.first+self.last+companydomain
@@ -59,7 +97,7 @@ class Employee:
 
 
 
-    # special method to give employees categ based on hiredate
+    # class method to give employees categ based on hiredate
     def empstatus(self):
         import datetime
         z=datetime.datetime.now()
@@ -90,7 +128,7 @@ class Employee:
 
 
 
-    # special method to give notice if employee is up for review
+    # class method to give notice if employee is up for review
     def raiseyet(self):
         import datetime
         z=datetime.datetime.now()
@@ -121,15 +159,7 @@ class Employee:
 
 
 
-
-
-
-
-
-
-
-
-    # special method to give employees vacation days on hiredate anniversy
+    # class method to give employees vacation days on hiredate anniversy
     def addvacdays(self,vacalot):
         import datetime
         z=datetime.datetime.now()
@@ -158,10 +188,15 @@ class Employee:
 
 
 
-
-
-
-
+    # class method to give employees additional personal days on new calendar year
+    def persadd(self):
+        nextyear = yearcheck()
+        if nextyear == True:
+            for key in obdict:
+                self.persremaining = int(self.persremaining) + 3
+                print(f'{self.first} has {self.persremaining} personal days')
+        else:
+            print('same brah')
 
 
 
