@@ -642,11 +642,19 @@ def verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns):
             verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns)
 
         elif choose.lower() == 'y':
+            # sickdays taken
             list.append(0)
+            # sickdays remaining
             list.append(0)
+            # persdays taken
             list.append(0)
+            # persdays remaining
             list.append(0)
+            # vacsdays taken
             list.append(0)
+            # vacsdays remaining
+            list.append(0)
+            # no.of years worked
             list.append(0)
             print('input test done')
             print(list)
