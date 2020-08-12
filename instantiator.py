@@ -1,10 +1,15 @@
+import datetime
+z=datetime.datetime.now()
+monthnow = int((z.strftime("%m")))
+yearnow = (z.strftime("%Y"))
+yearint = (int(yearnow))-2000
 
+
+# zipped dict for classcomprende()
+obdict = 0
+
+# this file is used annual functions to be run. new yr ret True updates file and save
 def yearcheck():
-    import datetime
-    z=datetime.datetime.now()
-    yearnow = (z.strftime("%Y"))
-    yearint = (int(yearnow))-2000
-    
     from cryptography.fernet import Fernet
     fkey = open('testdocs/filekey.night','rb')
     key = fkey.read()
@@ -34,10 +39,64 @@ def yearcheck():
             # print('file encryted')   
         return True
 
-yearcheck()
+
+# this file is used  functions to be run every 2 mos. if its been 2 mos. ret True update file and save  
+def everytwocheck():   
+    from cryptography.fernet import Fernet
+    fkey = open('testdocs/filekey.night','rb')
+    key = fkey.read()
+    cipher = Fernet(key)   
+    
+    with open('testdocs/sickrun.night','rb') as ys:
+        encryptedfileSR = ys.read()
+    decrypted_fileSR = cipher.decrypt(encryptedfileSR)
+    sickrun = (decrypted_fileSR.decode())
+    
+    if int(sickrun) == monthnow:
+        newsick = int(sickrun) + 2
+        with open(f'testdocs\\sickrun.night',mode='w')as s:
+            s.write(f'{newsick}')  
+            print('files created!')
+            
+        sickrunfile = 'testdocs/sickrun.night'
+        with open(sickrunfile,'rb')as e:
+            sickrunfiletoencrypt = e.read()
+    
+        sickrunencryptedfile = cipher.encrypt(sickrunfiletoencrypt) 
+        with open(sickrunfile,'wb') as ee:
+            ee.write(sickrunencryptedfile)
+            print('file encryted')
+        return True
+    else:
+        print('falseret')
+        return False
+        
+        
+    
+        
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>      
+
+
+
+
+
+
+
+
+
+
+
 
 class Employee:
-    def __init__(self,first,last,nickname,social,contel,address,city,state,zipcode,hiremonth,hiredate,hireyear,dept,position,hourlypay,weeklypay,monthlypay,yearlypay,sicktaken,sickremaining,perstaken,persremaining,vactaken,vacremaining,sickdates,persdates,vacdates):
+
+    def __init__(self,first,last,nickname,social,contel,address,city,state,zipcode,hiremonth,hiredate,hireyear,dept,position,hourlypay,weeklypay,monthlypay,yearlypay,sicktaken,sickremaining,perstaken,persremaining,vactaken,vacremaining,sickdates,persdates,vacdates,empnoyrs):
         self.first = first
         self.last = last
         self.nickname = nickname
@@ -62,10 +121,12 @@ class Employee:
         self.persremaining = persremaining
         self.vactaken = vactaken
         self.vacremaining = vacremaining
+        self.empnoyrs = empnoyrs
         self.sickdates = sickdates
         self.persdates = persdates
         self.vacdates = vacdates
         self.hdatecombo = int(hireyear+hiremonth+hiredate)
+
 
 
 
@@ -123,13 +184,8 @@ class Employee:
 
 
 
-
-
-
-
-
     # class method to give notice if employee is up for review
-    def raiseyet(self):
+    def annivCheck(self):
         import datetime
         z=datetime.datetime.now()
         monthnow = (z.strftime("%m"))
@@ -142,15 +198,21 @@ class Employee:
         if int(self.hireyear) < yearint:
             if int(self.hiremonth) < monthint:
                 print("Review / Raise")
+                return True
             elif int(self.hiremonth) == monthint:
                 if int(self.hiredate) <= dayint:
                     print("Review / Raise")
+                    return True
                 else:
-                    print(f'{int(self.hiredate) - dayint} day(s) from Review and / or Raise')        
+                    print(f'{int(self.hiredate) - dayint} day(s) from Review and / or Raise')
+                    return False        
             else:
                 print(f'{int(self.hiremonth) - monthint} month(s) away Review and / or Raise')
+                return False
         else:
             print('next year')
+
+
 
 
 
@@ -160,31 +222,33 @@ class Employee:
 
 
     # class method to give employees vacation days on hiredate anniversy
-    def addvacdays(self,vacalot):
-        import datetime
-        z=datetime.datetime.now()
-        monthnow = (z.strftime("%m"))
-        daynow = (z.strftime("%d"))
-        yearnow = (z.strftime("%Y"))
-        yearint = (int(yearnow))-2000
-        monthint= int(monthnow)
-        dayint = int(daynow)
-        print (self.hdatecombo)
+    # def hdateAnniv(self,vacalot):
+    #     import datetime
+    #     z=datetime.datetime.now()
+    #     monthnow = (z.strftime("%m"))
+    #     daynow = (z.strftime("%d"))
+    #     yearnow = (z.strftime("%Y"))
+    #     yearint = (int(yearnow))-2000
+    #     monthint= int(monthnow)
+    #     dayint = int(daynow)
+    #     print (self.hdatecombo)
         
-        if int(self.hireyear) < yearint:
-            if int(self.hiremonth) < monthint:
-                self.vacremaining = int(self.vacremaining) + vacalot 
-                print(self.vacremaining)
-            elif int(self.hiremonth) == monthint:
-                if int(self.hiredate) <= dayint:
-                    self.vacremaining = int(self.vacremaining) + vacalot 
-                    print(self.vacremaining)
-                else:
-                    print(f'{int(self.hiredate) - dayint} day(s) away from additional vacation time')        
-            else:
-                print(f'{int(self.hiremonth) - monthint} month(s) away from additional vacation time')
-        else:
-            print('next year')
+    #     if int(self.hireyear) < yearint:
+    #         if int(self.hiremonth) < monthint:
+    #             self.vacremaining = int(self.vacremaining) + vacalot 
+    #             print(self.vacremaining)
+    #             print('hire date anniversary past vacdays / review ')
+    #         elif int(self.hiremonth) == monthint:
+    #             if int(self.hiredate) <= dayint:
+    #                 self.vacremaining = int(self.vacremaining) + vacalot 
+    #                 print(self.vacremaining)
+    #                 print('hire date anniversary past vacdays / review ')
+    #             else:
+    #                 print(f'{self.first} {self.last} {int(self.hiredate) - dayint} day(s) away from additional vacation time')        
+    #         else:
+    #             print(f'{self.first} {self.last} {int(self.hiremonth) - monthint} month(s) away from additional vacation time')
+    #     else:
+    #         print('next year')
 
 
 
@@ -202,19 +266,6 @@ class Employee:
 
 
 
-
-
-
-
-
-
-
-
-
-        
-
-
-
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -223,9 +274,6 @@ class Employee:
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
-
 
 
 
@@ -258,12 +306,13 @@ def EmployeeCreate(nlist,nmlist,dhold):
         persremaining = nmlist[z][21]
         vactaken = nmlist[z][22]
         vacremaining = nmlist[z][23]
+        empnoyrs = nmlist[z][24]
         sickdates = nmlist[z+1]
         persdates = nmlist[z+2]
         vacdates = nmlist[z+3]
         hdatecombo =nmlist[z][11]+hiremonth+nmlist[z][9]+nmlist[z][10]
         
-        noclist[x] = Employee(first,last,nickname,social,contel,address,zipcode,hiremonth,hiredate,hireyear,dept,position,hourlypay,weeklypay,monthlypay,yearlypay,sicktaken,sickremaining,perstaken,persremaining,vactaken,vacremaining,sickdates,persdates,vacdates)
+        noclist[x] = Employee(first,last,nickname,social,contel,address,zipcode,hiremonth,hiredate,hireyear,dept,position,hourlypay,weeklypay,monthlypay,yearlypay,sicktaken,sickremaining,perstaken,persremaining,vactaken,vacremaining,sickdates,persdates,vacdates,empnoyrs)
         print(f'employee {nlist[x]} has been instantiated')
     for dt in range(len(noclist)):
         dictionaryhold.append(noclist[dt].__dict__)
@@ -272,8 +321,13 @@ def EmployeeCreate(nlist,nmlist,dhold):
 
 
 
-
-
+# creates dictionary to make instance variables
+def classcomprede(dhold,odc):
+    noclistkey=[]
+    for x in range(len(dhold)):
+        noclistkey.append(dhold[x]['first']+dhold[x]['last'])
+    print(noclistkey)
+    odc=dict(zip(noclistkey,noclist))
 
 
 
@@ -304,14 +358,9 @@ def EmployeeCreate(nlist,nmlist,dhold):
 #             nmlist[w].append(newlistA[w][k])
 #     print(f'here it is the freeekking dicter {dhold}')
 
-obdict = 0
 
-def classcomprede(dhold,odc):
-    noclistkey=[]
-    for x in range(len(dhold)):
-        noclistkey.append(dhold[x]['first']+dhold[x]['last'])
-    print(noclistkey)
-    odc=dict(zip(noclistkey,noclist))
+
+
 
 
 
@@ -411,6 +460,8 @@ def payavg(depvar):
     print(f'Total{sum(payadder)}')
     return (sum(payadder))
 
+
+
 # grabs particular departments pay total and avg pay THEN gives total annd avg pay
 def totalpay(depvar,depvar2,depvar3,depvar4,depvar5,depvar6):
     a = payavg(depvar)
@@ -428,7 +479,58 @@ def totalpay(depvar,depvar2,depvar3,depvar4,depvar5,depvar6):
 
 
 
+def yearlyReview(dictr,vacalotLu,vacalotMg,raiseLu):
+    for emp in dictr:
+        check = dictr[emp].annivCheck()
+        runcheck = yearint - int(dictr[emp].hireyear)
+        if check == True and int(dictr[emp].empnoyrs) < runcheck:
+            dictr[emp].empnoyrs = int(dictr[emp].empnoyrs) + 1
+            print('raise time')
+            print(f'{dictr[emp].first},{dictr[emp].empnoyrs}')
+            self.vacremaining = int(self.vacremaining) + vacalotMg
 
+            print(self.vacremaining)
+        else:
+            print('not yet')
+
+
+
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+# this func checks if its time to add sickdays and adds it
+def sickadd(dictr):
+    sickadder = everytwocheck()
+    if sickadder == True:
+        for sickey in dictr:
+            print(f'{dictr[sickey].first} {dictr[sickey].last} ... {dictr[sickey].sickremaining}')
+            ns = int(dictr[sickey].sickremaining) + 1
+            dictr[sickey].sickremaining = str(ns)
+            print(f'{dictr[sickey].first} {dictr[sickey].last} ... {dictr[sickey].sickremaining}')
+    else:
+        print('not yet')
+            
+
+
+
+
+# this func checks if its time to add persdays and adds them
+def persadd(dictr):
+    nextyear = yearcheck(dictr)
+    if nextyear == True:
+        for key in dictr:
+            dictr[key].persremaining = int(dictr[key].persremaining) + 3
+            print(f'{dictr[key].first} has {dictr[key].persremaining} personal days')
+    else:
+        print('same brah')
+
+
+
+# this func checks if its time to add vacdays and adds them marks them as up for review / raise
 
 
 
@@ -441,10 +543,6 @@ def totalpay(depvar,depvar2,depvar3,depvar4,depvar5,depvar6):
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -456,55 +554,3 @@ def totalpay(depvar,depvar2,depvar3,depvar4,depvar5,depvar6):
 
 
 
-def bulkinst(nlist,nmlist,dhold):
-    for x in range(len(nlist)):
-        first = nmlist[x][0]
-        last = nmlist[x][1] 
-        nickname = nmlist[x][2] 
-        social = nmlist[x][3] 
-        contel = nmlist[x][4] 
-        address = nmlist[x][5]
-        city = nmlist[x][6]
-        state = nmlist[x][7] 
-        zipcode  = nmlist[x][8]
-        hiremonth = nmlist[x][9]
-        hiredate = nmlist[x][10]
-        hireyear = nmlist[x][11]
-        dept = nmlist[x][12]
-        position = nmlist[x][13]
-        hourlypay = nmlist[x][14]
-        weeklypay = nmlist[x][15]
-        monthlypay = nmlist[x][16]
-        yearlypay = nmlist[x][17]
-        sicktaken = nmlist[x][18]
-        sickremaining = nmlist[x][19]
-        perstaken = nmlist[x][20]
-        persremaining = nmlist[x][21]
-        vactaken = nmlist[x][22]
-        vacremaining = nmlist[x][23]
-        sickdates = nmlist[x][24]
-        persdates = nmlist[x][25]
-        vacdates = nmlist[x][26]
-
-        nlist[x] = Employee(first,last,nickname,social,contel,address,city,state,zipcode,hiremonth,hiredate,hireyear,dept,position,hourlypay,weeklypay,monthlypay,yearlypay,sicktaken,sickremaining,perstaken,persremaining,vactaken,vacremaining,sickdates,persdates,vacdates)
-    
-    print(f'employee {nlist[x]} has been instantiated')
-    for dt in range(len(nlist)):
-        dhold.append(nlist[dt].__dict__)
-    print(dhold)
-
-
-
-
-
-def whoboss(dhold):
-    for lo in range(len(dhold)):
-        print(dhold[lo]['dept'])
-        if dhold[lo]['position'][0] == '*':
-            name = dhold[lo]['first']+' ' + dhold[lo]['last']
-            print(f'{name} is a boss!!!!!!')
-
-
-def whereerrbody(dhold):
-    for zc in range(len(dhold)):
-        print(f"{dhold[zc]['first']} {dhold[zc]['last']} is in this zipcode: {dhold[zc]['zipcode']}.")
