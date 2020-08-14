@@ -5,8 +5,11 @@ yearnow = (z.strftime("%Y"))
 yearint = (int(yearnow))-2000
 
 
-# zipped dict for classcomprende()
+# zipped dict
 obdict = 0
+noclistkey=[]
+
+
 
 # this file is used annual functions to be run. new yr ret True updates file and save
 def yearcheck():
@@ -216,51 +219,46 @@ class Employee:
 
 
 
-
-
-
-
-
-    # class method to give employees vacation days on hiredate anniversy
-    # def hdateAnniv(self,vacalot):
-    #     import datetime
-    #     z=datetime.datetime.now()
-    #     monthnow = (z.strftime("%m"))
-    #     daynow = (z.strftime("%d"))
-    #     yearnow = (z.strftime("%Y"))
-    #     yearint = (int(yearnow))-2000
-    #     monthint= int(monthnow)
-    #     dayint = int(daynow)
-    #     print (self.hdatecombo)
-        
-    #     if int(self.hireyear) < yearint:
-    #         if int(self.hiremonth) < monthint:
-    #             self.vacremaining = int(self.vacremaining) + vacalot 
-    #             print(self.vacremaining)
-    #             print('hire date anniversary past vacdays / review ')
-    #         elif int(self.hiremonth) == monthint:
-    #             if int(self.hiredate) <= dayint:
-    #                 self.vacremaining = int(self.vacremaining) + vacalot 
-    #                 print(self.vacremaining)
-    #                 print('hire date anniversary past vacdays / review ')
-    #             else:
-    #                 print(f'{self.first} {self.last} {int(self.hiredate) - dayint} day(s) away from additional vacation time')        
-    #         else:
-    #             print(f'{self.first} {self.last} {int(self.hiremonth) - monthint} month(s) away from additional vacation time')
-    #     else:
-    #         print('next year')
-
-
-
     # class method to give employees additional personal days on new calendar year
-    def persadd(self):
+    def persadd(self,odc):
         nextyear = yearcheck()
         if nextyear == True:
-            for key in obdict:
+            for key in odc:
                 self.persremaining = int(self.persremaining) + 3
                 print(f'{self.first} has {self.persremaining} personal days')
         else:
             print('same brah')
+
+
+
+
+    # class method to check hiring date anniversary
+    def annivCheck(self):
+        import datetime
+        z=datetime.datetime.now()
+        monthnow = (z.strftime("%m"))
+        daynow = (z.strftime("%d"))
+        yearnow = (z.strftime("%Y"))
+        yearint = (int(yearnow))-2000
+        monthint= int(monthnow)
+        dayint = int(daynow)
+        
+        if int(self.hireyear) < yearint:
+            if int(self.hiremonth) < monthint:
+                print("Review / Raise")
+                return True
+            elif int(self.hiremonth) == monthint:
+                if int(self.hiredate) <= dayint:
+                    print("Review / Raise")
+                    return True
+                else:
+                    print(f'{int(self.hiredate) - dayint} day(s) from Review and / or Raise')
+                    return False        
+            else:
+                print(f'{int(self.hiremonth) - monthint} month(s) away Review and / or Raise')
+                return False
+        else:
+            print('next year')
 
 
 
@@ -322,12 +320,11 @@ def EmployeeCreate(nlist,nmlist,dhold):
 
 
 # creates dictionary to make instance variables
-def classcomprede(dhold,odc):
-    noclistkey=[]
-    for x in range(len(dhold)):
-        noclistkey.append(dhold[x]['first']+dhold[x]['last'])
-    print(noclistkey)
-    odc=dict(zip(noclistkey,noclist))
+
+for x in range(len(dictionaryhold)):
+    noclistkey.append(dictionaryhold[x]['first']+dictionaryhold[x]['last'])
+print(noclistkey)
+obdict=dict(zip(noclistkey,noclist))
 
 
 
@@ -345,18 +342,83 @@ def classcomprede(dhold,odc):
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
-# def editlistloader(nlist,nmlist,dhold):
-#     for x in range (len(dhold)):
-#         nmlist.append([])
-#     newlistA=[]
-#     for v in range(len(dhold)):
-#         nlist.append(dhold[v]['first']+dhold[v]['last'])
-        
-#     for w in range(len(dhold)):
-#         newlistA.append(dhold[w])
-#         for k in (newlistA[w]):
-#             nmlist[w].append(newlistA[w][k])
-#     print(f'here it is the freeekking dicter {dhold}')
+
+fddict = {}
+fdMgmt = {}
+fdagnt = {}
+ntaud = {}
+bllmn = {}
+drmn = {}
+FDposDict = [fdagnt,ntaud,bllmn,drmn]
+FDposDictSTR = ['fdagnt','ntaud','bllmn','drmn']
+
+
+hskdict = {}
+hskMgmt = {}
+hskper = {}
+hseman ={} 
+HskposDict = [hskper,hseman]
+HskposDictSTR = ['hskper','hseman']
+
+sledict = {}
+sleMgmt = {}
+res = {}
+SleposDict = [res]
+SleposDictSTR = ['res']
+
+pbxdict = {}
+pbxMgmt = {}
+oprtr = {}
+pbxposDict = [oprtr]
+PbxposDictSTR = ['oprtr']
+
+accntdict = {}
+accntMgmt = {}
+acct = {}
+accntposDict = [acct]
+AccntposDictSTR = ['acct']
+
+
+
+def depsep(dep,dest,destA,destAstr,destB):
+    obd={key: value for key, value in sorted(obdict.items(), key=lambda item: item[1].last)}
+    for x in obd:
+        print(f'{obd[x].last},{obd[x].first}....{obd[x].dept} / {obd[x].position}')
+        if obd[x].dept == dep:
+            dest.update({obd[x].first+obd[x].last:obd[x]})
+        else:
+            pass
+    for y in dest:
+        print('yes')
+        print(dest[y].position)
+        if dest[y].position[0] == '*':
+            destB.update({dest[y].first+dest[y].last:dest[y]})
+        else:
+            for b in range (len(destA)):
+                print(str(destA[b]))
+                if dest[y].position == destAstr[b]:
+                    destA[b].update({dest[y].first+dest[y].last:dest[y]})
+                    print('yes')
+                else:
+                    pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def empdir(obd):
+    for x in alphsortlast:
+        print(f'{obd[x].last},{obd[x].first}....{obd[x].contel}\n{obd[x].address}\n{obd[x].city}, {obd[x].state} {obd[x].zipcode}\n')
 
 
 
@@ -479,17 +541,32 @@ def totalpay(depvar,depvar2,depvar3,depvar4,depvar5,depvar6):
 
 
 
-def yearlyReview(dictr,vacalotLu,vacalotMg,raiseLu):
+def hdateAnniv(dictr,vacalotLu,vacalotMg,payincLu):
     for emp in dictr:
         check = dictr[emp].annivCheck()
         runcheck = yearint - int(dictr[emp].hireyear)
-        if check == True and int(dictr[emp].empnoyrs) < runcheck:
+        print(dictr[emp].first)
+        print(dictr[emp].position)
+        if dictr[emp].position[0]=='*' and check == True and int(dictr[emp].empnoyrs) < runcheck:
             dictr[emp].empnoyrs = int(dictr[emp].empnoyrs) + 1
+            dictr[emp].vacremaining = int(dictr[emp].vacremaining) + vacalotMg
             print('raise time')
             print(f'{dictr[emp].first},{dictr[emp].empnoyrs}')
-            self.vacremaining = int(self.vacremaining) + vacalotMg
-
-            print(self.vacremaining)
+        elif dictr[emp].position[0] != '*' and check == True and int(dictr[emp].empnoyrs) < runcheck:
+            dictr[emp].empnoyrs = int(dictr[emp].empnoyrs) + 1
+            dictr[emp].vacremaining = int(dictr[emp].vacremaining) + vacalotLu
+            print(dictr[emp].hourlypay)
+            dictr[emp].hourlypay = float(dictr[emp].hourlypay) + (float(payincLu))
+            print(dictr[emp].hourlypay)
+            dictr[emp].weeklypay = float(dictr[emp].hourlypay) * 40
+            dictr[emp].monthlypay = float(dictr[emp].weeklypay) * 4
+            dictr[emp].yearlypay = float(dictr[emp].monthlypay) * 12
+            print('raise time')
+            print(f'{dictr[emp].first},{dictr[emp].empnoyrs}')
+        elif dictr[emp].position[0]=='*' and check == True and int(dictr[emp].empnoyrs) == runcheck:
+            print('Anniversary passed // raise applied manually')
+        elif check == True and int(dictr[emp].empnoyrs) == runcheck:
+            print('Anniversary passed // raise applied')
         else:
             print('not yet')
 
