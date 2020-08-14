@@ -560,8 +560,8 @@ def paysetter(list):
             if paylist>=5 and pay[2]=='.':
                 hourly = payno
                 weekly = payno*40
-                monthly = weekly *4
-                yearly = monthly *12
+                monthly = payno * 16
+                yearly = payno * 2080
                 print(f'gross pay hourly{hourly}')
                 print(f'gross pay weekly{weekly}')
                 print(f'gross pay monthly{monthly}')
@@ -571,10 +571,10 @@ def paysetter(list):
                 list[16]=monthly
                 list[17]=yearly
             elif paylist>=8 and pay[5]=='.':
-                weekly = payno/52
-                hourly = weekly/40
-                monthly = weekly *4 
                 yearly = payno
+                monthly = payno/12
+                weekly = payno/52
+                hourly = payno/2080
                 print(f'gross pay hourly{hourly}')
                 print(f'gross pay weekly{weekly}')
                 print(f'gross pay monthly{monthly}')
@@ -584,10 +584,10 @@ def paysetter(list):
                 list[16]=monthly
                 list[17]=yearly                    
             elif paylist>=9 and pay[6]=='.':
-                weekly = payno/52
-                hourly = weekly/40
-                monthly = weekly *4 
                 yearly = payno
+                monthly = payno/12
+                weekly = payno/52
+                hourly = payno/2080
                 print(f'gross pay hourly{hourly}')
                 print(f'gross pay weekly{weekly}')
                 print(f'gross pay monthly{monthly}')
