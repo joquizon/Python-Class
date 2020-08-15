@@ -370,16 +370,31 @@ pbxdict = {}
 pbxMgmt = {}
 oprtr = {}
 pbxposDict = [oprtr]
-PbxposDictSTR = ['oprtr']
+pbxposDictSTR = ['oprtr']
 
 accntdict = {}
 accntMgmt = {}
 acct = {}
 accntposDict = [acct]
-AccntposDictSTR = ['acct']
+accntposDictSTR = ['acct']
+
+engdict = {}
+engMgmt = {}
+engnr = {}
+engposDict = [engnr]
+engposDictSTR = ['engnr']
 
 
+positlist = [fdagnt,ntaud,bllmn,drmn,hskper,hseman,res,oprtr,acct,engnr]
+positlistSTR = ['front desk agents','nightauditors','bellmen','doormen','housekeeper','housemen','reservationists','operators','accountants','engineers']
 
+mngmt = [accntMgmt,engMgmt,fdMgmt,hskMgmt,pbxMgmt,sleMgmt]
+
+dep = [hskdict,fddict,engdict,pbxdict,sledict,accntdict]                
+depString = ['housekeeping','front desk','engineering','pbx','sales','accounting'] 
+
+# this function sorts the whole direct by last name. loops thru that and updates dep dict. then loops throug dep dict
+# and updates position dictionaries from that dep
 def depsep(dep,dest,destA,destAstr,destB):
     obd={key: value for key, value in sorted(obdict.items(), key=lambda item: item[1].last)}
     for x in obd:
@@ -404,87 +419,53 @@ def depsep(dep,dest,destA,destAstr,destB):
 
 
 
+depsep('FD',fddict,FDposDict,FDposDictSTR,fdMgmt)
+depsep('hsk',hskdict,HskposDict,HskposDictSTR,hskMgmt)
+depsep('sle',sledict,SleposDict,SleposDictSTR,sleMgmt)
+depsep('pbx',pbxdict,pbxposDict,pbxposDictSTR,pbxMgmt)
+depsep('acct',accntdict,accntposDict,accntposDictSTR,accntMgmt)
+depsep('sle',sledict,SleposDict,SleposDictSTR,sleMgmt)
+depsep('eng',engdict,engposDict,engposDictSTR,engMgmt)
+
+
+def propDirprint():
+    pdp={key: value for key, value in sorted(obdict.items(), key=lambda item: item[1].last)}
+    for  x in pdp:
+        print(f'{pdp[x].last}, {pdp[x].first}<{pdp[x].dept}//{pdp[x].position}>......{pdp[x].contel}\n{pdp[x].address}\n{pdp[x].city}, {pdp[x].state} {pdp[x].zipcode}')
 
 
 
+def indyDirprint():
+    for pick in range(len(depString)):
+        print(f'{pick}....{depString[pick]}')
+    
+    usercho = input('choose the no. of the dep directory you would like to see: ')
+
+    if usercho not in ('123456'):
+        print('try again')
+        indyDirprint()
+    else:
+        for ent in dep[int(usercho)]:
+            print(f'{dep[int(usercho)][ent].last}, {dep[int(usercho)][ent].first}<{dep[int(usercho)][ent].dept}//{dep[int(usercho)][ent].position}>......{dep[int(usercho)][ent].contel}\n{dep[int(usercho)][ent].address}\n{dep[int(usercho)][ent].city}, {dep[int(usercho)][ent].state} {dep[int(usercho)][ent].zipcode}')
 
 
 
+def specDirprint():
+    for pos in range(len(positlistSTR)):
+        print(f'{pos}....{positlistSTR[pos]}')
+    print(f'{(len(positlistSTR))+1}'....Manager directory)
+    userchoA = input('choose the no. of the position directory you would like to see: ')
+    if userchoA == str((len(positlistSTR))+1):
+        for dmg in range(len(mngmt)):
+            for subdmg in mngmt[dmg]:
+                print(f'{mngmt[dmg][subdmg].last}, {mngmt[dmg][subdmg].first}<{mngmt[dmg][subdmg].dept}//{mngmt[dmg][subdmg].position}>......{mngmt[dmg][subdmg].contel}\n{mngmt[dmg][subdmg].address}\n{mngmt[dmg][subdmg].city}, {mngmt[dmg][subdmg].state} {mngmt[dmg][subdmg].zipcode}')
+    elif userchoA not in ('0123456789'):
+        print('try again')
+        specDirprint()
+    else:
+        for pst in positlist[int(userchoA)]:
+            print(f'{positlist[int(userchoA)][pst].last}, {positlist[int(userchoA)][pst].first}<{positlist[int(userchoA)][pst].positlistt}//{positlist[int(userchoA)][pst].position}>......{positlist[int(userchoA)][pst].contel}\n{positlist[int(userchoA)][pst].address}\n{positlist[int(userchoA)][pst].city}, {positlist[int(userchoA)][pst].state} {positlist[int(userchoA)][pst].zipcode}')
 
-
-
-
-
-
-def empdir(obd):
-    for x in alphsortlast:
-        print(f'{obd[x].last},{obd[x].first}....{obd[x].contel}\n{obd[x].address}\n{obd[x].city}, {obd[x].state} {obd[x].zipcode}\n')
-
-
-
-
-
-
-
-def sortbydept():
-    alphsortdept = {key: value for key, value in sorted(obdict.items(), key=lambda item: item[1].dept)}
-    pass
-
-def listdeptPos():
-    alphsortdept = {key: value for key, value in sorted(obdict.items(), key=lambda item: item[1].dept)}
-    # loop obdict grab specific dept
-    # append to new dictionary
-    # sort new dictionary by position
-    pass
-
-def sortbyposition():
-    alphsortposition = {key: value for key, value in sorted(obdict.items(), key=lambda item: item[1].position)}
-    pass
-
-def positionAllCount():
-    pass
-
-def positionDeptCount():
-    pass
-
-# you can create counts of position and average out pay and longevity in position overall or by dept
-
-
-def sortbylastname():
-    alphsortlast = {key: value for key, value in sorted(obdict.items(), key=lambda item: item[1].last)}
-    pass
-
-def sortbypay():
-    numsortyearlypay = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(float(item[1].yearlypay)))}
-    pass
-
-def sortbyhiredate():
-    numsorthdatecombo = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(float(item[1].hdatecombo)))}
-    pass
-
-def sortbysicktake():
-    numsortsicktaken = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(item[1].sicktaken))}
-    pass
-
-def sortbyperstake():
-    numsortperstaken = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(item[1].perstaken))}
-    pass
-
-def sortbyvactake():
-    numsortvactaken = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(item[1].vactaken))}
-    pass
-
-def sortbysickRemain():
-    numsortsickremaining = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(item[1].sickremaining))}
-    pass
-
-def sortbypersRemain():
-    numsortpersremaining = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(item[1].persremaining))}
-    pass
-
-def sortbyvacRemain():
-    numsortvacremaining = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(item[1].vacremaining))}
-    pass
 
 
 
@@ -558,11 +539,13 @@ def hdateAnniv(dictr,vacalotLu,vacalotMg,payincLu):
             print(dictr[emp].hourlypay)
             dictr[emp].hourlypay = float(dictr[emp].hourlypay) + (float(payincLu))
             print(dictr[emp].hourlypay)
+            print(f'{dictr[emp].first},{dictr[emp].yearlypay}')
             dictr[emp].weeklypay = float(dictr[emp].hourlypay) * 40
-            dictr[emp].monthlypay = float(dictr[emp].weeklypay) * 4
-            dictr[emp].yearlypay = float(dictr[emp].monthlypay) * 12
+            dictr[emp].monthlypay = float(dictr[emp].hourlypay) * 160
+            dictr[emp].yearlypay = float(dictr[emp].hourlypay) * 2080
             print('raise time')
             print(f'{dictr[emp].first},{dictr[emp].empnoyrs}')
+            print(f'{dictr[emp].first},{dictr[emp].yearlypay}')
         elif dictr[emp].position[0]=='*' and check == True and int(dictr[emp].empnoyrs) == runcheck:
             print('Anniversary passed // raise applied manually')
         elif check == True and int(dictr[emp].empnoyrs) == runcheck:
