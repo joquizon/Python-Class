@@ -398,22 +398,17 @@ depString = ['housekeeping','front desk','engineering','pbx','sales','accounting
 def depsep(dep,dest,destA,destAstr,destB):
     obd={key: value for key, value in sorted(obdict.items(), key=lambda item: item[1].last)}
     for x in obd:
-        print(f'{obd[x].last},{obd[x].first}....{obd[x].dept} / {obd[x].position}')
         if obd[x].dept == dep:
             dest.update({obd[x].first+obd[x].last:obd[x]})
         else:
             pass
     for y in dest:
-        print('yes')
-        print(dest[y].position)
         if dest[y].position[0] == '*':
             destB.update({dest[y].first+dest[y].last:dest[y]})
         else:
             for b in range (len(destA)):
-                print(str(destA[b]))
                 if dest[y].position == destAstr[b]:
                     destA[b].update({dest[y].first+dest[y].last:dest[y]})
-                    print('yes')
                 else:
                     pass
 
@@ -427,47 +422,65 @@ depsep('acct',accntdict,accntposDict,accntposDictSTR,accntMgmt)
 depsep('sle',sledict,SleposDict,SleposDictSTR,sleMgmt)
 depsep('eng',engdict,engposDict,engposDictSTR,engMgmt)
 
-
+# this function prints the directory for the whole property
 def propDirprint():
     pdp={key: value for key, value in sorted(obdict.items(), key=lambda item: item[1].last)}
     for  x in pdp:
-        print(f'{pdp[x].last}, {pdp[x].first}<{pdp[x].dept}//{pdp[x].position}>......{pdp[x].contel}\n{pdp[x].address}\n{pdp[x].city}, {pdp[x].state} {pdp[x].zipcode}')
+        print(f'\n{pdp[x].last}, {pdp[x].first}  <{pdp[x].dept}//{pdp[x].position}>......{pdp[x].contel}\n{pdp[x].address}\n{pdp[x].city}, {pdp[x].state} {pdp[x].zipcode}\n')
 
 
 
+# this function prints the directory for a chosen department
 def indyDirprint():
     for pick in range(len(depString)):
         print(f'{pick}....{depString[pick]}')
     
     usercho = input('choose the no. of the dep directory you would like to see: ')
 
-    if usercho not in ('123456'):
+    if usercho not in ('012345') and len(usercho)>0:
         print('try again')
         indyDirprint()
     else:
         for ent in dep[int(usercho)]:
-            print(f'{dep[int(usercho)][ent].last}, {dep[int(usercho)][ent].first}<{dep[int(usercho)][ent].dept}//{dep[int(usercho)][ent].position}>......{dep[int(usercho)][ent].contel}\n{dep[int(usercho)][ent].address}\n{dep[int(usercho)][ent].city}, {dep[int(usercho)][ent].state} {dep[int(usercho)][ent].zipcode}')
+            print(f'\n{dep[int(usercho)][ent].last}, {dep[int(usercho)][ent].first}  <{dep[int(usercho)][ent].dept}//{dep[int(usercho)][ent].position}>......{dep[int(usercho)][ent].contel}\n{dep[int(usercho)][ent].address}\n{dep[int(usercho)][ent].city}, {dep[int(usercho)][ent].state} {dep[int(usercho)][ent].zipcode}\n')
 
 
 
+# this function prints the directory for a chosen labor position // or the management direct
 def specDirprint():
     for pos in range(len(positlistSTR)):
         print(f'{pos}....{positlistSTR[pos]}')
-    print(f'{(len(positlistSTR))+1}'....Manager directory)
+    print(f'{(len(positlistSTR))+1}....Manager directory')
     userchoA = input('choose the no. of the position directory you would like to see: ')
-    if userchoA == str((len(positlistSTR))+1):
+    if userchoA == str((len(positlistSTR))+1) and len(userchoA)>0:
         for dmg in range(len(mngmt)):
             for subdmg in mngmt[dmg]:
-                print(f'{mngmt[dmg][subdmg].last}, {mngmt[dmg][subdmg].first}<{mngmt[dmg][subdmg].dept}//{mngmt[dmg][subdmg].position}>......{mngmt[dmg][subdmg].contel}\n{mngmt[dmg][subdmg].address}\n{mngmt[dmg][subdmg].city}, {mngmt[dmg][subdmg].state} {mngmt[dmg][subdmg].zipcode}')
-    elif userchoA not in ('0123456789'):
+                print(f'\n{mngmt[dmg][subdmg].last}, {mngmt[dmg][subdmg].first}  <{mngmt[dmg][subdmg].dept}//{mngmt[dmg][subdmg].position}>......{mngmt[dmg][subdmg].contel}\n{mngmt[dmg][subdmg].address}\n{mngmt[dmg][subdmg].city}, {mngmt[dmg][subdmg].state} {mngmt[dmg][subdmg].zipcode}\n')
+        specDirprint()
+    elif userchoA not in ('0123456789') or len(userchoA) == 0:
         print('try again')
         specDirprint()
     else:
         for pst in positlist[int(userchoA)]:
-            print(f'{positlist[int(userchoA)][pst].last}, {positlist[int(userchoA)][pst].first}<{positlist[int(userchoA)][pst].positlistt}//{positlist[int(userchoA)][pst].position}>......{positlist[int(userchoA)][pst].contel}\n{positlist[int(userchoA)][pst].address}\n{positlist[int(userchoA)][pst].city}, {positlist[int(userchoA)][pst].state} {positlist[int(userchoA)][pst].zipcode}')
+            print(f'\n{positlist[int(userchoA)][pst].last}, {positlist[int(userchoA)][pst].first}  <{positlist[int(userchoA)][pst].dept}//{positlist[int(userchoA)][pst].position}>......{positlist[int(userchoA)][pst].contel}\n{positlist[int(userchoA)][pst].address}\n{positlist[int(userchoA)][pst].city}, {positlist[int(userchoA)][pst].state} {positlist[int(userchoA)][pst].zipcode}\n')
+        specDirprint()
 
-
-
+# this function is the menu for choosing to print which directory
+def menuforDctry():
+    print('1....Complete Property Directory\n2....Department Directory\n3...Position Directory\n')
+    userchoB = input('Enter the no. of the directory you wish to open: ')
+    if userchoB in ('123') and len(userchoB)>0:
+        if userchoB == '1':
+            propDirprint()
+        elif userchoB =='2':
+            indyDirprint()
+        else:
+            specDirprint()
+        menuforDctry()
+    else:
+        print('Sorry Try again')
+        menuforDctry()
+        
 
 # chart attendance patterns over time using sickdates or vacation and persdates tendencies with pervac dates
 
