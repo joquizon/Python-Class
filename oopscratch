@@ -359,3 +359,283 @@ sicktime =dataenteredSET2[5]
 
 
 empHdMonth+empHdday+empHdyear+
+
+
+
+
+
+
+
+
+ Employee(first,last,nickname,social,contel,address,zipcode,hiremonth,hiredate,hireyear,dept,position,hourlypay,weeklypay,monthlypay,yearlypay,sicktaken,sickremaining,perstaken,persremaining,vactaken,vacremaining,sickdates,persdates,vacdates)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        self.first = first
+        self.last = last
+        self.nickname = nickname
+        self.social = social
+        self.contel = contel
+        self.address = address
+        self.zipcode = zipcode 
+        self.hiremonth = hiremonth     
+        self.hiredate = hiredate
+        self.hireyear = hireyear
+        self.dept = dept
+        self.position = position
+        self.hourlypay = hourlypay
+        self.weeklypay= weeklypay
+        self.monthlypay= monthlypay
+        self.yearlypay= yearlypay
+        self.sicktaken = sicktaken
+        self.sickremaining = sickremaining
+        self.perstaken = perstaken
+        self.persremaining = persremaining
+        self.vactaken = vactaken
+        self.vacremaining = vacremaining
+        self.sickdates = sickdates
+        self.persdates = persdates
+        self.vacdates = vacdates
+
+
+
+
+
+
+first = nmlist[x][0]
+last = nmlist[x][1] 
+nickname = nmlist[x][2] 
+social = nmlist[x][3] 
+contel = nmlist[x][4] 
+address = nmlist[x][5] 
+zipcode  = nmlist[x][6] 
+hiremonth = nmlist[x][7]
+hiredate = nmlist[x][8] 
+hireyear = nmlist[x][9] 
+dept = nmlist[x][11] 
+position = nmlist[x][12] 
+hourlypay = nmlist[x][13] 
+weeklypay = nmlist[x][14] 
+monthlypay = nmlist[x][15] 
+yearlypay = nmlist[x][16] 
+sicktaken = nmlist[x][17] 
+sickremaining = nmlist[x][18] 
+perstaken = nmlist[x][19] 
+persremaining = nmlist[x][21] 
+vactaken = nmlist[x][22] 
+vacremaining = nmlist[x][23] 
+sickdates = nmlist[x][24] 
+persdates = nmlist[x][25] 
+vacdates = nmlist[x][26] 
+
+
+        z = x * 4
+        first = nmlist[z][0]
+        last = nmlist[z][1] 
+        nickname = nmlist[z][2] 
+        social = nmlist[z][3] 
+        contel = nmlist[z][4] 
+        address = nmlist[z][5] + ' ' + nmlist[z][6] + ' ' + nmlist[z][7] 
+        zipcode  = nmlist[z][8]
+        hiremonth = nmlist[z][9]
+        hiredate = nmlist[z][10]
+        hireyear = nmlist[z][11]
+        dept = nmlist[z][12]
+        position = nmlist[z][13]
+        hourlypay = nmlist[z][14]
+        weeklypay = nmlist[z][15]
+        monthlypay = nmlist[z][16]
+        yearlypay = nmlist[z][17]
+        sicktaken = nmlist[z][18]
+        sickremaining = nmlist[z][19]
+        perstaken = nmlist[z][20]
+        persremaining = nmlist[z][21]
+        vactaken = nmlist[z][22]
+        vacremaining = nmlist[z][23]
+        sickdates = nmlist[z+1][24]
+        persdates = nmlist[z+2][25]
+        vacdates = nmlist[z+3][26]
+
+
+
+
+8] 
+9] 
+10]
+11] 
+12] 
+13] 
+14] 
+15] 
+16] 
+17] 
+18] 
+19] 
+20]
+21] 
+22] 
+23]
+24]
+25]
+26] 
+0] 
+0] 
+0] 
+
+
+
+
+
+
+[reginaldoquizon,jasonbourne,isaganidimayacyac,theovan gogh,josequizon,sarawalker,johncasey,charlesbartowski]
+['jason',
+ 'bourne',
+ 'jabo',
+ '987654321',
+ '9876543211',
+ '1 ultimatum st',
+ 'helena',
+ 'MT',
+ '54321',
+ '01',
+ '01',
+ '20',
+ 'acct',
+ 'acctnt',
+ '31.25',
+ '1250.0',
+ '5000.0',
+ '65000.0',
+ '0',
+ '0',
+ '0',
+ '0',
+ '0',
+ '0',
+ ['0'],
+ ['0'],
+ ['0']]
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+(toedit) == '1' or (toedit) == '2' or (toedit) == '3' or  (toedit) == '4' or (toedit) == '5' or (toedit) == '6' or (toedit) == '7' or (toedit) == '8' or (toedit) == '9' or  (toedit) == '10' or (toedit) == '11' or (toedit) == '12' or (toedit) == '13' or  (toedit) == '14' or (toedit) == '15' or (toedit) == '16' or (toedit) == '17' or 
+
+self.first = first
+        self.last = last
+        self.nickname = nickname
+        self.social = social
+        self.contel = contel
+        self.address = address
+        self.city = city
+        self.state = state
+        self.zipcode = zipcode 
+        self.hiremonth = hiremonth     
+        self.hiredate = hiredate
+        self.hireyear = hireyear
+        self.dept = dept
+        self.position = position
+        self.hourlypay = hourlypay
+        self.weeklypay= weeklypay
+        self.monthlypay= monthlypay
+        self.yearlypay= yearlypay
+        self.sicktaken = sicktaken
+        self.sickremaining = sickremaining
+        self.perstaken = perstaken
+        self.persremaining = persremaining
+        self.vactaken = vactaken
+        self.vacremaining = vacremaining
+        self.sickdates = sickdates
+        self.persdates = persdates
+        self.vacdates = vacdates
+
+
+
+
+aa[x]
+alphsortyearlypay = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(float(item[1].yearlypay)))}
+
+
+
+
+
+
+
+noclistkey=[]
+for x in range(len(dictionaryhold)):
+    noclistkey.append(dictionaryhold[x]['first']+dictionaryhold[x]['last'])
+print(noclistkey)
+obdict=dict(zip(noclistkey,noclist))
+
+print(obdict['jasonbourne'].zipcode)
+
+for key in obdict:
+    print(obdict[key].last)
+directory=[]    
+
+alphsortfirst = {key: value for key, value in sorted(obdict.items(), key=lambda item: item[1].first)}
+alphsortlast = {key: value for key, value in sorted(obdict.items(), key=lambda item: item[1].last)}
+alphsortdept = {key: value for key, value in sorted(obdict.items(), key=lambda item: item[1].dept)}
+alphsortposition = {key: value for key, value in sorted(obdict.items(), key=lambda item: item[1].position)}
+
+numsortyearlypay = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(float(item[1].yearlypay)))}
+numsortzipcode = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(float(item[1].zipcode)))}
+numsorthdatecombo = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(float(item[1].hdatecombo)))}
+numsortsicktaken = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(item[1].sicktaken))}
+numsortperstaken = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(item[1].perstaken))}
+numsortvactaken = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(item[1].vactaken))}
+
+def sortbysickRemain():
+numsortsickremaining = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(item[1].sickremaining))}
+    pass
+
+def sortbypersRemain():
+numsortpersremaining = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(item[1].persremaining))}
+    pass
+
+def sortbyvacRemain():
+numsortvacremaining = {key: value for key, value in sorted(obdict.items(), key=lambda item: int(item[1].vacremaining))}
+    
+
+
+
+
+
+
+print(f"{self} terminal login generated:\n{terminal}\n{terminal2}\n{terminal3}\n{terminal4}\n{terminal5}")
+
+
+
+
+        terminal = self.first+self.last
+        terminal2 = self.nickname+self.last[0]
+        terminal3 = self.first[0]+self.last
+        terminal4 = self.first+self.contel[-4:]
+        terminal5 = self.first+self.last[0]
