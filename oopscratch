@@ -639,3 +639,101 @@ print(f"{self} terminal login generated:\n{terminal}\n{terminal2}\n{terminal3}\n
         terminal3 = self.first[0]+self.last
         terminal4 = self.first+self.contel[-4:]
         terminal5 = self.first+self.last[0]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# this function only runs inside positionsalprint func. it provides submenu for printing  spcific dep mgr sals
+def mgmtpositStat(l1,l2,l3,l4,l5,l6,l7,l8,l9,l10):
+    for mgsal in range(len(mngmtString)):
+        print(f'{mgsal}....{mngmtString[mgsal]}')
+        
+    print(f'{len(mngmtString)+1}....All')
+
+    userchoEEmg = input('Please choose an option: ')
+
+
+    if userchoEEmg in ('012345') and len(userchoEEmg)>0:
+        MgChospositdictView = mngmt[int(userchoEEmg)]
+        for posal in MgChospositdictView:
+            l1.append(MgChospositdictView[posal].yearlypay)
+            l2.append(MgChospositdictView[posal].monthlypay)
+            l3.append(MgChospositdictView[posal].weeklypay)
+        print(f'{mngmtString[int(userchoEEmg)]}....total count:{len(MgChospositdictView)}')
+    elif userchoEEmg == '6':
+        for mgposal in range(len(mngmt)):
+            for subposal in mngmt[mgposal]:
+                l1.append(mngmt[mgposal][subposal].yearlypay)
+                l2.append(mngmt[mgposal][subposal].monthlypay)
+                l3.append(mngmt[mgposal][subposal].weeklypay)
+        print(f'{mngmtString[int(userchoEEmg)]}....total count:{len(MgChospositdictView)}')                
+    else:
+        print('Sorry try again')
+        mgmtpositsal()
+        
+        
+# this prints salary by position // prints mgmt as whole per dept        
+def positionStat():
+    PstsalcollectY = []
+    PstsalcollectM = []
+    PstsalcollectW = []
+    Pstsiclist = []
+    Pstperlist = []
+    Pstvaclist = []
+    Pstsictklist = []
+    Pstpertklist = []
+    Pstvactklist = []
+    Pstexplist = []
+    
+    for statpos in range(len(positlistSTR)):
+        print(f'{statpos}....{positlistSTR[statpos]}')
+        
+    print(f'{(len(positlistSTR))+1}....Management Listing by dep')
+    
+    userchoEE = input('Please choose the salary position you wish to print: ')
+    
+    if userchoEE in ('0123456789') and len(userchoEE)>0:
+        chospositdictView = positlist[int(userchoEE)]
+        for ov in chospositdictView:
+            PstsalcollectY.append(chospositdictView[ov].yearlypay)
+            PstsalcollectM.append(chospositdictView[ov].monthlypay)
+            PstsalcollectW.append(chospositdictView[ov].weeklypay)
+            Pstsiclist.append(int(chospositdictView[ov].sickremaining))
+            Pstperlist.append(int(chospositdictView[ov].persremaining))
+            Pstvaclist.append(int(chospositdictView[ov].vacremaining))
+            Pstsictklist.append((int(chospositdictView[ov].sicktaken))
+            Pstpertklist.append((int(chospositdictView[ov].perstaken))
+            Pstvactklist.append((int(chospositdictView[ov].vactaken))
+            Pstexplist.append((int(chospositdictView[ov].empnoyrs))
+
+
+
+        print(f'{positlistSTR[int(userchoEE)]}....total count:{len(chospositdictView)}')
+    elif userchoEE == '11' and len(userchoEE)>0:
+        mgmtpositsal(PstsalcollectY,PstsalcollectM,PstsalcollectW)
+    else:
+        print('sorry try again')
+        positionSalprint()
+    
+    yearlyAVG = float((sum(PstsalcollectY)) // (len(PstsalcollectY)))
+    monthlyAVG = float((sum(PstsalcollectM)) // (len(PstsalcollectM)))
+    weeklyAVG = float((sum(PstsalcollectW)) // (len(PstsalcollectW)))
+    
+
+    print(f'Yearly total....{sum(PstsalcollectY)}\nYearly Avg....{yearlyAVG}\n')
+    print(f'Monthly total....{sum(PstsalcollectM)}\nMonthly Avg....{monthlyAVG}\n')
+    print(f'Weekly total....{sum(PstsalcollectW)}\nWeekly Avg....{weeklyAVG}\n')
