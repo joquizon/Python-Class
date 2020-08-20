@@ -232,33 +232,7 @@ class Employee:
 
 
 
-    # class method to check hiring date anniversary
-    def annivCheck(self):
-        import datetime
-        z=datetime.datetime.now()
-        monthnow = (z.strftime("%m"))
-        daynow = (z.strftime("%d"))
-        yearnow = (z.strftime("%Y"))
-        yearint = (int(yearnow))-2000
-        monthint= int(monthnow)
-        dayint = int(daynow)
-        
-        if int(self.hireyear) < yearint:
-            if int(self.hiremonth) < monthint:
-                print("Review / Raise")
-                return True
-            elif int(self.hiremonth) == monthint:
-                if int(self.hiredate) <= dayint:
-                    print("Review / Raise")
-                    return True
-                else:
-                    print(f'{int(self.hiredate) - dayint} day(s) from Review and / or Raise')
-                    return False        
-            else:
-                print(f'{int(self.hiremonth) - monthint} month(s) away Review and / or Raise')
-                return False
-        else:
-            print('next year')
+    
 
 
 
@@ -503,34 +477,10 @@ def menuforDctry():
 
 
 
-# grabs particular departments pay total and avg pay /// ret only total of dep so it can be reused by totalpay
-def payavg(depvar):
-    payadder=[]
-    for key in obdict:
-        if obdict[key].dept == depvar: 
-            payadder.append(int(float(obdict[key].yearlypay)))
-    avgpay = sum(payadder)//len(payadder)
-    print(f'Yearly {avgpay}')
-    print(f'Monthly {avgpay/12}')
-    print(f'Weekly {avgpay/52}')
-    print(f'Total{sum(payadder)}')
-    return (sum(payadder))
 
 
 
-# grabs particular departments pay total and avg pay THEN gives total annd avg pay
-def totalpay(depvar,depvar2,depvar3,depvar4,depvar5,depvar6):
-    a = payavg(depvar)
-    b = payavg(depvar2)
-    c = payavg(depvar3)
-    d = payavg(depvar4)
-    e = payavg(depvar5)
-    f = payavg(depvar6)
 
-    print(f'total payroll{sum[a,b,c,d,e,f]}')
-    print(f'avg payroll/ yr {(sum[a,b,c,d,e,f])//6}')
-    print(f'avg payroll/ mo {((sum[a,b,c,d,e,f])//6)12}')
-    print(f'avg payroll/ wk {((sum[a,b,c,d,e,f])//6)52}')
 
 
 
