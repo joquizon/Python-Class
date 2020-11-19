@@ -1,5 +1,5 @@
 
-def empsearchprinter(nlist,nmlist,sposit,retfunc):
+def empsearchprinter(npos,nlist,nmlist,sposit,retfunc):
     print('This is where you edit employee information, if you re here by mistake type (<) to return to main menu')
     holdinglist = nmlist[::4]
     itsthere = 'false'
@@ -10,10 +10,17 @@ def empsearchprinter(nlist,nmlist,sposit,retfunc):
         if searcher == nlist[k]:
             print('employee found!')
             itsthere = 'true'
+            print(itsthere)
+            sposit[0] = k
+            print(sposit[0])
+            npos = k
+            print(npos)
         else:
             pass
     if searcher == '<':
         retfunc()
+    else:
+        pass
     if itsthere == 'true':
         # check the nocmemlist and match input to a name
         for emp in range (len(holdinglist)):
@@ -23,6 +30,7 @@ def empsearchprinter(nlist,nmlist,sposit,retfunc):
                     sposit[0]=0
                 elif emp > 0:
                     sposit[0] = emp*4
+                    # remember list1 is basic info + 3 sic per vac dates lists hence position * 4
                 for reader in range(len(holdinglist[emp])):
                     if reader==0:
                         print(f'{[reader]}>>>firstname:.....{holdinglist[emp][reader]}')
@@ -85,7 +93,7 @@ def empsearchprinter(nlist,nmlist,sposit,retfunc):
                 pass
     else:
         print(f'sorry {searcher} is not listed')
-        empsearchprinter(nlist,nmlist,sposit,retfunc)
+        empsearchprinter(npos,nlist,nmlist,sposit,retfunc)
 
 
 

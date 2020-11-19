@@ -660,7 +660,7 @@ def verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns):
             print(list)
             empname = list[0]+list[1]
             nlist.append(empname)
-            # readytosave()
+            # ready()
 
         # >>>>>>>>>firname edit
         elif choose == '0':
@@ -767,7 +767,9 @@ def verifier(list,list2,list3,list4,retfunc,mn,dn,yn,ds,nlist,dns):
 
 def linechooser(lchosen,nlist,nmlist,sposit,retfunc,mn,dn,yn,ds,resetfunc,dns):
         currlist = nmlist[sposit[0]]
-        nlistpos = sposit[0]
+        nlistpos = int((sposit[0]) / 4)
+        print(sposit)
+        print(nlistpos)
         # >>>>>>>>>first name edit
         if lchosen == '0':
             print(f'current entry: {currlist[0]}')
@@ -782,7 +784,6 @@ def linechooser(lchosen,nlist,nmlist,sposit,retfunc,mn,dn,yn,ds,resetfunc,dns):
             lnameFunc(currlist,retfunc)
             print(f'new entry: {currlist[1]}')
             nlist[nlistpos]=currlist[0]+currlist[1]
-            print(nlist)
             resetfunc()       
         # >>>>>>>>>nick name edit
         elif lchosen == '2':

@@ -65,8 +65,8 @@ def terminator(list):
         try:
             connorno = int(connor)
             if connorno <= len(list):
-                list.pop(connorno)
                 print(f'hasta la vista {list[connorno]}')
+                list.pop(connorno)
                 for x in range(len(list)):
                     print(f"{x}....{list[x]}")
             else:
@@ -77,7 +77,7 @@ def terminator(list):
             terminator(list)
             break
         else:
-            break        
+            break
             
 
 
