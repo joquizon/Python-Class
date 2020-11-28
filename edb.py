@@ -29,7 +29,8 @@ from logmtn import Mainsicpervac_Mtn
 from nocsaver import goneempfilesaver
 from nocsaver import nocupdate
 from nocsaver import terminencrypter
-
+from mainInstant import OOPstart
+from mainInstant import objectMenu
 
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Openloader vars
@@ -107,7 +108,7 @@ def EditempInfo():
         quit()
     else:
         print('boopbeep doesnot compute')
-        EditempInfo(npos)
+        EditempInfo()
 
 
 # this fnction is for new employee info entrie
@@ -140,6 +141,13 @@ def Ndataenter():
 
 
 
+def ViewerStart(nlist,nmlist,retfunc):
+    # this instantiates
+    OOPstart(nlist,nmlist)
+    # this starts the menu
+    objectMenu(nlist,retfunc)
+
+
 
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>mode select
@@ -148,8 +156,9 @@ def modeset():
     nocmemlist.clear()
 
     employeeloader(noclist,nocmemlist)
+    print(noclist)
     print(nocmemlist)
-    mission = input("(1) new ENTRY // (2) file READER // (3) Terminator (4)EXIT: ")
+    mission = input("(1) new ENTRY // (2) file READER // (3) Terminator // (4)Viewer // (q) EXiT: ")
     if mission== '1':
         print("A new employee! coo'coo :)")
         Ndataenter()
@@ -162,7 +171,11 @@ def modeset():
         noclistedit()
 
     elif mission == '4':
+        ViewerStart(noclist,nocmemlist,modeset)
+
+    elif mission == 'q':
         quit()
+
     else:
         print('boopbeep Error!')
         modeset()
