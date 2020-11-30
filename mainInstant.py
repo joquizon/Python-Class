@@ -342,6 +342,9 @@ def instantiation(nlist,nmlist):
     obdictA.append(obs)
 # ignition func --- this starts instantiation 
 def OOPstart(nlist,nmlist):
+    obdictA.clear()
+    noclistkey.clear()
+    dictionaryhold.clear()
     instantiation(nlist,nmlist)
 
 
@@ -475,9 +478,9 @@ pbxposDictSTR = ['oprtr']
 
 accntdict = {}
 accntMgmt = {}
-acct = {}
-accntposDict = [acct]
-accntposDictSTR = ['acct']
+acctnt = {}
+accntposDict = [acctnt]
+accntposDictSTR = ['acctnt']
 
 engdict = {}
 engMgmt = {}
@@ -485,7 +488,7 @@ engnr = {}
 engposDict = [engnr]
 engposDictSTR = ['engnr']
 
-positlist = [fdagnt,ntaud,bllmn,drmn,hskper,hseman,res,oprtr,acct,engnr]
+positlist = [fdagnt,ntaud,bllmn,drmn,hskper,hseman,res,oprtr,acctnt,engnr]
 positlistSTR = ['front desk agents','nightauditors','bellmen','doormen','housekeeper','housemen','reservationists','operators','accountants','engineers']
 
 mngmt = [accntMgmt,engMgmt,fdMgmt,hskMgmt,pbxMgmt,sleMgmt]
@@ -497,6 +500,12 @@ depString = ['housekeeping','front desk','engineering','pbx','sales','accounting
 positSalcollectY = []
 positSalcollectM = []
 positSalcollectW = []
+
+
+
+
+
+
 
 
 
@@ -541,6 +550,101 @@ def subretfunc(prevfunc,nlist,retfunc):
     else: 
         print('sorry does not compute...try again')
         subretfunc(prevfunc,nlist,retfunc)
+
+
+
+# this function displays the status of a position group's pay and time off remaining and taken
+
+def positionStat(nlist,retfunc):
+    poskeyhold=[]
+    PstsalcollectY = []
+    PstsalcollectM = []
+    PstsalcollectW = []
+    Pstsiclist = []
+    Pstperlist = []
+    Pstvaclist = []
+    Pstsictklist = []
+    Pstpertklist = []
+    Pstvactklist = []
+
+    lbormgchoice = input('Is it a labor position .... <l> or management .... <m>:')
+    if lbormgchoice == 'l':
+        for statpos in range(len(positlistSTR)):
+            print(f'{statpos}....{positlistSTR[statpos]}')
+        poschoiceno = input('please choose the department you would like to review: ')
+        if poschoiceno in ('0123456789') and  len(poschoiceno)>0:
+            for z in positlist[int(poschoiceno)].keys():
+                    poskeyhold.append(z)
+            for x in range(len(poskeyhold)):
+                PstsalcollectY.append(int(float(obdictA[0][poskeyhold[x]].yearlypay)))  
+                PstsalcollectM.append(int(float(obdictA[0][poskeyhold[x]].monthlypay)))  
+                PstsalcollectW.append(int(float(obdictA[0][poskeyhold[x]].weeklypay)))
+                Pstsiclist.append(int(float(obdictA[0][poskeyhold[x]].sickremaining)))   
+                Pstperlist.append(int(float(obdictA[0][poskeyhold[x]].persremaining)))   
+                Pstvaclist.append(int(float(obdictA[0][poskeyhold[x]].vacremaining))) 
+                Pstsictklist.append(int(float(obdictA[0][poskeyhold[x]].sicktaken)))   
+                Pstpertklist.append(int(float(obdictA[0][poskeyhold[x]].perstaken)))   
+                Pstvactklist.append(int(float(obdictA[0][poskeyhold[x]].vactaken))) 
+    elif lbormgchoice =='m':
+        for mgstatpos in range(len(mngmtString)):
+            print(f'{mgstatpos}....{mngmtString[mgstatpos]}')
+        Mposchoiceno = input('please choose the department you would like to review: ')
+        if Mposchoiceno in ('012345') and  len(Mposchoiceno)>0:
+            for z in mngmt[int(Mposchoiceno)].keys():
+                    poskeyhold.append(z)
+            for x in range(len(poskeyhold)):
+                PstsalcollectY.append(int(float(obdictA[0][poskeyhold[x]].yearlypay)))  
+                PstsalcollectM.append(int(float(obdictA[0][poskeyhold[x]].monthlypay)))  
+                PstsalcollectW.append(int(float(obdictA[0][poskeyhold[x]].weeklypay))) 
+                Pstsiclist.append(int(float(obdictA[0][poskeyhold[x]].sickremaining)))   
+                Pstperlist.append(int(float(obdictA[0][poskeyhold[x]].persremaining)))   
+                Pstvaclist.append(int(float(obdictA[0][poskeyhold[x]].vacremaining))) 
+                Pstsictklist.append(int(float(obdictA[0][poskeyhold[x]].sicktaken)))   
+                Pstpertklist.append(int(float(obdictA[0][poskeyhold[x]].perstaken)))   
+                Pstvactklist.append(int(float(obdictA[0][poskeyhold[x]].vactaken)))
+    else:
+        print('does not compute')
+        positionStat(nlist,retfunc)
+        
+    statuswhat = input('do you want to see salary status .... <s>\n or time off status .... <t>:')
+    if statuswhat == 's':
+        print(poskeyhold)
+        payY=sum(PstsalcollectY)
+        payM=sum(PstsalcollectM)
+        payW=sum(PstsalcollectW)
+        for dd in range(len(poskeyhold)):
+            print(f'{obdictA[0][poskeyhold[dd]].first} {obdictA[0][poskeyhold[dd]].last} earns {PstsalcollectY[dd]} yearly\n ')
+            print(f'{obdictA[0][poskeyhold[dd]].first} {obdictA[0][poskeyhold[dd]].last} earns {PstsalcollectM[dd]} monthly\n ')
+            print(f'{obdictA[0][poskeyhold[dd]].first} {obdictA[0][poskeyhold[dd]].last} earns {PstsalcollectW[dd]} weekly\n ')
+        print(f'This position group earns {payY} yearly\n')
+        print(f'This position group earns {payM} monthly\n')
+        print(f'This position group earns {payW} weekly\n')
+        subretfunc(positionStat,nlist,retfunc)
+    elif statuswhat == 't':
+        print(poskeyhold)
+        sicrem =sum(Pstsiclist)
+        persrem =sum(Pstperlist)
+        vacrem =sum(Pstvaclist)
+        sictake =sum(Pstsictklist)
+        perstake =sum(Pstpertklist)
+        vactake =sum(Pstvactklist)
+        for ee in range(len(poskeyhold)):
+            print(f'{obdictA[0][poskeyhold[ee]].first} {obdictA[0][poskeyhold[ee]].last} has taken {Pstsiclist[ee]} sick days and has {Pstsictklist[ee]} remaining.\n')
+            print(f'{obdictA[0][poskeyhold[ee]].first} {obdictA[0][poskeyhold[ee]].last} has taken {Pstperlist[ee]} personal days and has {Pstpertklist[ee]} remaining.\n')
+            print(f'{obdictA[0][poskeyhold[ee]].first} {obdictA[0][poskeyhold[ee]].last} has taken {Pstvaclist[ee]} vacation days and has {Pstvactklist[ee]} remaining.\n')
+        print(f'This position group has taken {sictake} sickdays and has {sicrem} remaining\n ') 
+        print(f'This position group has taken {perstake} personal days and has {persrem} remaining\n ') 
+        print(f'This position group has taken {vactake} vacation days and has {vacrem} remaining\n ') 
+        subretfunc(positionStat,nlist,retfunc)
+    else:
+        print('doesnot compute')
+        positionStat(nlist,retfunc)
+
+
+
+
+
+
 
 # this function shows y m w -ly payroll per dept, their members, sic per vac remaining and taken, yrs of experience
 
@@ -840,7 +944,7 @@ def groupfuncMenu(nlist,retfunc):
             print('Sorry Try again')
             menuforSalry(nlist,retfunc)    
             
-    gchoice = input('What would you like to do?\nTo print a Directory enter ... <a>\nTo print a Salary Summaries enter ... <b>\nTo see a count of each Property position enter ... <c>\nTo see a Department overview enter ... <d>\n')
+    gchoice = input('What would you like to do?\nTo print a Directory enter ... <a>\nTo print a Salary Summaries enter ... <b>\nTo see a count of each Property position enter ... <c>\nTo see a Department overview enter ... <d>\nTo see a Position group overview enter ... <e>\n')
     if gchoice == 'a':
         menuforDctry(nlist,retfunc)
     elif gchoice == 'b':
@@ -849,6 +953,8 @@ def groupfuncMenu(nlist,retfunc):
         positCT(nlist,retfunc)
     elif gchoice == 'd':   
         depStat(nlist,retfunc)
+    elif gchoice == 'e':    
+        positionStat(nlist,retfunc)
     elif gchoice == '*':
         objectMenu(nlist,retfunc)
     elif gchoice == 'q':
@@ -884,7 +990,7 @@ def objectMenu(nlist,retfunc):
     elif viewerchoice == 't':
         depStat()
     elif viewerchoice == 'q':
-        quit
+        quit()
     else:
         print('please choose 1 or 2...try again')
         objectMenu(nlist,retfunc)
