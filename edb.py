@@ -47,9 +47,9 @@ z=datetime.datetime.now()
 monthnow = (z.strftime("%m"))
 daynow = int((z.strftime("%d")))
 yearnow = int((z.strftime("%Y")))-2000
-print(monthnow)
-print(daynow)
-print(yearnow)
+# print(monthnow)
+# print(daynow)
+# print(yearnow)
 hireY=1
 hiredD=1
 hiredM=1
@@ -80,8 +80,16 @@ def noclistedit():
 
 # this fnction is for editing existing employee info entries
 def EditempInfo():
+    # subfunc to save before restarting back the toedit input 
+    def sicpervacsavers():
+        editlist = nocmemlist[searchpos[0]]
+        editlistA = nocmemlist[searchpos[0]+1]
+        editlistB= nocmemlist[searchpos[0]+2]
+        editlistC= nocmemlist[searchpos[0]+3]
+        newempfilesaver(editlist,editlistA,editlistB,editlistC,EditempInfo,noclist)
+
     print(searchpos)
-    toedit = input('enter the no. of the line you wish to edit or (s) if you want to save youre done and ready to save\nor (m) to go to the log maintenance: ')
+    toedit = input('enter the no. of the line you wish to edit or (s) if you want to save youre done and ready to save\nor (m) to go to the log maintenance\n(<)if you wish to return to the previous menu: ')
     for x in range(0,18):
         if toedit == str(x):
             linechooser(toedit,noclist,nocmemlist,searchpos,modeset,monthnow,daynow,yearnow,depset,EditempInfo,daynowstr)
@@ -97,13 +105,13 @@ def EditempInfo():
     elif (toedit) == '19' or (toedit) == '21' or (toedit) == '23':
         linechooser(toedit,noclist,nocmemlist,searchpos,modeset,monthnow,daynow,yearnow,depset,EditempInfo,daynowstr)
     elif (toedit) == '18' or (toedit) == '24':
-        sickdayslog(EditempInfo,nocmemlist,searchpos,monthnow,daynow,yearnow)
+        sickdayslog(sicpervacsavers,nocmemlist,searchpos,monthnow,daynow,yearnow)
     elif (toedit) == '20' or (toedit) == '25':
-        persdayslog(EditempInfo,nocmemlist,searchpos,monthnow,daynow,yearnow)
+        persdayslog(sicpervacsavers,nocmemlist,searchpos,monthnow,daynow,yearnow)
     elif (toedit) == '22' or (toedit) == '26':
-        vacdayslog(EditempInfo,nocmemlist,searchpos,monthnow,daynow,yearnow)
+        vacdayslog(sicpervacsavers,nocmemlist,searchpos,monthnow,daynow,yearnow)
     elif toedit ==  'm':
-        Mainsicpervac_Mtn(EditempInfo,nocmemlist,searchpos)
+        Mainsicpervac_Mtn(sicpervacsavers,nocmemlist,searchpos)
     elif toedit == 'Q':
         quit()
     else:
@@ -154,10 +162,7 @@ def ViewerStart(nlist,nmlist,retfunc):
 def modeset():
     noclist.clear()
     nocmemlist.clear()
-
     employeeloader(noclist,nocmemlist)
-    print(noclist)
-    print(nocmemlist)
     mission = input("(1) new ENTRY // (2) file READER // (3) Terminator // (4)Viewer // (q) EXiT: ")
     if mission== '1':
         print("A new employee! coo'coo :)")

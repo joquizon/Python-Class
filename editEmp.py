@@ -1,10 +1,10 @@
 
 def empsearchprinter(npos,nlist,nmlist,sposit,retfunc):
-    print('This is where you edit employee information, if you re here by mistake type (<) to return to main menu')
+    print('\nThis is where you edit employee information, if you re here by mistake type (<) to return to main menu')
     holdinglist = nmlist[::4]
     itsthere = 'false'
     print(nlist)
-    searcher= input('employee name:')
+    searcher= input('\nEnter the employee name or enter (<) to return to the previous menu: ')
     for k in range(len(nlist)):
         # if in input is in the noclist
         if searcher == nlist[k]:
@@ -24,6 +24,9 @@ def empsearchprinter(npos,nlist,nmlist,sposit,retfunc):
     if itsthere == 'true':
         # check the nocmemlist and match input to a name
         print(len(holdinglist))
+        print(holdinglist)
+        print(searcher)
+        print(f'{holdinglist[9][0]}+{holdinglist[9][1]}')
         for emp in range (len(holdinglist)):
             if searcher == (str(holdinglist[emp][0]))+(str(holdinglist[emp][1])):
                 #this is input's position in the nocmemlist
