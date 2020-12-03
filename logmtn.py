@@ -1,3 +1,6 @@
+import datetime
+getyear=datetime.datetime.now()
+yearnow = int((getyear.strftime("%Y")))-2000
 
 def Mainsicpervac_Mtn(retfunc,nmlist,sposit):
     sickremove=[]
@@ -17,8 +20,8 @@ def Mainsicpervac_Mtn(retfunc,nmlist,sposit):
     def Vacdateremover():
         Vremover = input('enter the year of the dates you wish to remove: ')
         if Vremover == '*':
-            sicpervac_mtn()
-        elif (len(Vremover)) == 2:
+            retfunc()
+        elif (len(Vremover)) == 2 and Vremover != str(yearnow):
             for Vremo in range(len(vacdates)):
                 if vacdates[Vremo][-2]+vacdates[Vremo][-1] == Vremover:
                     Vacremove.append(vacdates[Vremo])
@@ -34,12 +37,13 @@ def Mainsicpervac_Mtn(retfunc,nmlist,sposit):
                 if fwarn == 'y':
                     for Vlisted in range (len(Vacremove)):
                         vacdates.remove(Vacremove[Vlisted])
+                        curremp[22] = len(vacdates)-1  
                     print(vacdates)
                     print('alldone! :)')
                     retfunc()
                 elif fwarn =='n':
-                    print('cool cool lets try again or you can type (*) to go back to the previous menu')
-                    Vacdateremover()
+                    print('cool cool lets try again')
+                    sicpervac_mtn(retfunc)            
             else:
                 print('sorry i did not find that year!Try again')
                 Vacdateremover()
@@ -61,17 +65,17 @@ def Mainsicpervac_Mtn(retfunc,nmlist,sposit):
                     for Vlisted in range (len(Vacremove)):
                         vacdates.remove(Vacremove[Vlisted])
                     print(vacdates)
+                    print('alldone! :)')
+                    retfunc()
                 elif fwarn =='n':
-                    print('cool cool lets try again or you can type (*) to go back to the previous menu')
-                    Vacdateremover()
+                    print('cool cool lets try again')
+                    sicpervac_mtn(retfunc)            
             else:
                 print('sorry i did not find that year!Try again')
                 Vacdateremover()
-        elif remover == '*':
-            morevacentries()
         else:
             print('sorry that is not on the list:)')
-            dateremover()
+            Vacdateremover()
 
             
             
@@ -117,15 +121,15 @@ def Mainsicpervac_Mtn(retfunc,nmlist,sposit):
         elif schoice =='2':
             Vacdateremover()
         elif schoice == '*':
-            sicpervac_mtn()
+            sicpervac_mtn(retfunc)
         else:
             print('beep boop beep does not compute beep boop beep try again!')
             Vacdatechoice()
     def Persdateremover():
         Premover = input('enter the year of the dates you wish to remove: ')
         if Premover == '*':
-            sicpervac_mtn()
-        elif (len(Premover)) == 2:
+            sicpervac_mtn(retfunc)
+        elif (len(Premover)) == 2 and Premover != str(yearnow):
             for Premo in range(len(perdates)):
                 if perdates[Premo][-2]+perdates[Premo][-1] == Premover:
                     PerPremove.append(perdates[Premo])
@@ -145,8 +149,8 @@ def Mainsicpervac_Mtn(retfunc,nmlist,sposit):
                     print('alldone! :)')
                     retfunc()
                 elif fwarn =='n':
-                    print('cool cool lets try again or you can type (*) to go back to the previous menu')
-                    Persdateremover()
+                    print('cool cool lets try again')
+                    sicpervac_mtn(retfunc)
             else:
                 print('sorry i did not find that year!Try again')
                 Persdateremover()
@@ -169,16 +173,14 @@ def Mainsicpervac_Mtn(retfunc,nmlist,sposit):
                         perdates.remove(PerPremove[Plisted])
                     print(perdates)
                 elif fwarn =='n':
-                    print('cool cool lets try again or you can type (*) to go back to the previous menu')
-                    Persdateremover()
+                    print('cool cool lets try again')
+                    sicpervac_mtn(retfunc)
             else:
                 print('sorry i did not find that year!Try again')
                 Persdateremover()
-        elif remover == '*':
-            morevacentries()
         else:
             print('sorry that is not on the list:)')
-            dateremover()
+            Persdateremover()
 
             
             
@@ -224,22 +226,25 @@ def Mainsicpervac_Mtn(retfunc,nmlist,sposit):
         elif schoice =='2':
             Persdateremover()
         elif schoice == '*':
-            sicpervac_mtn()
+            sicpervac_mtn(retfunc)
         else:
             print('beep boop beep does not compute beep boop beep try again!')
             Persdatechoice()
+
+
     def sickdateremover():
-        Sremover = input('enter the year of the dates you wish to remove: ')
+        Sremover = input('enter the year of the dates you wish to remove<you can only remove years prior not current year>: ')
         if Sremover == '*':
-            sicpervac_mtn()
-        elif (len(Sremover)) == 2:
+            sicpervac_mtn(retfunc)
+        # need conditional that says if current year user cannot remove
+        elif (len(Sremover)) == 2 and Sremover != str(yearnow):
             for Sremo in range(len(sicdates)):
                 if sicdates[Sremo][-2]+sicdates[Sremo][-1] == Sremover:
                     sickremove.append(sicdates[Sremo])
                 else:
                     pass
             if (len(sickremove)) > 0:
-                print('these are the dates you chose to remove')
+                print('these are the dates you chose to remove: ')
                 for x in range(len(sickremove)):
                     print(f'date to be removed .....{sickremove[x]}')
                 
@@ -252,8 +257,8 @@ def Mainsicpervac_Mtn(retfunc,nmlist,sposit):
                     print('alldone! :)')
                     retfunc()
                 elif fwarn =='n':
-                    print('cool cool lets try again or you can type (*) to go back to the previous menu')
-                    sickdateremover()
+                    print('cool cool lets try again')
+                    sicpervac_mtn(retfunc)
             else:
                 print('sorry i did not find that year!Try again')
                 sickdateremover()
@@ -276,22 +281,20 @@ def Mainsicpervac_Mtn(retfunc,nmlist,sposit):
                         sicdates.remove(sickremove[Slisted])
                     print(sicdates)
                 elif fwarn =='n':
-                    print('cool cool lets try again or you can type (*) to go back to the previous menu')
-                    sickdateremover()
+                    print('cool cool lets try again')
+                    sicpervac_mtn(retfunc)
             else:
                 print('sorry i did not find that year!Try again')
                 sickdateremover()
-        elif remover == '*':
-            morevacentries()
         else:
             print('sorry that is not on the list:)')
-            dateremover()
+            sickdateremover()
 
             
             
     def specsick():
             Sictoremove.clear()
-            datepicker = input('type the line no. of the date you wish to remove').lower()
+            datepicker = input('type the line no. of the date you wish to remove: ').lower()
             for dp in range(len(sicdates)):
                 if str(dp) == datepicker:
                     Sictoremove.append(sicdates[dp])
@@ -307,7 +310,7 @@ def Mainsicpervac_Mtn(retfunc,nmlist,sposit):
                     curremp[18] = int(curremp[18]) - 1
                     curremp[19] = int(curremp[19]) + 1
                     print(f'{curremp[0]} {curremp[1]} has regained 1 sickday')
-                    print('great! that is done you can enter another date or type (*) to go back to the previous menu or type (s) to save your changes')
+                    print('great! that is done you can enter another date or type (*) to go back to the previous menu or type (s) to save your changes OR: ')
                     specsick()
                 elif ffwarn == 'n':
                     print('ok cool you can enter another date or type (*) to go back to the previous menu')
@@ -331,14 +334,17 @@ def Mainsicpervac_Mtn(retfunc,nmlist,sposit):
         elif schoice =='2':
             sickdateremover()
         elif schoice == '*':
-            sicpervac_mtn()
+            sicpervac_mtn(retfunc)
         else:
             print('beep boop beep does not compute beep boop beep try again!')
             sickdatechoice()
 
 
             
-    def sicpervac_mtn():
+    def sicpervac_mtn(retfunc):
+        sickremove.clear()
+        PerPremove.clear()
+        Vacremove.clear()
         for s in range(len(sicdates)):
             print(f'Sick date: {sicdates[s]}')
         for p in range(len(perdates)):
@@ -346,9 +352,9 @@ def Mainsicpervac_Mtn(retfunc,nmlist,sposit):
         for v in range(len(vacdates)):
             print(f'Vacation date: {vacdates[v]}')
         
-        mtnchoice = input('pls choose which set you would like to edit.\nEnter: (1) for sickdates (2) for personal dates (3) for vacation dates: ')
+        mtnchoice = input('pls choose which set you would like to edit.\nEnter: (1) for sickdates (2) for personal dates (3) for vacation dates\nif you need to go back to the previous menu (*): ')
         if mtnchoice == '*':
-            retfunc
+            retfunc()
         elif mtnchoice == '1':
             sickdatechoice()
         elif mtnchoice == '2':
@@ -357,5 +363,5 @@ def Mainsicpervac_Mtn(retfunc,nmlist,sposit):
             Vacdatechoice()
         else:
             print('that is not on the list')
-            sicpervac_mtn()
-    sicpervac_mtn()
+            sicpervac_mtn(retfunc)
+    sicpervac_mtn(retfunc)
