@@ -57,9 +57,9 @@ x=datetime.datetime(hireY,hiredD,hiredM)
 depset=[0]
 daynowstr = (z.strftime("%d"))
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> sickday persday vacday listcreator
-sickdatestart =[0]
-persdatestart =[0]
-vacdatestart =[0]
+sickdatestart =['AA']
+persdatestart =['AA']
+vacdatestart =['AA']
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> position of input match on employeesearch
 searchpos=[0]

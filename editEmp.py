@@ -23,10 +23,10 @@ def empsearchprinter(npos,nlist,nmlist,sposit,retfunc):
         pass
     if itsthere == 'true':
         # check the nocmemlist and match input to a name
-        print(len(holdinglist))
-        print(holdinglist)
-        print(searcher)
-        print(f'{holdinglist[9][0]}+{holdinglist[9][1]}')
+        # print(len(holdinglist))
+        # print(holdinglist)
+        # print(searcher)
+        # print(f'{holdinglist[9][0]}+{holdinglist[9][1]}')
         for emp in range (len(holdinglist)):
             if searcher == (str(holdinglist[emp][0]))+(str(holdinglist[emp][1])):
                 #this is input's position in the nocmemlist
