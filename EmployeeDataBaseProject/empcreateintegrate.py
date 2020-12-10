@@ -1,4 +1,10 @@
 def demorun():
+    import os
+    old = 'testdocs\\noclist.night'
+    new = 'testdocs\\noclistog.night'
+
+    os.rename(old,new)
+
     noclist = []
 
     nocmemlist = []
@@ -19,8 +25,9 @@ def demorun():
     borough = ['manhattan','queens','staten island','bronx','brooklyn']
     zipcode = [['10001','10011','10018','10019','10020'],['11354','11355','11356','11357','11358'],['10306','10307','10308','10309','10312'],['10461','10462','10464','10465','10472'],['11201','11205','11215','11217','11231']]
 
-
-
+    # patch for separating demo files
+    # for plus in range(len(names)):
+    #     names[plus][1]= (f'{names[plus][1]}+')
 
     dept= ['hsk','FD','eng','pbx','sle','acct']
     deptpos =[['*deptmgr','*adeptmgr','*deptsup','hskper','hseman'],['*deptmgr','*adeptmgr','*ntmgr','deptsup','ntaud','fdagnt','bllmn','drmn'],['*deptmgr','*adeptmgr','*deptsup','engnr'],['*deptmgr','*adeptmgr','*deptsup','oprtr'],['*deptmgr','*adeptmgr','*deptsup','res'],['*cntrller','*asscntrller','acctnt']]
@@ -96,16 +103,16 @@ def demorun():
         with open(f'testdocs\\noclist.night',mode='w')as n:
             for m in range(len(nocadder)):
                 n.write(f'{nocadder[m]}\n')    
-        with open(f'testdocs\\{empname}D.night',mode='w')as t:
+        with open(f'testdocs\\{empname}.night',mode='w')as t:
             for k in range(len(list)):
                 t.write(f'{list[k]}\n')
-        with open(f'testdocs\\{empname}Dsickdates.night',mode='w')as q:
+        with open(f'testdocs\\{empname}sickdates.night',mode='w')as q:
             for r in range(len(list2)):
                 q.write(f'{list2[r]}\n')
-        with open(f'testdocs\\{empname}Dpersdates.night',mode='w')as s:
+        with open(f'testdocs\\{empname}persdates.night',mode='w')as s:
             for y in range(len(list3)):
                 s.write(f'{list3[y]}\n')
-        with open(f'testdocs\\{empname}Dvacdates.night',mode='w')as h:
+        with open(f'testdocs\\{empname}vacdates.night',mode='w')as h:
             for j in range(len(list4)):
                 h.write(f'{list4[j]}\n')
         print('files created!')
@@ -141,7 +148,7 @@ def demorun():
             ee.write(Nocencryptedfile)
 
     # >>>>>>>>>>>>>>>>>>>>>
-        infofile= 'testdocs/'+ empname +'D.night'
+        infofile= 'testdocs/'+ empname +'.night'
         with open(infofile,'rb')as f:
             filetoencrypt = f.read()
 
@@ -152,7 +159,7 @@ def demorun():
 
 
     # >>>>>>>>>>>>>>>>>>>>>          
-        sickfile= 'testdocs/'+ empname +'Dsickdates.night'
+        sickfile= 'testdocs/'+ empname +'sickdates.night'
         with open(sickfile,'rb')as ff:
             sickfiletoencrypt = ff.read()
 
@@ -162,7 +169,7 @@ def demorun():
 
 
     # >>>>>>>>>>>>>>>>>>>>>          
-        persfile= 'testdocs/'+ empname +'Dpersdates.night'
+        persfile= 'testdocs/'+ empname +'persdates.night'
         with open(persfile,'rb')as fff:
             persfiletoencrypt = fff.read()
 
@@ -172,7 +179,7 @@ def demorun():
 
 
     # >>>>>>>>>>>>>>>>>>>>>      
-        vacfile= 'testdocs/'+ empname +'Dvacdates.night'
+        vacfile= 'testdocs/'+ empname +'vacdates.night'
         with open(vacfile,'rb')as ffff:
             vacfiletoencrypt = ffff.read()
 
@@ -181,7 +188,7 @@ def demorun():
             effff.write(vacencryptedfile)
 
             
-        with open('testdocs/'+ empname +'D.night','rb') as df:
+        with open('testdocs/'+ empname +'.night','rb') as df:
             encryptedfile = df.read()
             print(encryptedfile)
             print('>>>>>>>>>>>>>>>>>>>>>>>')
@@ -190,8 +197,8 @@ def demorun():
 
 
 
-    print(noclist)
-    print(nocmemlist)
+    # print(noclist)
+    # print(nocmemlist)
     for x in range(len(noclist)):
             nocadder.append(noclist[x])
             listcreate(nocmemlist[(x*4)],nocmemlist[(x*4)+1],nocmemlist[(x*4)+2],nocmemlist[(x*4)+3],noclist[x])
