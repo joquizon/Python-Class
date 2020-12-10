@@ -32,8 +32,10 @@ from nocsaver import terminencrypter
 from mainInstant import OOPstart
 from mainInstant import objectMenu
 from empcreateintegrate import demorun
-from initiate import freshstart
+from initiate import resetnoclist
 from initiate import demoend
+from restoredefault import filedeleter
+from restoredefault import freshstart
 import os
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Openloader vars
 nocmemlist =[]
@@ -158,25 +160,38 @@ def ViewerStart(nlist,nmlist,retfunc):
     objectMenu(nlist,retfunc)
 
 
-def demochoose():
+def demochoose(nlist):
     print('\nThe Demo mode of Employee Database will create fictional files\n so that you may test run its functionality\n')
     demochoice = input('to begin Enter <1>\n if you are already in Demo mode and would like to delete the fictional files Enter <2>: ')
     if demochoice == '1':
         demorun()
         modeset()
     elif demochoice == '2':
-        demoend()
-        freshstart()
+        demoend(nlist)
+        resetnoclist()
         modeset()
     else:
         demochoose()
+
+
+
+def resetEDB(nlist):
+    filedeleter(nlist)
+    freshstart()
+
+
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>mode select
 def modeset():
     noclist.clear()
     nocmemlist.clear()
+    print(dataentered)
+    dataentered.clear()
+    for x in range(18):
+        dataentered.append(0)
+    print(dataentered)
     employeeloader(noclist,nocmemlist)
-    mission = input("(1) new ENTRY // (2) file READER // (3) Terminator // (4)Viewer // (5) begin or end Demo Content // (q) EXiT: ")
+    mission = input("(1) new ENTRY // (2) file READER // (3) Terminator // (4)Viewer // (5) begin or end Demo Content // ('R') RESTORE factory Default // (q) EXiT: ")
     if mission== '1':
         print("A new employee! coo'coo :)")
         Ndataenter()
@@ -192,8 +207,10 @@ def modeset():
         ViewerStart(noclist,nocmemlist,modeset)
     
     elif mission == '5':
-        demochoose()
+        demochoose(noclist)
 
+    elif mission == 'R':
+        resetEDB(noclist)
 
     elif mission == 'q':
         quit()
