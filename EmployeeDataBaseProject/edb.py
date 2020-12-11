@@ -71,10 +71,23 @@ nocpos=0
 
 
 
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> credentials
+screennames = []
+passwords = []
+
+
+
+def clearscreen():
+    import os
+    from os import system
+    clear = lambda: system('cls')
+    clear()
+
 def noclistedit():
     terminator(noclist)
     nocupdate(noclist)
     terminencrypter()
+    clearscreen()
     modeset()
     
 
@@ -122,6 +135,8 @@ def EditempInfo():
         print('boopbeep doesnot compute')
         EditempInfo()
 
+    clearscreen()
+
 
 # this fnction is for new employee info entrie
 def Ndataenter():
@@ -150,7 +165,7 @@ def Ndataenter():
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>confirm or edit info
     readytosave(dataentered,sickdatestart,persdatestart,vacdatestart,verifier,modeset,newempfilesaver,noclist,monthnow,daynow,yearnow,depset)
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> say yes and runs func to creates files --> encrypted --> saved
-
+    clearscreen()
 
 
 def ViewerStart(nlist,nmlist,retfunc):
@@ -165,10 +180,14 @@ def demochoose(nlist):
     demochoice = input('to begin Enter <1>\n if you are already in Demo mode and would like to delete the fictional files Enter <2>: ')
     if demochoice == '1':
         demorun()
+        clearscreen()
+        print('DEMO MODE IN EFFECT!!!')
         modeset()
+        
     elif demochoice == '2':
         demoend(nlist)
         resetnoclist()
+        clearscreen()
         modeset()
     else:
         demochoose()
@@ -178,6 +197,8 @@ def demochoose(nlist):
 def resetEDB(nlist):
     filedeleter(nlist)
     freshstart()
+    clearscreen()
+    modeset()
 
 
 
@@ -185,13 +206,11 @@ def resetEDB(nlist):
 def modeset():
     noclist.clear()
     nocmemlist.clear()
-    print(dataentered)
     dataentered.clear()
     for x in range(18):
         dataentered.append(0)
-    print(dataentered)
     employeeloader(noclist,nocmemlist)
-    mission = input("(1) new ENTRY // (2) file READER // (3) Terminator // (4)Viewer // (5) begin or end Demo Content // ('R') RESTORE factory Default // (q) EXiT: ")
+    mission = input("(1) new ENTRY // (2) file READER // (3) Terminator // (4)Viewer // (5) begin or end Demo Content // ('X') Logout // ('C') Create New Log in // ('R') RESTORE factory Default // (q) EXiT: ")
     if mission== '1':
         print("A new employee! coo'coo :)")
         Ndataenter()
@@ -207,15 +226,174 @@ def modeset():
         ViewerStart(noclist,nocmemlist,modeset)
     
     elif mission == '5':
+        clearscreen()
         demochoose(noclist)
+
+    elif mission == 'X':
+        logout()
+
+    elif mission == 'C':
+        clearscreen()
+        createEntry()
 
     elif mission == 'R':
         resetEDB(noclist)
+        modeset()
 
     elif mission == 'q':
+        clearscreen()
         quit()
 
     else:
         print('boopbeep Error!')
         modeset()
-modeset()
+
+
+
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# LOG IN and LOG IN CREATOR FUNCTIONS
+
+
+
+def credloader():
+    from cryptography.fernet import Fernet
+    fkey = open('testdocs/niterun/filekeyMain.NIGHT','rb')
+    key = fkey.read()
+    cipher = Fernet(key)          
+
+    with open('testdocs/niterun/mulder.night','rb') as df:
+        encryptedfile = df.read()
+    decrypted_file = cipher.decrypt(encryptedfile)
+
+
+    screener = (decrypted_file.decode()).splitlines() 
+    for sm in range(len(screener)):
+        screennames.append(screener[sm])
+        
+
+    with open('testdocs/niterun/scully.night','rb') as ef:
+        encryptedfile2 = ef.read()
+    decrypted_file2 = cipher.decrypt(encryptedfile2)
+
+
+    passer = (decrypted_file2.decode()).splitlines() 
+    for tn in range(len(passer)):
+        passwords.append(passer[tn])
+        
+
+def entrycrypt():
+    from cryptography.fernet import Fernet
+    fkey = open('testdocs/niterun/filekeyMain.NIGHT','rb')
+    key = fkey.read()
+    print (key)
+    cipher = Fernet(key)
+
+#     opens created files to be encrypted and encrypts
+    foxfile= 'testdocs/niterun/mulder.night'
+    with open(foxfile,'rb')as e:
+        foxfiletoencrypt = e.read()
+
+    foxencryptedfile = cipher.encrypt(foxfiletoencrypt) 
+    with open(foxfile,'wb') as xx:
+        xx.write(foxencryptedfile)
+
+        
+    danafile= 'testdocs/niterun/scully.night'
+    with open(danafile,'rb')as e:
+        danafiletoencrypt = e.read()
+
+    danaencryptedfile = cipher.encrypt(danafiletoencrypt) 
+    with open(danafile,'wb') as xs:
+        xs.write(danaencryptedfile)
+    clearscreen()
+    modeset()
+    
+def entrystore():
+
+    with open(f'testdocs/niterun/mulder.night',mode='w')as f:
+        for m in range(len(screennames)):
+            f.write(f'{screennames[m]}\n')
+    with open(f'testdocs/niterun/scully.night',mode='w')as d:
+        for n in range(len(passwords)):
+            d.write(f'{passwords[n]}\n')
+    print('filecreated')
+    entrycrypt()
+
+def passwordCreate():
+    print('create your password here\nyour password needs be at least 6 characters long and\n to include one of each of the following !@#$%^&*, a number and a letter:')
+    alphab = 'abcdefghijklmnopqrstuvwxyz'
+    nmr = '1234567890'
+    symb = '!@#$%^&*'
+    pcheck = [[],[],[]]
+    newpass = input('new password: ')
+    for a in range(len(newpass)):
+        if newpass[a] in (alphab):
+            pcheck[0].append('A')
+        elif newpass[a] in (nmr):
+            pcheck[1].append('B')
+        elif newpass[a] in (symb):
+            pcheck[2].append('C')
+        else:
+            print('you are using an unauthorized character in your password READ THE INSTRUCTION PLS.')
+            passwordCreate()
+            
+    if len(pcheck[0])>0 and len(pcheck[1])>0 and len(pcheck[2])>0 and len(newpass) > 5:
+        print('password Created')
+        passwords.append(newpass)
+        entrystore()
+    else:
+        print('password missing requirement/s try again')
+        passwordCreate()
+                
+def createEntry():
+    print('create screen name here')
+    newuser = input('enter your new username here: ')
+    for a in range(len(screennames)):
+        if newuser != screennames[a]:
+            screennames.append(newuser)
+            passwordCreate()
+        else:
+            print('that user name has been picked')
+            createEntry()
+
+def login():
+    scn = input('enter your screen name or type in quit to close program: ')
+    pw = input('enter your password: ')
+    logcheck = []
+    if  scn == 'quit':
+        quit()
+    else:
+        for x in range(len(screennames)):
+            if scn == screennames[x]:
+                logcheck.append('s')
+            else:
+                pass
+                
+        for y in range(len(passwords)):
+            if pw == passwords[y]:
+                logcheck.append('s')
+            else:
+                pass
+        if len(logcheck) == 2:
+            clearscreen()
+            print('WELCOME')
+            modeset()
+        else:
+            print('try again')
+            login()
+
+
+def logout():
+    clearscreen()
+    login()
+
+    
+credloader()
+clearscreen()
+login()
+
+
+
+
+
