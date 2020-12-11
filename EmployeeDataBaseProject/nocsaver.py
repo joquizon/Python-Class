@@ -49,7 +49,6 @@ def terminencrypter():
         print(encryptedfile)
         print('>>>>>>>>>>>>>>>>>>>>>>>')
     decrypted_file = cipher.decrypt(encryptedfile)
-    print(decrypted_file.decode())  
 
 
 
