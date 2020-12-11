@@ -1,5 +1,4 @@
 
-
 import datetime
 z=datetime.datetime.now()
 monthnow = int((z.strftime("%m")))
@@ -15,7 +14,11 @@ obdictA = []
 noclistkey=[]
 dictionaryhold = []
 
-
+def clearscreen():
+    import os
+    from os import system
+    clear = lambda: system('cls')
+    clear()
 # this file is used annual functions to be run. new yr ret True updates file and save
 # if true every employee is given an additional 3 personal days
 def yearcheck():
@@ -338,6 +341,7 @@ def instantiation(nlist,nmlist):
     for x in range(len(dictionaryhold)):
         noclistkey.append(dictionaryhold[x]['first']+dictionaryhold[x]['last'])
     print(noclistkey)
+    clearscreen()
     obs = dict(zip(noclistkey,nlist))
     obdictA.append(obs)
 # ignition func --- this starts instantiation 
@@ -542,10 +546,13 @@ def subretfunc(prevfunc,nlist,retfunc):
     print(f'\nWhat would you like to do now?\n')
     subChoice = input(f'\nTry Again enter ... <y>\nGo back to the previous Menu enter ... <*>\nGo back to the Viewer Menu enter ... <m>\n:')
     if subChoice == 'y':
+        clearscreen()
         prevfunc(nlist,retfunc)
     elif subChoice == '*':
+        clearscreen()
         groupfuncMenu(nlist,retfunc)
     elif subChoice == 'm':
+        clearscreen()
         objectMenu(nlist,retfunc)
     else: 
         print('sorry does not compute...try again')
@@ -911,6 +918,7 @@ def positionSalprint(nlist,retfunc):
 # menu for departmental positional object viewer
         
 def groupfuncMenu(nlist,retfunc):
+    clearscreen()
 #     CHOICE 1 TO PRINT DIRECTORY RUNS SUBFUNC menuforDctry()
     def menuforDctry(nlist,retfunc):
         print('1....Complete Property Directory\n2....Department Directory\n3...Position Directory\n*...Previous Menu')
@@ -944,7 +952,7 @@ def groupfuncMenu(nlist,retfunc):
             print('Sorry Try again')
             menuforSalry(nlist,retfunc)    
             
-    gchoice = input('What would you like to do?\nTo print a Directory enter ... <a>\nTo print a Salary Summaries enter ... <b>\nTo see a count of each Property position enter ... <c>\nTo see a Department overview enter ... <d>\nTo see a Position group overview enter ... <e>\n')
+    gchoice = input('What would you like to do?\nTo print a Directory enter ... <a>\nTo print a Salary Summaries enter ... <b>\nTo see a count of each Property position enter ... <c>\nTo see a Department overview enter ... <d>\nTo see a Position group overview enter ... <e>\n type <*> Previous Menu')
     if gchoice == 'a':
         menuforDctry(nlist,retfunc)
     elif gchoice == 'b':
@@ -972,6 +980,7 @@ def groupfuncMenu(nlist,retfunc):
 # THIS THE MENU TO CHOOSE WETHER INDIVIDUAL OR GROUP VIEW UTILIZES FUNCTIONS ABOVE
 
 def objectMenu(nlist,retfunc):
+    clearscreen()
     print('welcome to the dataviewer')
     viewerchoice = input('To view individual Employee data enter ... < 1 >\nTo view Group date enter ... < 2 >\nTo return to main menu enter ... <*>\nTo QUIT enter ... <q>\n:')
     if viewerchoice == '1':
@@ -990,6 +999,7 @@ def objectMenu(nlist,retfunc):
     elif viewerchoice == 't':
         depStat()
     elif viewerchoice == 'q':
+        clearscreen()
         quit()
     else:
         print('please choose 1 or 2...try again')

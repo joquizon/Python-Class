@@ -1,3 +1,10 @@
+def clearscreen():
+    import os
+    from os import system
+    clear = lambda: system('cls')
+    clear()
+
+
 def readytosave(list,list2,list3,list4,confirmfunc,retfunc,savefunc,nlist,mn,dn,yn,ds):
     saver = input('save your entries enter (y) to save enter (n) to go back(<): ')
     if saver == 'y':
@@ -96,7 +103,7 @@ def filencrypter(list):
         print(encryptedfile)
         print('>>>>>>>>>>>>>>>>>>>>>>>')
     decrypted_file = cipher.decrypt(encryptedfile)           
-
+    clearscreen()
 
 
 
