@@ -1,4 +1,8 @@
-
+def clearscreen():
+    import os
+    from os import system
+    clear = lambda: system('cls')
+    clear()
 # noclist is list
 #elist is big giant nocmemlist
 # nocmemlist =[]
@@ -58,24 +62,29 @@ def employeeloader(nlist,elist):
 def terminator(list):
     for x in range(len(list)):
         print(f"{x}....{list[x]}")
-    connor = input('typed the line no. of the employee you wish to tuhminate:')
-    while True:
-        try:
-            connorno = int(connor)
-            if connorno <= len(list):
-                print(f'hasta la vista {list[connorno]}')
-                list.pop(connorno)
-                for x in range(len(list)):
-                    print(f"{x}....{list[x]}")
-            else:
-                print('nooooo')
+    connor = input('typed the line no. of the employee you wish to tuhminate or if termination is over type <*>:')
+    if connor == '*':
+        print('Termination Over')
+    else:
+        while True:
+            try:
+                connorno = int(connor)
+                if connorno <= len(list):
+                    clearscreen()
+                    print(f'hasta la vista {list[connorno]}')
+                    list.pop(connorno)
+                    for x in range(len(list)):
+                        print(f"{x}....{list[x]}")
+                    terminator(list)
+                else:
+                    print('nooooo')
+                    terminator(list)
+            except ValueError :
+                print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
                 terminator(list)
-        except ValueError :
-            print('Exceptumondo Dude! this thing just takes numbers!!!Try again!')
-            terminator(list)
-            break
-        else:
-            break
+                break
+            else:
+                break
             
 
 
